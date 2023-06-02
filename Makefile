@@ -1,10 +1,10 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 
 
 SRCDIR = src
 OBJDIR = obj
 
-SRCS = $(SRCDIR) \
+SRCS = $(SRCDIR)/minishell.c $(SRCDIR)/lexer.c $(SRCDIR)/utils.c\
 
 OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
  
@@ -17,7 +17,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) | lib
 		@echo "			-> Compiling $(NAME)..."
-		@$(CC) $(OBJS) $(LIBPATH) -o $@
+		@$(CC) $(OBJS) $(LIBPATH) -lreadline -o $@
 		@echo "			-> Finished $(NAME)"
 
 $(OBJDIR):
