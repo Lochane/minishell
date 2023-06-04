@@ -6,7 +6,7 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/04 13:17:46 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/04 15:09:04 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,41 +22,30 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+# include "struct.h"
 
 # define PROMPT "minishell>"
 
-
-typedef enum s_tokens
-{
-	PIPE = 1,
-	GREAT,
-	GREAT_GREAT,
-	LESS,
-	LESS_LESS,
-}	t_tokens;
-
-typedef struct s_lexer
-{
-	char *str;
-	t_tokens token;
-	struct s_lexer *next;
-	struct s_lexer *prev;
-} t_lexer;
-typedef struct s_data
-{
-	char*	args;
-	t_lexer	*lexer;
-}	t_data;
-
-
+/*	Lexer Utils */
 void	ft_add_back_lexer(t_lexer **lst, t_lexer *new);
 t_lexer	*ft_lstnew_lexer(void *content);
-void	print_lst(t_lexer *data);
-void	print_tab(char **tab);
 
-
-void	set_lexer(t_data *data, t_lexer **lexer);
+/* Lexer */
+void	set_lexer(t_data **data, t_lexer **lexer);
 void	check_token(t_data *data);
 
+/* Parsing */
+void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer);
+void 	check_cmd(t_data *data);
+
+/* Parsing Utils */
+int	lstsize_lexer(t_lexer *lst);
+t_simple_cmd	*lstnew_simple_cmd(char **content);
+void	add_back_simple_cmd(t_simple_cmd **lst, t_simple_cmd *new);
+
+/* Utils */
+void	print_lexer(t_lexer *data);
+void	print_simple_cmd(t_simple_cmd *data);
+void	print_tab(char **tab);
 
 #endif
