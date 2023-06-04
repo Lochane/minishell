@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:53:21 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/02 17:29:30 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:18:20 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,19 @@ void	print_lst(t_lexer *data)
 {
 	while (data)
 	{
-		ft_printf("%d", data->token);
+		printf("%s", data->str);
 		data = data->next;
 	}
-	ft_printf("\n");
+	printf("\n");
+}
+
+void	print_tab(char **tab)
+{
+	int i = 0;
+
+	while (tab[i])
+	{
+		printf("%s\n", tab[i]);
+		i++;
+	}
 }

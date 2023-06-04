@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/02 17:27:00 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:17:46 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@
 
 # define PROMPT "minishell>"
 
-typedef struct s_data
-{
-	char*	args;
-}	t_data;
 
 typedef enum s_tokens
 {
@@ -46,11 +42,18 @@ typedef struct s_lexer
 	struct s_lexer *next;
 	struct s_lexer *prev;
 } t_lexer;
+typedef struct s_data
+{
+	char*	args;
+	t_lexer	*lexer;
+}	t_data;
 
 
 void	ft_add_back_lexer(t_lexer **lst, t_lexer *new);
 t_lexer	*ft_lstnew_lexer(void *content);
 void	print_lst(t_lexer *data);
+void	print_tab(char **tab);
+
 
 void	set_lexer(t_data *data, t_lexer **lexer);
 void	check_token(t_data *data);

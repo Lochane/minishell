@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:56:28 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/02 17:37:34 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:32:53 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	set_lexer(t_data *data, t_lexer **lexer)
 	int		i;
 
 	i = 0;
-	tmp = ft_split(data->args, 20);
+	tmp = ft_split(data->args, ' ');
+	print_tab(tmp);
 	while (tmp[i])
 	{
 		tmp_lst = ft_lstnew_lexer(tmp[i]);
@@ -31,29 +32,29 @@ void	set_lexer(t_data *data, t_lexer **lexer)
 
 void	check_token(t_data *data)
 {
-	t_lexer	*lexer;
 	int		i;
 
-	set_lexer(data, &lexer);
-	while (lexer)
+	data->lexer = NULL;
+	set_lexer(data, &data->lexer);
+	while (data->lexer)
 	{
 		i = 0;
-		while (lexer->str[i])
+		while (data->lexer->str[i])
 		{
-			if (lexer->str[0] == '|' && !lexer->str[1])
-				lexer->token = PIPE;
-			else if (lexer->str[0] == '<' && !lexer->str[1])
-				lexer->token = LESS;
-			else if (lexer->str[0] == '<' && lexer->str[1] == '<' \
-				&& !lexer->str[2])
-				lexer->token = LESS_LESS;
-			else if (lexer->str[0] == '>' && !lexer->str[1])
-				lexer->token = GREAT;
-			else if (lexer->str[0] == '>' && lexer->str[1] == '>' \
-				&& !lexer->str[2])
-				lexer->token = GREAT_GREAT;
+			if (data->lexer->str[0] == '|' && !data->lexer->str[1])
+				data->lexer->token = PIPE;
+			else if (data->lexer->str[0] == '<' && !data->lexer->str[1])
+				data->lexer->token = LESS;
+			else if (data->lexer->str[0] == '<' && data->lexer->str[1] == '<' 
+				&& !data->lexer->str[2])
+				data->lexer->token = LESS_LESS;
+			else if (data->lexer->str[0] == '>' && !data->lexer->str[1])
+				data->lexer->token = GREAT;
+			else if (data->lexer->str[0] == '>' && data->lexer->str[1] == '>' 
+				&& !data->lexer->str[2])
+				data->lexer->token = GREAT_GREAT;
 			i++;
 		}
-		lexer = lexer->next;
+		data->lexer = data->lexer->next;
 	}
 }

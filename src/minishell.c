@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/02 17:19:54 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:18:49 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_data data;
+	
 	(void)envp;
 	if (argc != 1 || argv[1])
 	{
@@ -25,7 +26,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		data.args = readline(PROMPT);
 		check_token(&data);
-		printf("%s", data.args);
+		// printf("%s", data.args);
 	}
 	return (0);
 }
