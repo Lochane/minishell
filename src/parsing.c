@@ -6,7 +6,7 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/04 15:23:07 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/06 23:47:54 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@ void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer)
 	char **tab;
 	
 	i = 0;
-	tab = malloc(sizeof(char) * lstsize_lexer(lexer));
-	// while (lexer->prev || lexer->prev->token != '1')
-	// 	lexer = lexer->prev;
+	tab = malloc(sizeof(char **) * lstsize_lexer(lexer));
+	while (lexer->prev)
+	 	lexer = lexer->prev;
 	while (lexer)
 	{
 		tab[i] = lexer->str;
+		lexer = lexer->next;
 		i++;
 	}
+	tab[i] = '\0';
+	//print_tab(tab);
 	tmp = lstnew_simple_cmd(tab);
 	// print_lst(tmp);
 	add_back_simple_cmd(simple_cmd, tmp);
-	// print_lst((*simple_cmd));
+	//print_simple_cmd((*simple_cmd));
 
 	free(tab);
 }
@@ -38,14 +41,17 @@ void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer)
 void check_cmd(t_data *data)
 {
 	data->simple_cmd = NULL;
-	// while (data->lexer->prev)
-	// 	data->lexer = data->lexer->prev;
+	if (!data->lexer->str)
+		return ;
+	print_lexer(data->lexer);
+	//printf("lol");
+	while (data->lexer->prev)
+		data->lexer = data->lexer->prev;
 	while (data->lexer)
 	{
-		// if (data->lexer->token != '1')
+		if (data->lexer->token != '1' || !data->lexer->next)
 			copy_cmd(&data->simple_cmd, data->lexer);
 		data->lexer = data->lexer->next;
 	}
 	// print_lst(data->simple_cmd);
-	
 }

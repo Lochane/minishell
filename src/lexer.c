@@ -6,15 +6,15 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:56:28 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/04 15:14:30 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/06 22:50:24 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// TODO proteger malloc et free
+// TODO free
 
-void	set_lexer(t_data **data, t_lexer **lexer)
+int	set_lexer(t_data **data, t_lexer **lexer)
 {
 	t_lexer	*tmp_lst;
 	char	**tmp;
@@ -25,18 +25,22 @@ void	set_lexer(t_data **data, t_lexer **lexer)
 	while (tmp[i])
 	{
 		tmp_lst = ft_lstnew_lexer(tmp[i]);
+		if (!tmp_lst)
+			return (0);
 		ft_add_back_lexer(lexer, tmp_lst);
 		tmp_lst = tmp_lst->next;
 		i++;
 	}
+	return (1);
 }
 
-void	check_token(t_data *data)
+int	check_token(t_data *data)
 {
 	int		i;
 
 	data->lexer = NULL;
-	set_lexer(&data, &data->lexer);
+	if (set_lexer(&data, &data->lexer) == 0)
+		return (0);
 	while (data->lexer)
 	{
 		i = 0;
@@ -61,4 +65,5 @@ void	check_token(t_data *data)
 		else
 			break ;
 	}
+	return (1);
 }

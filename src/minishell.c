@@ -6,7 +6,7 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/04 15:14:46 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/06 23:28:01 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	main(int argc, char **argv, char **envp)
 		data.args = readline(PROMPT);
 		data.envp = envp;
 		check_token(&data);
-		print_lexer(data.lexer);
 		check_cmd(&data);
+		//print_lexer(data.lexer);
 		// printf("%s", data.args);
 	}
 	return (0);

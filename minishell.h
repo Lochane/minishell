@@ -6,7 +6,7 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/04 15:09:04 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/06 22:48:06 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	ft_add_back_lexer(t_lexer **lst, t_lexer *new);
 t_lexer	*ft_lstnew_lexer(void *content);
 
 /* Lexer */
-void	set_lexer(t_data **data, t_lexer **lexer);
-void	check_token(t_data *data);
+int	set_lexer(t_data **data, t_lexer **lexer);
+int	check_token(t_data *data);
 
 /* Parsing */
 void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer);
