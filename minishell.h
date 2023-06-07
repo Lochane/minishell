@@ -6,7 +6,7 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/06 22:48:06 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/07 01:48:51 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void 	check_cmd(t_data *data);
 
 /* Parsing Utils */
 int	lstsize_lexer(t_lexer *lst);
-t_simple_cmd	*lstnew_simple_cmd(char **content);
+t_simple_cmd	*lstnew_simple_cmd(char **content, int size);
 void	add_back_simple_cmd(t_simple_cmd **lst, t_simple_cmd *new);
 
 /* Utils */

@@ -6,7 +6,7 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 14:28:49 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/06 23:51:55 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/07 01:49:40 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,19 @@ int	lstsize_lexer(t_lexer *lst)
 	return (size);
 }
 
-t_simple_cmd	*lstnew_simple_cmd(char **content)
+t_simple_cmd	*lstnew_simple_cmd(char **content, int size)
 {
 	t_simple_cmd	*liste;
 	int	i;
 
 	i = 0;
 	liste = malloc(sizeof(t_simple_cmd));
+	liste->str = malloc(sizeof(char **) * (size + 1));
 	if (!liste)
 		return (NULL);
-	printf("****************************\n");
-	print_tab(content);
 	while (content[i])
 	{
-		ft_strlcpy(liste->str[i], content[i], ft_strlen(content[i]));
+		liste->str[i] = content[i];
 		i++;
 	}
 	liste->next = NULL;
