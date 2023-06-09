@@ -6,7 +6,7 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 14:28:49 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/07 01:49:40 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/10 00:44:08 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	lstsize_lexer(t_lexer *lst)
 	size = 0;
 	while (lst != NULL)
 	{
+		if (lst->token == 1)
+			break ;
 		size++;
 		lst = lst->next;
 	}

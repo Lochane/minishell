@@ -6,7 +6,7 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:56:28 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/06 22:50:24 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/07 02:22:39 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	set_lexer(t_data **data, t_lexer **lexer)
 	int		i;
 
 	i = 0;
+	
 	tmp = ft_split((*data)->args, ' ');
 	while (tmp[i])
 	{
