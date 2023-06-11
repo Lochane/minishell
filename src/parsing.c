@@ -6,13 +6,44 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/10 01:05:50 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/12 00:40:59 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// TODO protéger malloc
+// TODO protéger malloc et gerer effacement de redirection
+
+t_lexer *check_redirection(t_lexer **redirection, t_lexer *lexer)
+{
+	t_lexer	*tmp;
+	t_lexer	*lst;
+
+	//tmp = malloc(sizeof (t_lexer));
+	lst = lexer;
+	redirection = malloc(sizeof(t_lexer));
+	while(lst)
+	{
+		if (lexer->token > 1)
+		{
+			tmp = ft_lstnew_lexer(lexer->next->str);
+			ft_add_back_lexer(redirection, tmp);
+			if (lexer->next->next)
+			{
+				tmp = lexer->next->next;
+				lexer->next = tmp;
+			}
+			else
+			{
+				lexer->next = NULL;
+				break ;
+			} 
+		}
+		else
+			lexer = lexer->next;
+	}
+	return (lst)
+}
 
 void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer)
 {
@@ -52,6 +83,7 @@ void check_cmd(t_data *data)
 		while (data->lexer->prev)
 	 		data->lexer = data->lexer->prev;
 	}
+	check_redirection(&data->simple_cmd->redirections, data->lexer);
 	while (data->lexer)
 	{
 		if (data->lexer->token == 1)

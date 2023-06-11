@@ -6,7 +6,7 @@
 /*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:56:28 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/07 02:22:39 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/11 23:53:22 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	check_token(t_data *data)
 			else if (data->lexer->str[0] == '>' && data->lexer->str[1] == '>' 
 				&& !data->lexer->str[2])
 				data->lexer->token = GREAT_GREAT;
+			else 
+				data->lexer->token = 0;
 			i++;
 		}
 		if (data->lexer->next != NULL)

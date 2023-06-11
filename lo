@@ -1,0 +1,9 @@
+total 148K
+drwxrwxr-x 4 lochane lochane 4,0K juin   6 22:29 libft
+-rw-rw-r-- 1 lochane lochane    0 juin  12 00:29 lo
+-rw-rw-r-- 1 lochane lochane  788 juin   6 22:27 Makefile
+-rwxrwxr-x 1 lochane lochane 123K juin  12 00:29 minishell
+-rw-rw-r-- 1 lochane lochane 1,9K juin  12 00:07 minishell.h
+drwxrwxr-x 2 lochane lochane 4,0K juin  12 00:29 obj
+drwxrwxr-x 2 lochane lochane 4,0K juin   6 22:27 src
+-rw-rw-r-- 1 lochane lochane 1,5K juin   6 22:27 struct.h
