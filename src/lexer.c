@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:56:28 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/11 23:53:22 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/12 14:46:55 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	set_lexer(t_data **data, t_lexer **lexer)
 	int		i;
 
 	i = 0;
-	
+
 	tmp = ft_split((*data)->args, ' ');
 	while (tmp[i])
 	{

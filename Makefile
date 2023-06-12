@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror -g3
 SRCDIR = src
 OBJDIR = obj
 
-SRCS = $(SRCDIR)/minishell.c $(SRCDIR)/lexer.c $(SRCDIR)/utils.c $(SRCDIR)/parsing.c $(SRCDIR)/parsing_utils.c\
+SRCS = $(SRCDIR)/minishell.c $(SRCDIR)/lexer.c $(SRCDIR)/utils.c $(SRCDIR)/parsing.c $(SRCDIR)/simple_cmd_utils.c\
 		$(SRCDIR)/lexer_utils.c
 
 OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))

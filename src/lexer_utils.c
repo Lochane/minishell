@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:47:25 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/04 14:39:03 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/12 16:12:56 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,41 @@ void	ft_add_back_lexer(t_lexer **lst, t_lexer *new)
 	}
 	else
 	*lst = new;
+}
+
+void	go_prev_lexer(t_lexer **lexer)
+{
+	while ((*lexer))
+		(*lexer) = (*lexer)->prev;
+}
+
+void	lexer_remove_two_nodes(t_lexer **lexer)
+{
+	t_lexer	*node1;
+	t_lexer	*node2;
+
+	node1 = *lexer;
+	node2 = (*lexer)->next;
+
+	(*lexer) = node2->next;
+	if (*lexer != NULL)
+		(*lexer)->prev = node1->prev;
+	free(node1);
+	free(node2);
+
+}
+
+int	lstsize_lexer(t_lexer *lst)
+{
+	int	size;
+
+	size = 0;
+	while (lst != NULL)
+	{
+		if (lst->token == 1)
+			break ;
+		size++;
+		lst = lst->next;
+	}
+	return (size);
 }

@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 14:28:49 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/11 23:29:27 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/12 16:12:48 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	lstsize_lexer(t_lexer *lst)
-{
-	int	size;
-
-	size = 0;
-	while (lst != NULL)
-	{
-		if (lst->token == 1)
-			break ;
-		size++;
-		lst = lst->next;
-	}
-	return (size);
-}
 
 t_simple_cmd	*lstnew_simple_cmd(char **content, int size)
 {
