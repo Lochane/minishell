@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/12 18:10:41 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/13 00:15:27 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 void	check_redirection(t_lexer **redirection, t_lexer *lexer)
 {
 	t_lexer	*tmp;
-	int		count;
 
-	count = 0;
 	redirection = malloc(sizeof(t_lexer));
 	while (lexer)
 	{
@@ -33,9 +31,7 @@ void	check_redirection(t_lexer **redirection, t_lexer *lexer)
 			tmp = ft_lstnew_lexer(lexer->next->str);
 			ft_add_back_lexer(redirection, tmp);
 			if (lexer->next->next)
-			{
 				lexer_remove_two_nodes(&lexer);
-			}
 			else
 			{
 				lexer = NULL;
@@ -62,6 +58,7 @@ void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer)
 			break ;
 		lexer = lexer->prev;
 	}
+	//print_lexer(lexer);
 	i = 0;
 	size = lstsize_lexer(lexer);
 	tab = malloc(sizeof(char **) * (size + 1));
@@ -88,7 +85,7 @@ void	check_cmd(t_data *data)
 	 		data->lexer = data->lexer->prev;
 	}
 	check_redirection(&data->simple_cmd->redirections, data->lexer);
-	print_lexer(data->lexer);
+	//print_lexer(data->lexer);
 	while (data->lexer)
 	{
 		if (data->lexer->token == 1)
@@ -97,4 +94,5 @@ void	check_cmd(t_data *data)
 			copy_cmd(&data->simple_cmd, data->lexer);
 		data->lexer = data->lexer->next;
 	}
+	//print_simple_cmd(data->simple_cmd);
 }

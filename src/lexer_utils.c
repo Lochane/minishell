@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:47:25 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/12 16:12:56 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/13 00:09:00 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ void	lexer_remove_two_nodes(t_lexer **lexer)
 
 	node1 = *lexer;
 	node2 = (*lexer)->next;
-
-	(*lexer) = node2->next;
-	if (*lexer != NULL)
-		(*lexer)->prev = node1->prev;
+	if (node1->prev != NULL)
+		node1->prev->next = node2;
+	if (node2->next != NULL)
+		node2->next->prev = node1;
+    if (*lexer == node1)
+		*lexer = node2->next;
 	free(node1);
 	free(node2);
-
 }
 
 int	lstsize_lexer(t_lexer *lst)
