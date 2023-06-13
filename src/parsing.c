@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/13 00:15:27 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/13 15:40:19 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,34 @@
 
 
 
-void	check_redirection(t_lexer **redirection, t_lexer *lexer)
+void	check_redirection(t_lexer **redirection, t_lexer **lexer)
 {
 	t_lexer	*tmp;
 
 	redirection = malloc(sizeof(t_lexer));
-	while (lexer)
+	while ((*lexer))
 	{
-		if (lexer->token > 1)
+		if ((*lexer)->token > 1)
 		{
-			tmp = ft_lstnew_lexer(lexer->str);
-			tmp->token = lexer->token;
+			tmp = ft_lstnew_lexer((*lexer)->str);
+			tmp->token = (*lexer)->token;
 			ft_add_back_lexer(redirection, tmp);
-			tmp = ft_lstnew_lexer(lexer->next->str);
+			tmp = ft_lstnew_lexer((*lexer)->next->str);
 			ft_add_back_lexer(redirection, tmp);
-			if (lexer->next->next)
-				lexer_remove_two_nodes(&lexer);
+			if ((*lexer)->next->next)
+				lexer_remove_two_nodes(lexer);
 			else
 			{
-				lexer = NULL;
+				(*lexer) = NULL;
 				break ;
 			}
 		}
 		else
-			lexer = lexer->next;
+		{
+			
+		}
+			(*lexer) = (*lexer)->next;
 	}
-	// while (lexer)
-	// 	lexer = lexer->prev;
 }
 
 void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer)
@@ -84,8 +85,14 @@ void	check_cmd(t_data *data)
 		while (data->lexer->prev)
 	 		data->lexer = data->lexer->prev;
 	}
-	check_redirection(&data->simple_cmd->redirections, data->lexer);
-	//print_lexer(data->lexer);
+	check_redirection(&data->simple_cmd->redirections, &data->lexer);
+	//go_prev_lexer(&data->lexer);
+	if (data->lexer->prev)
+	{
+		while (data->lexer->prev)
+	 		data->lexer = data->lexer->prev;
+	}
+	print_lexer(data->lexer);
 	while (data->lexer)
 	{
 		if (data->lexer->token == 1)
@@ -94,5 +101,6 @@ void	check_cmd(t_data *data)
 			copy_cmd(&data->simple_cmd, data->lexer);
 		data->lexer = data->lexer->next;
 	}
-	//print_simple_cmd(data->simple_cmd);
+	go_prev_simple_cmd(&data->simple_cmd);
+	print_simple_cmd(data->simple_cmd);
 }

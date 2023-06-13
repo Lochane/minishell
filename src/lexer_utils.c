@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:47:25 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/13 00:09:00 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/13 15:31:12 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	ft_add_back_lexer(t_lexer **lst, t_lexer *new)
 
 void	go_prev_lexer(t_lexer **lexer)
 {
+	if ((*lexer)->prev)
+		(*lexer) = (*lexer)->prev;
 	while ((*lexer))
 		(*lexer) = (*lexer)->prev;
 }

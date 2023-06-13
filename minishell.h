@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/13 00:07:18 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/13 15:25:11 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		lstsize_lexer(t_lexer *lst);
 
 /* Simple Cmd Utils */
 /* Fonction utilisee pour gerer le liste chainee de type t_simple_cmd*/
+void	go_prev_simple_cmd(t_simple_cmd **lst);
 t_simple_cmd	*lstnew_simple_cmd(char **content, int size);
 void	add_back_simple_cmd(t_simple_cmd **lst, t_simple_cmd *new);
 
@@ -46,7 +47,7 @@ int		check_token(t_data *data);
 /* Parsing */
 void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer);
 void	check_cmd(t_data *data);
-void	check_redirection(t_lexer **redirection, t_lexer *lexer);
+void	check_redirection(t_lexer **redirection, t_lexer **lexer);
 
 
 
