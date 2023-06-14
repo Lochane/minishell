@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:53:21 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/14 12:15:36 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:35:26 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_simple_cmd(t_simple_cmd *data)
 		printf("*********************\n");
 		data = data->next;
 	}
-	printf("\n");
+	printf("********************\n");
 }
 
 void	print_tab(char **tab)

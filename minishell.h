@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/13 15:25:11 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:58:00 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 
 /*	Lexer Utils */
 /* Fonction utilisee pour gerer le liste chainee de type t_lexer*/
-void	go_prev_lexer(t_lexer **lexer);
+void	go_prev_lexer(t_lexer **lexer, int allow);
+void	lexer_remove_nodes(t_lexer **lexer);
 void	ft_add_back_lexer(t_lexer **lst, t_lexer *new);
 t_lexer	*ft_lstnew_lexer(void *content);
 void	lexer_remove_two_nodes(t_lexer **lexer);

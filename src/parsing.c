@@ -6,13 +6,13 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/14 12:12:16 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:02:43 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// TODO protéger malloc et gerer effacement de redirection
+// TODO protéger malloc
 
 
 
@@ -20,6 +20,7 @@ void	check_redirection(t_lexer **redirection, t_lexer **lexer)
 {
 	t_lexer	*tmp;
 
+	go_prev_lexer(lexer, 1);
 	redirection = malloc(sizeof(t_lexer));
 	while ((*lexer))
 	{
@@ -34,7 +35,8 @@ void	check_redirection(t_lexer **redirection, t_lexer **lexer)
 				lexer_remove_two_nodes(lexer);
 			else
 			{
-				(*lexer) = NULL;
+				(*lexer) = (*lexer)->prev;
+				(*lexer)->next = NULL;
 				break ;
 			}
 		}
@@ -46,6 +48,7 @@ void	check_redirection(t_lexer **redirection, t_lexer **lexer)
 			(*lexer) = (*lexer)->next;
 		}
 	}
+	go_prev_lexer(lexer, 0);
 }
 
 void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer)
@@ -55,22 +58,20 @@ void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer)
 	char			**tab;
 	int				size;
 
-	while (lexer->prev)
-	{
-		if (lexer->prev->token == 1)
-			break ;
-		lexer = lexer->prev;
-	}
-	//print_lexer(lexer);
+	go_prev_lexer(&lexer, 1);
 	i = 0;
 	size = lstsize_lexer(lexer);
 	tab = malloc(sizeof(char **) * (size + 1));
 	while (lexer)
 	{
 		if (lexer->token == 1)
+		{
+			lexer_remove_nodes(&lexer);
 			break ;
+		}
 		tab[i] = lexer->str;
-		lexer = lexer->next;
+		lexer_remove_nodes(&lexer);
+		// lexer = lexer->next;
 		i++;
 	}
 	tab[i] = NULL;
@@ -83,18 +84,22 @@ void	check_cmd(t_data *data)
 {
 	data->simple_cmd = NULL;
 	if (data->lexer)
-		go_prev_lexer(&data->lexer);
-	check_redirection(&data->simple_cmd->redirections, &data->lexer);
-	go_prev_lexer(&data->lexer);
-	print_lexer(data->lexer);
+		go_prev_lexer(&data->lexer, 0);
 	while (data->lexer)
 	{
 		if (data->lexer->token == 1)
+		{
+			check_redirection(&data->simple_cmd->redirections, &data->lexer);
 			copy_cmd(&data->simple_cmd, data->lexer);
+		}
 		else if (data->lexer->next == NULL)
+		{
+			check_redirection(&data->simple_cmd->redirections, &data->lexer);
 			copy_cmd(&data->simple_cmd, data->lexer);
+		}
 		data->lexer = data->lexer->next;
 	}
-	go_prev_simple_cmd(&data->simple_cmd);
+	if (data->simple_cmd)
+		go_prev_simple_cmd(&data->simple_cmd);
 	print_simple_cmd(data->simple_cmd);
 }
