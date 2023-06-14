@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/14 14:02:43 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:33:07 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer)
 		}
 		tab[i] = lexer->str;
 		lexer_remove_nodes(&lexer);
-		// lexer = lexer->next;
 		i++;
 	}
 	tab[i] = NULL;
