@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/13 15:40:19 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:12:16 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void	check_redirection(t_lexer **redirection, t_lexer **lexer)
 		}
 		else
 		{
-			
-		}
+			if (!(*lexer)->next)
+				break ;
+			else
 			(*lexer) = (*lexer)->next;
+		}
 	}
 }
 
@@ -81,17 +83,9 @@ void	check_cmd(t_data *data)
 {
 	data->simple_cmd = NULL;
 	if (data->lexer)
-	{
-		while (data->lexer->prev)
-	 		data->lexer = data->lexer->prev;
-	}
+		go_prev_lexer(&data->lexer);
 	check_redirection(&data->simple_cmd->redirections, &data->lexer);
-	//go_prev_lexer(&data->lexer);
-	if (data->lexer->prev)
-	{
-		while (data->lexer->prev)
-	 		data->lexer = data->lexer->prev;
-	}
+	go_prev_lexer(&data->lexer);
 	print_lexer(data->lexer);
 	while (data->lexer)
 	{

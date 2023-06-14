@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:47:25 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/13 15:31:12 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:10:22 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ void	ft_add_back_lexer(t_lexer **lst, t_lexer *new)
 
 void	go_prev_lexer(t_lexer **lexer)
 {
-	if ((*lexer)->prev)
-		(*lexer) = (*lexer)->prev;
-	while ((*lexer))
+	while ((*lexer)->prev)
 		(*lexer) = (*lexer)->prev;
 }
 
@@ -62,7 +60,7 @@ void	lexer_remove_two_nodes(t_lexer **lexer)
 		node1->prev->next = node2;
 	if (node2->next != NULL)
 		node2->next->prev = node1;
-    if (*lexer == node1)
+	if (*lexer == node1)
 		*lexer = node2->next;
 	free(node1);
 	free(node2);

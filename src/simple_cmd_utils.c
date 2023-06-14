@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 14:28:49 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/13 15:14:36 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:12:28 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	add_back_simple_cmd(t_simple_cmd **lst, t_simple_cmd *new)
 
 void	go_prev_simple_cmd(t_simple_cmd **lst)
 {
-	while ((*lst))
+	while ((*lst)->prev)
 		(*lst) = (*lst)->prev;
 }
