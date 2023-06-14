@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:47:25 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/14 13:57:07 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:08:23 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,13 @@ void	lexer_remove_nodes(t_lexer **lexer)
 	t_lexer	*node;
 
 	node = *lexer;
+
 	if (node->prev != NULL)
 		node->prev->next = node->next;
 	if (node->next != NULL)
 		node->next->prev = node->prev;
-	*lexer = node->next;
+	if (node == *lexer)
+		*lexer = node->next;
 	free(node);
 }
+

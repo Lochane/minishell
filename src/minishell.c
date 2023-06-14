@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/10 00:00:30 by lochane          ###   ########.fr       */
+/*   Updated: 2023/06/14 17:20:09 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		data.args = readline(PROMPT);
-		data.envp = envp;
+		data.envp = envp; // pas bien
 		check_token(&data);
 		check_cmd(&data);
 		//print_lexer(data.lexer);
@@ -35,3 +35,37 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
+
+// main(void)
+// {
+// 	t_lexer	lexer;
+
+// 	while (tab[i])
+// 	{
+// 		lexer = getlex(lexer, tab[i]);
+// 	}
+// }
+
+// getlex()
+// {
+// 	t_lexer lex;
+// 	t_lexer tmp;
+
+// 	tmp = lexer;
+// 	lex.str = str;
+// 	lex.token = t_token token;
+// 	lex.next = null;
+// 	while (lexer.next)
+// 	{
+// 		lexer = lexer.next;
+// 	}
+// 	lex.prev = lexer;
+// 	lexer.next = lex;
+// 	return (tmp)
+// }
+
+// removenode(lexer)
+// {
+// 	lexer->next->prev = lexer->prev
+// 	lexer->prev->next = lexer->next;
+// }
