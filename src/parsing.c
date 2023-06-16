@@ -6,13 +6,21 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/16 17:03:56 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/16 20:41:42 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // TODO protéger malloc
+
+char	**manage_space(char *tab)
+{
+	// si on croise '>>' '>' '<<' '<'
+	// si il y a des espace alors on supprime pour qu'il en reste 1
+	// si il y en a pas on en ajoute
+	
+}
 
 void	get_arg(char **tab, t_cmd *cmd)
 {
@@ -49,6 +57,7 @@ void	tri_cmd(char *tab, t_cmd *cmd)
 	char	**tmp;
 	int		size;
 
+	tab = manage_space(tab);
 	tmp = ft_split(tab, ' ');
 	size = tab_size(tmp);
 	cmd->cmd = ft_strdup(tmp[0]);
