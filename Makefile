@@ -1,11 +1,10 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 
+CFLAGS = -g3 
 
 SRCDIR = src
 OBJDIR = obj
 
-SRCS = $(SRCDIR)/minishell.c $(SRCDIR)/lexer.c $(SRCDIR)/utils.c $(SRCDIR)/parsing.c $(SRCDIR)/simple_cmd_utils.c\
-		$(SRCDIR)/lexer_utils.c
+SRCS = $(SRCDIR)/minishell.c $(SRCDIR)/utils.c $(SRCDIR)/parsing.c\
 
 OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
  

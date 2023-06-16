@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/14 17:05:12 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:03:56 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,93 +14,68 @@
 
 // TODO protéger malloc
 
-
-
-void	check_redirection(t_lexer **redirection, t_lexer **lexer)
+void	get_arg(char **tab, t_cmd *cmd)
 {
-	t_lexer	*tmp;
+	int		j;
+	int		i;
 
-	go_prev_lexer(lexer, 1);
-	redirection = malloc(sizeof(t_lexer));
-	while ((*lexer))
+	i = 1;
+	j = 0;
+	while (tab[i])
 	{
-		printf("token = %d\n", (*lexer)->token);
-		if ((*lexer)->token > 1)
-		{
-			tmp = ft_lstnew_lexer((*lexer)->str);
-			tmp->token = (*lexer)->token;
-			ft_add_back_lexer(redirection, tmp);
-			tmp = ft_lstnew_lexer((*lexer)->next->str);
-			ft_add_back_lexer(redirection, tmp);
-			if ((*lexer)->next->next)
-				lexer_remove_two_nodes(lexer);
-			else
-			{
-				(*lexer) = (*lexer)->prev;
-				(*lexer)->next = NULL;
-				break ;
-			}
-		}
-		else
-		{
-			if (!(*lexer)->next)
-				break ;
-			else
-			(*lexer) = (*lexer)->next;
-		}
-	}
-	go_prev_lexer(lexer, 0);
-}
-
-void	copy_cmd(t_simple_cmd **simple_cmd, t_lexer *lexer)
-{
-	t_simple_cmd	*tmp;
-	int				i;
-	char			**tab;
-	int				size;
-
-	go_prev_lexer(&lexer, 1);
-	i = 0;
-	size = lstsize_lexer(lexer);
-	tab = malloc(sizeof(char **) * (size + 1));
-	while (lexer)
-	{
-		if (lexer->token == 1)
-		{
-			lexer_remove_nodes(&lexer);
-			break ;
-		}
-		tab[i] = lexer->str;
-		lexer_remove_nodes(&lexer);
-		lexer = lexer->next;
+		// if ((tab[i][0] == '>' && !tab[i][1]) || (tab[i][0] == '>' && tab[i][1] == '>'))
+		// {
+		// 	if (!cmd->in)
+				
+		// }	
+		cmd->arg[j] = ft_strdup(tab[i]);
 		i++;
+		j++;
 	}
-	tab[i] = NULL;
-	tmp = lstnew_simple_cmd(tab, size);
-	add_back_simple_cmd(simple_cmd, tmp);
-	free(tab);
 }
 
-void	check_cmd(t_data *data)
+int	tab_size(char **tab)
 {
-	data->simple_cmd = NULL;
-	if (data->lexer)
-		go_prev_lexer(&data->lexer, 0);
-	while (data->lexer)
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+void	tri_cmd(char *tab, t_cmd *cmd)
+{
+	char	**tmp;
+	int		size;
+
+	tmp = ft_split(tab, ' ');
+	size = tab_size(tmp);
+	cmd->cmd = ft_strdup(tmp[0]);
+	cmd->arg = malloc(sizeof(char **) * size - 1);
+	if (tab[1])
 	{
-		if (data->lexer->token == 1)
-		{
-			check_redirection(&data->simple_cmd->redirections, &data->lexer);
-			copy_cmd(&data->simple_cmd, data->lexer);
-		}
-		else if (data->lexer->next == NULL)
-		{
-			check_redirection(&data->simple_cmd->redirections, &data->lexer);
-			copy_cmd(&data->simple_cmd, data->lexer);
-		}
-		data->lexer = data->lexer->next;
+		get_arg(tmp, cmd);
+		print_tab(cmd->arg);
 	}
-	if (data->simple_cmd)
-		go_prev_simple_cmd(&data->simple_cmd);
-	print_simple_cmd(data->simple_cmd);
+}
+
+void parsing(t_data *data)
+{
+	char	**tmp;
+	// t_cmd	lst_tmp;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	tmp = ft_split(data->args, '|');
+	// print_tab(tmp);
+	while (tmp[i])
+	{
+		tri_cmd(tmp[i], &data->cmd);
+		j = 0;
+		i++;
+		// lst_tmp = *lst_tmp.next;
+	}
 }

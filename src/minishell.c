@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/14 17:20:09 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:24:17 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data data;
-	
-	// print_tab(envp);
+	t_data	data;
+
+	(void)envp;
 	if (argc != 1 || argv[1])
 	{
 		printf("Error:\nThis progam don't take arguments\n");
@@ -27,11 +27,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		data.args = readline(PROMPT);
-		data.envp = envp; // pas bien
-		check_token(&data);
-		check_cmd(&data);
-		//print_lexer(data.lexer);
-		// printf("%s", data.args);
+		parsing(&data);
 	}
 	return (0);
 }
