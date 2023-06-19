@@ -40,6 +40,11 @@ fclean: clean
 norme:
 		norminette $(SRCS)
 
+valgrind:
+		valgrind --suppressions=ignore_readline --trace-children=yes \
+		--leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes    \
+    	./minishell
+
 re: fclean all
 
 .PHONY: all lib clean fclean re norme

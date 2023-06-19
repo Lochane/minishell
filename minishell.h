@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/16 14:25:21 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:07:36 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ void parsing(t_data	*data);
 
 /* Utils */
 void	print_tab(char **tab);
+char	*ft_strjoin_shell(char const *s1, char const *s2, int j);
+
 
 #endif
