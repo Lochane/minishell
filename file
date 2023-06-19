@@ -1,6 +1,8 @@
+a.out
 file
-file1
+file1.c
 filels
+ignore_readline
 libft
 Makefile
 minishell
