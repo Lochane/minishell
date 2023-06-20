@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/20 10:45:45 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/20 10:56:27 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	get_arg(char **tab, t_cmd *cmd)
 			i++;
 		}
 	}
-	printf("cmd->in = %s\n", cmd->in);
 }
 
 // TODO free tmp
@@ -72,10 +71,10 @@ void	set_cmd(t_data *data)
 
 	i = 0;
 	j = 0;
+	data->cmd = malloc(sizeof(t_cmd));
 	tmp = ft_split(data->args, '|');
 	while (tmp[i])
 	{
-		data->cmd = malloc(sizeof(t_cmd));
 		tri_cmd(tmp[i], data->cmd);
 		i++;
 		data->cmd = data->cmd->next;

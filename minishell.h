@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/19 17:50:27 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:02:36 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,18 @@ void	check_space_after(char *tab);
 int		manage_in(char *tab, char *src, t_cmd *cmd, int i);
 int		manage_out(char *tab, char *src, t_cmd *cmd, int i);
 
-
 /* Set Cmd Utils */
 char	*ft_strjoin_shell(char const *s1, char const *s2, int j);
 int		tab_size(char **tab);
 int		found_space(char *tab, int allow);
 
+/* Check Syntax*/
+int		check_syntax(char *args);
+int		check_ampersand(char *args, int i);
+int		check_slash(char *args, int i);
+int		check_chevron(char *args, int i);
 
 /* Utils */
 void	print_tab(char **tab);
-
 
 #endif

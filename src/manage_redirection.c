@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/20 10:52:12 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:43:41 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ int	manage_in(char *tab, char *src, t_cmd *cmd, int i)
 	check_space_after(cmd->in);
 	cmd->in[ft_strlen(cmd->in)] = '\0';
 	// free(tmp);
-	printf("cmd->in = %s\n", cmd->in);
 	return (i);
 }
 
 int	manage_out(char *tab, char *src, t_cmd *cmd, int i)
 {
 	char	*tmp;
+	char	*new_tmp;
 
 	if (!cmd->out)
 	{
@@ -117,6 +117,5 @@ int	manage_out(char *tab, char *src, t_cmd *cmd, int i)
 	}
 	check_space_after(cmd->out);
 	cmd->out[ft_strlen(cmd->out)] = '\0';
-	printf("cmd->out = %s\n", cmd->out);
 	return (i);
 }
