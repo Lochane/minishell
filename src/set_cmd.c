@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/19 19:23:00 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/20 10:45:45 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ void	get_arg(char **tab, t_cmd *cmd)
 {
 	int		j;
 	int		i;
+	int		size;
 
 	i = 1;
 	j = 0;
+	size = tab_size(tab);
+	cmd->out = NULL;
+	cmd->in = NULL;
 	while (tab[i])
 	{
 		if (tab[i][0] == '<')
@@ -29,11 +33,14 @@ void	get_arg(char **tab, t_cmd *cmd)
 			i = manage_out(tab[i], tab[i + 1], cmd, i);
 		else
 		{
+			if (!cmd->arg)
+				cmd->arg = malloc(sizeof(char **) * size - 1);
 			cmd->arg[j] = ft_strdup(tab[i]);
 			j++;
 			i++;
 		}
 	}
+	printf("cmd->in = %s\n", cmd->in);
 }
 
 // TODO free tmp
@@ -41,17 +48,16 @@ void	get_arg(char **tab, t_cmd *cmd)
 void	tri_cmd(char *tab, t_cmd *cmd)
 {
 	char	**tmp;
-	int		size;
 
 	check_space_before(tab);
 	check_space_after(tab);
 	tmp = ft_split(tab, ' ');
-	size = tab_size(tmp);
 	cmd->cmd = ft_strdup(tmp[0]);
 	if (tab[1])
 	{
-		cmd->arg = malloc(sizeof(char **) * size - 1);
 		get_arg(tmp, cmd);
+		if (cmd->arg)
+			print_tab(cmd->arg);
 	}
 }
 
