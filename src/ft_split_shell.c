@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_shell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:03:04 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/20 17:26:35 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:27:03 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
 static	size_t	ft_checkword(char const *s, char c)
 {
@@ -54,7 +54,7 @@ static	void	*ft_free(char **res, size_t i)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_shell(char const *s, char c)
 {
 	size_t	i;
 	size_t	j;

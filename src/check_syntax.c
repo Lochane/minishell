@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/20 14:02:23 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:33:12 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	check_slash(char *args, int i)
 		}	
 	}
 	return (0);
-
 }
 
 int	check_ampersand(char *args, int i)
@@ -82,7 +81,6 @@ int	check_syntax(char *args)
 	i = 0;
 	while (args[i])
 	{
-
 		if (check_chevron(args, i) != 0 || check_pipe(args, i) != 0 \
 			|| check_ampersand(args, i) != 0)
 			return (2);

@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:51:16 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/19 15:24:57 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:25:08 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 typedef struct s_cmd
 {
-	char	*cmd; // ls
-	char 	**arg; // [0] -l [1] -a [2] sources
-	char	*in; // < coucou < salut < bonjour << cc
-	char	*out; // >> heredoc > out > out2
-	struct	s_cmd	*next;
+	char			*cmd;
+	char			**arg;
+	char			*in;
+	char			*out;
+	struct s_cmd	*next;
 }	t_cmd;
 
 typedef struct s_data

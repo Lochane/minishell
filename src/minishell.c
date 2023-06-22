@@ -6,13 +6,30 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/20 12:20:56 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:09:35 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // TODO faire fonction pour initialiser data
+
+int	history(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ')
+		{
+			add_history(str);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -29,8 +46,11 @@ int	main(int argc, char **argv, char **envp)
 		data.args = readline(PROMPT);
 		if (data.args)
 		{
-			if (check_syntax(data.args) == 0)
-				set_cmd(&data);
+			if (history(data.args) == 0)
+			{
+				if (check_syntax(data.args) == 0)
+					set_cmd(&data);
+			}
 		}
 		else
 			break ;
