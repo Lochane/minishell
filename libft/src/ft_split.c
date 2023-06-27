@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:03:04 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/20 17:26:35 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:09:28 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static size_t	ft_checkletter(char const *s, char c, size_t i)
 	return (count);
 }
 
-static	void	*ft_free(char **res, size_t i)
+static void	*ft_free(char **res, size_t i)
 {
 	while (i-- > 0)
 		free(res[i]);

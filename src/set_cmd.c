@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/22 14:15:58 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:37:53 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	get_arg(char **tab, t_cmd *cmd)
 		else
 		{
 			if (!cmd->arg)
-				cmd->arg = malloc(sizeof(char **) * size - 1);
+			{
+				cmd->arg = malloc(sizeof(char *) * size);
+				cmd->arg[size - 1] = NULL;
+			}
 			cmd->arg[j] = ft_strdup(tab[i]);
 			j++;
 			i++;
@@ -51,13 +54,16 @@ void	tri_cmd(char *tab, t_cmd *cmd)
 	check_space_before(tab);
 	check_space_after(tab);
 	tmp = ft_split_shell(tab, ' ');
+	dprintf(2, "%s\n", tmp[2]);
 	cmd->cmd = ft_strdup(tmp[0]);
 	if (tab[1])
 	{
+		cmd->arg = NULL;
 		get_arg(tmp, cmd);
 		if (cmd->arg)
 			print_tab(cmd->arg);
 	}
+	free(tmp);
 }
 
 // TODO free tmp
@@ -79,4 +85,5 @@ void	set_cmd(t_data *data)
 		i++;
 		data->cmd = data->cmd->next;
 	}
+	free(tmp);
 }

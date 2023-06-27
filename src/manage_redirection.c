@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/20 11:43:41 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:24:24 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	manage_in(char *tab, char *src, t_cmd *cmd, int i)
 	}
 	check_space_after(cmd->in);
 	cmd->in[ft_strlen(cmd->in)] = '\0';
-	// free(tmp);
+	free(tmp);
 	return (i);
 }
 

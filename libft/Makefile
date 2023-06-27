@@ -20,7 +20,7 @@ SRCFILES = 	$(addprefix src/, ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha \
 			ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd ft_lstnew \
 			ft_lstadd_front ft_lstsize ft_lstlast ft_lstadd_back ft_lstdelone \
 			ft_lstclear ft_lstiter ft_lstmap  ft_printf get_next_line get_next_line_utils \
-			ft_putnbr_printf ft_putstr_printf ft_putchar_printf ft_make_this_p)
+			ft_putnbr_printf ft_putstr_printf ft_putchar_printf ft_make_this_p) \
 
 
 OBJ = $(addsuffix .o, $(SRCFILES))
