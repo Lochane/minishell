@@ -6,13 +6,13 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:03:04 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/27 14:38:57 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:18:08 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	check_quote(const char *str)
+static int	count_quote(const char *str)
 {
 	int	i;
 
@@ -50,8 +50,8 @@ static	size_t	ft_checkword(char const *s, char c)
 			count++;
 			while (s[i] && s[i] != c)
 			{
-				if (check_quote(&s[i]))
-					i += check_quote(&s[i]);
+				if (count_quote(&s[i]))
+					i += count_quote(&s[i]);
 				else
 					i++;
 			}
@@ -69,8 +69,8 @@ static int	len_words(const char *str, char charset)
 	{
 		if (str[k] == charset || !str[k])
 			break ;
-		if (check_quote(&str[k]))
-			k += check_quote(&str[k]);
+		if (count_quote(&str[k]))
+			k += count_quote(&str[k]);
 		else
 			k++;
 	}
@@ -96,7 +96,7 @@ static void	fill_words(char **split, const char *str, char charset, int words)
 		if (!split[i])
 			ft_free_tab(split, i);
 		if (split[i] != 0)
-			ft_strlcpy(split[i], &str[j], k);
+			ft_strlcpy(split[i], &str[j], k + 1);
 		j += k;
 		i++;
 	}

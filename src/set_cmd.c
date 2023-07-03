@@ -6,26 +6,13 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/07/03 12:34:29 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/03 14:40:58 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // TODO protéger malloc
-
-int	lstsize(t_cmd *lst)
-{
-	int	size;
-
-	size = 0;
-	while (lst != NULL)
-	{
-		size++;
-		lst = lst->next;
-	}
-	return (size);
-}
 
 void	get_arg(char **tab, t_cmd *cmd)
 {
@@ -36,8 +23,6 @@ void	get_arg(char **tab, t_cmd *cmd)
 	i = 1;
 	j = 0;
 	size = tab_size(tab);
-	cmd->out = NULL;
-	cmd->in = NULL;
 	while (tab[i])
 	{
 		if (tab[i][0] == '<')
@@ -58,8 +43,6 @@ void	get_arg(char **tab, t_cmd *cmd)
 	}
 }
 
-// TODO free tmp
-
 void	tri_cmd(char *tab, t_cmd *cmd)
 {
 	char	**tmp;
@@ -70,15 +53,13 @@ void	tri_cmd(char *tab, t_cmd *cmd)
 	cmd->cmd = ft_strdup(tmp[0]);
 	if (tab[1])
 	{
-		cmd->arg = NULL;
+		initialise_cmd(cmd);
 		get_arg(tmp, cmd);
 		if (cmd->arg)
 			print_tab(cmd->arg);
 	}
 	free(tmp);
 }
-
-// TODO free tmp
 
 void	set_cmd(t_data *data)
 {
@@ -90,17 +71,17 @@ void	set_cmd(t_data *data)
 	i = 0;
 	j = 0;
 	lst_tmp = NULL;
-	data->cmd = malloc(sizeof(t_cmd));
 	tmp = ft_split(data->args, '|');
 	while (tmp[i])
 	{
-		tri_cmd(tmp[i], data->cmd);
-		if (!lst_tmp)
-			lst_tmp = data->cmd;
+		lst_tmp = malloc(sizeof(t_cmd));
+		tri_cmd(tmp[i], lst_tmp);
+		if (i == 0)
+			data->cmd = lst_tmp;
+		else
+			add_back(data->cmd, lst_tmp);
+		lst_tmp = lst_tmp->next;
 		i++;
-		data->cmd = data->cmd->next;
 	}
-	data->cmd = lst_tmp;
 	free(tmp);
-	printf("%d\n",lstsize(data->cmd));
 }

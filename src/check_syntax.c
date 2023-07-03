@@ -6,11 +6,49 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/20 15:33:12 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:26:40 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	check_double_quotes(char *args, int i)
+{
+	static int	check;
+
+	if (args[i] == '\'' && check == 0)
+	{
+		i++;
+		while (args[i])
+		{
+			if (args[i] == '\'')
+				check = 1;
+			i++;
+		}
+	}
+	if (check == 0)
+		return ((printf("bash: syntax error\n")), 2);
+	return (0);
+}
+
+int	check_quotes(char *args, int i)
+{
+	static int	check;
+
+	if (args[i] == '\'' && check == 0)
+	{
+		i++;
+		while (args[i])
+		{
+			if (args[i] == '\'')
+				check = 1;
+			i++;
+		}
+	}
+	if (check == 0)
+		return ((printf("bash: syntax error\n")), 2);
+	return (0);
+}
 
 int	check_chevron(char *args, int i)
 {
@@ -82,7 +120,8 @@ int	check_syntax(char *args)
 	while (args[i])
 	{
 		if (check_chevron(args, i) != 0 || check_pipe(args, i) != 0 \
-			|| check_ampersand(args, i) != 0)
+			|| check_ampersand(args, i) != 0 || check_quotes(args, i) != 0 \
+			|| check_double_quotes(args, i) != 0)
 			return (2);
 		if (check_slash(args, i) != 0)
 			return (126);
