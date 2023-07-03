@@ -6,13 +6,26 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/06/27 14:37:53 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/03 12:34:29 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // TODO protéger malloc
+
+int	lstsize(t_cmd *lst)
+{
+	int	size;
+
+	size = 0;
+	while (lst != NULL)
+	{
+		size++;
+		lst = lst->next;
+	}
+	return (size);
+}
 
 void	get_arg(char **tab, t_cmd *cmd)
 {
@@ -54,7 +67,6 @@ void	tri_cmd(char *tab, t_cmd *cmd)
 	check_space_before(tab);
 	check_space_after(tab);
 	tmp = ft_split_shell(tab, ' ');
-	dprintf(2, "%s\n", tmp[2]);
 	cmd->cmd = ft_strdup(tmp[0]);
 	if (tab[1])
 	{
@@ -77,13 +89,18 @@ void	set_cmd(t_data *data)
 
 	i = 0;
 	j = 0;
+	lst_tmp = NULL;
 	data->cmd = malloc(sizeof(t_cmd));
 	tmp = ft_split(data->args, '|');
 	while (tmp[i])
 	{
 		tri_cmd(tmp[i], data->cmd);
+		if (!lst_tmp)
+			lst_tmp = data->cmd;
 		i++;
 		data->cmd = data->cmd->next;
 	}
+	data->cmd = lst_tmp;
 	free(tmp);
+	printf("%d\n",lstsize(data->cmd));
 }
