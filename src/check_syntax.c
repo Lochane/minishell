@@ -120,8 +120,7 @@ int	check_syntax(char *args)
 	while (args[i])
 	{
 		if (check_chevron(args, i) != 0 || check_pipe(args, i) != 0 \
-			|| check_ampersand(args, i) != 0 || check_quotes(args, i) != 0 \
-			|| check_double_quotes(args, i) != 0)
+			|| check_ampersand(args, i) != 0)
 			return (2);
 		if (check_slash(args, i) != 0)
 			return (126);
