@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/03 14:37:31 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/07 14:06:52 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		manage_in(char *tab, char *src, t_cmd *cmd, int i);
 int		manage_out(char *tab, char *src, t_cmd *cmd, int i);
 
 /* Set Cmd Utils */
+t_cmd	*init_cmd(void);
 char	*ft_strjoin_shell(char const *s1, char const *s2, int j);
 int		tab_size(char **tab);
 int		found_space(char *tab, int allow);

@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/06/27 14:24:24 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/07 14:21:46 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_space_before(char *tab)
 	while (i > 0 && tab[--i])
 	{
 		space_count = 0;
-		if (tab[i] == '>' || tab[i] == '<')
+		if (tab[i] == '>' || tab[i] == '<' && i > 0)
 		{
 			i--;
 			j = i;
@@ -91,7 +91,6 @@ int	manage_in(char *tab, char *src, t_cmd *cmd, int i)
 	}
 	check_space_after(cmd->in);
 	cmd->in[ft_strlen(cmd->in)] = '\0';
-	free(tmp);
 	return (i);
 }
 
