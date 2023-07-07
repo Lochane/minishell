@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/07/03 14:40:58 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:56:32 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	get_arg(char **tab, t_cmd *cmd)
 			if (!cmd->arg)
 			{
 				cmd->arg = malloc(sizeof(char *) * size);
+				if (!cmd->arg)
+					return ;
 				cmd->arg[size - 1] = NULL;
 			}
-			cmd->arg[j] = ft_strdup(tab[i]);
-			j++;
-			i++;
+			cmd->arg[j++] = ft_strdup(tab[i++]);
 		}
 	}
 }
@@ -53,13 +53,15 @@ void	tri_cmd(char *tab, t_cmd *cmd)
 	cmd->cmd = ft_strdup(tmp[0]);
 	if (tab[1])
 	{
-		initialise_cmd(cmd);
 		get_arg(tmp, cmd);
 		if (cmd->arg)
 			print_tab(cmd->arg);
 	}
 	free(tmp);
 }
+
+
+
 
 void	set_cmd(t_data *data)
 {
@@ -74,7 +76,7 @@ void	set_cmd(t_data *data)
 	tmp = ft_split(data->args, '|');
 	while (tmp[i])
 	{
-		lst_tmp = malloc(sizeof(t_cmd));
+		lst_tmp = init_cmd();
 		tri_cmd(tmp[i], lst_tmp);
 		if (i == 0)
 			data->cmd = lst_tmp;
