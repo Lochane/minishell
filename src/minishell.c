@@ -6,11 +6,12 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/10 17:34:42 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:58:17 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 
 void	sig_handler(int signum, siginfo_t *info, void *content)
 {
@@ -23,6 +24,17 @@ void	sig_handler(int signum, siginfo_t *info, void *content)
 	}
 	else
 		return ;
+}
+
+void	intercept_sig(void)
+{
+	struct sigaction	ca;
+
+	ca.sa_sigaction = sig_handler;
+	ca.sa_flags = 0;
+	sigemptyset(&ca.sa_mask);
+	signal(SIGQUIT, SIG_IGN);
+	sigaction(SIGINT, &ca, NULL);
 }
 
 int	history(char *str)
@@ -45,18 +57,13 @@ int	history(char *str)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
-	struct	sigaction	ca;
 
 	if (argc != 1 || argv[1])
 	{
 		printf("Error:\nThis program don't take arguments\n");
 		exit(0);
 	}
-	ca.sa_sigaction = sig_handler;
-	ca.sa_flags = 0;
-	sigemptyset(&ca.sa_mask);
-	signal(SIGQUIT, SIG_IGN);
-	sigaction(SIGINT, &ca, NULL);
+	intercept_sig();
 	while (1)
 	{
 		data.args = readline(PROMPT);
@@ -66,12 +73,11 @@ int	main(int argc, char **argv, char **envp)
 			{
 				if (check_syntax(data.args) == 0)
 				{
-					if(!set_cmd(&data))
+					if (!set_cmd(&data))
 					{
 						// TODO clean tout
 						break ;
 					}
-					
 				}
 			}
 		}
