@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/10 16:24:40 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:34:42 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,14 @@ int	main(int argc, char **argv, char **envp)
 			if (history(data.args) == 0)
 			{
 				if (check_syntax(data.args) == 0)
-					set_cmd(&data);
+				{
+					if(!set_cmd(&data))
+					{
+						// TODO clean tout
+						break ;
+					}
+					
+				}
 			}
 		}
 		else

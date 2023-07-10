@@ -6,13 +6,13 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/07 14:21:46 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/10 16:56:49 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// TODO protéger malloc
+// TODO protéger malloc et free tmp
 
 void	check_space_before(char *tab)
 {
@@ -27,6 +27,8 @@ void	check_space_before(char *tab)
 		if (tab[i] == '>' || tab[i] == '<' && i > 0)
 		{
 			i--;
+			if (tab[i] == '>' || tab[i] == '<')
+				i--;
 			j = i;
 			while (tab[j--] == ' ')
 				space_count++;
@@ -77,6 +79,8 @@ int	manage_in(char *tab, char *src, t_cmd *cmd, int i)
 	if (!cmd->in)
 	{
 		tmp = ft_strjoin_shell(tab, src, 1);
+		if (!tmp)
+			return (0);
 		tmp[ft_strlen(tmp)] = ' ';
 		cmd->in = tmp;
 		i += 2;
@@ -84,13 +88,18 @@ int	manage_in(char *tab, char *src, t_cmd *cmd, int i)
 	else
 	{
 		tmp = ft_strjoin_shell(tab, src, 1);
+		if (!tmp)
+			return (0);
 		tmp[ft_strlen(tmp)] = ' ';
 		tmp = ft_strjoin(cmd->in, tmp);
+		if (!tmp)
+			return (0);
 		cmd->in = ft_strdup(tmp);
 		i += 2;
 	}
 	check_space_after(cmd->in);
 	cmd->in[ft_strlen(cmd->in)] = '\0';
+	// free(tmp);
 	return (i);
 }
 

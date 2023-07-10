@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/07/10 14:24:37 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:32:37 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // TODO protéger malloc
 
-void	found_cmd(char **tab, t_cmd *cmd)
+int	get_redirection(char **tab, t_cmd *cmd)
 {
 	int	i;
 
@@ -22,68 +22,99 @@ void	found_cmd(char **tab, t_cmd *cmd)
 	while (tab[i])
 	{
 		if (tab[i][0] == '<')
+		{
 			i = manage_in(tab[i], tab[i + 1], cmd, i);
+			if (i == 0)
+				return (0);
+		}
 		else if (tab[i][0] == '>')
+		{
 			i = manage_out(tab[i], tab[i + 1], cmd, i);
+			if (i == 0)
+				return (0);
+		}
+		else
+			i++;
+	}
+	return (1);
+}
+
+int	get_cmd(char **tab, t_cmd *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i][0] == '<' || tab[i][0] == '>')
+			i += 2;
 		else
 		{
 			cmd->cmd = ft_strdup(tab[i]);
+			if (!cmd->cmd)
+				return (0);
 			break ;
 		}
 	}
+	return (1);
 }
 
-void	get_arg(char **tab, t_cmd *cmd)
+int	get_arg(char **tab, t_cmd *cmd)
 {
 	int		j;
 	int		i;
-	int		size;
 
 	i = 1;
 	j = 0;
-	size = tab_size(tab);
 	while (tab[i])
 	{
-		if (tab[i][0] == '<')
-			i = manage_in(tab[i], tab[i + 1], cmd, i);
-		else if (tab[i][0] == '>')
-			i = manage_out(tab[i], tab[i + 1], cmd, i);
+		if (tab[i][0] == '<' || tab[i][0] == '>')
+			i += 2;
 		else
 		{
 			if (!cmd->arg)
 			{
-				cmd->arg = malloc(sizeof(char *) * size);
+				cmd->arg = malloc(sizeof(char *) * tab_size(tab));
 				if (!cmd->arg)
-					return ;
-				cmd->arg[size - 1] = NULL;
+					return (0);
+				cmd->arg[tab_size(tab) - 1] = NULL;
 			}
 			cmd->arg[j++] = ft_strdup(tab[i++]);
+			if (!cmd->arg)
+				return (0);
 		}
 	}
+	return (1);
 }
 
-void	tri_cmd(char *tab, t_cmd *cmd)
+int	tri_cmd(char *tab, t_cmd *cmd)
 {
 	char	**tmp;
 
 	check_space_before(tab);
 	check_space_after(tab);
 	tmp = ft_split_shell(tab, ' ');
-	print_tab(tmp);
-	found_cmd(tmp, cmd);
+	if (!tmp)
+		return (0);
+	if (!get_redirection(tmp, cmd))
+		return (0);
+	if (!get_cmd(tmp, cmd))
+		return (0);
 	if (tab[1])
 	{
-		get_arg(tmp, cmd);
+		if (!get_arg(tmp, cmd))
+			return (0);
 		if (cmd->arg)
 			print_tab(cmd->arg);
 	}
 	free(tmp);
+	return (1);
 }
 
 
 
 
-void	set_cmd(t_data *data)
+int	set_cmd(t_data *data)
 {
 	char	**tmp;
 	t_cmd	*lst_tmp;
@@ -94,10 +125,13 @@ void	set_cmd(t_data *data)
 	j = 0;
 	lst_tmp = NULL;
 	tmp = ft_split(data->args, '|');
+	if (!tmp)
+		return (0);
 	while (tmp[i])
 	{
 		lst_tmp = init_cmd();
-		tri_cmd(tmp[i], lst_tmp);
+		if (!tri_cmd(tmp[i], lst_tmp))
+			return (0);
 		if (i == 0)
 			data->cmd = lst_tmp;
 		else
@@ -106,4 +140,5 @@ void	set_cmd(t_data *data)
 		i++;
 	}
 	free(tmp);
+	return (1);
 }
