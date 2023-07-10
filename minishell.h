@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/10 17:27:18 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:40:30 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 # define PROMPT "minishell>"
 
 /* Set Cmd */
-int	tri_cmd(char *tab, t_cmd *cmd);
-int	get_arg(char **tab, t_cmd *cmd);
-int	set_cmd(t_data	*data);
+int		tri_cmd(char *tab, t_cmd *cmd);
+int		get_arg(char **tab, t_cmd *cmd);
+int		set_cmd(t_data	*data);
 
 /* Manage Redirection */
 void	check_space_before(char *tab);

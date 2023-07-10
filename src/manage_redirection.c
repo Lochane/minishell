@@ -6,13 +6,11 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/10 16:56:49 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:50:30 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// TODO protéger malloc et free tmp
 
 void	check_space_before(char *tab)
 {
@@ -82,7 +80,9 @@ int	manage_in(char *tab, char *src, t_cmd *cmd, int i)
 		if (!tmp)
 			return (0);
 		tmp[ft_strlen(tmp)] = ' ';
-		cmd->in = tmp;
+		cmd->in = ft_strdup(tmp);
+		if (!cmd->in)
+			return (0);
 		i += 2;
 	}
 	else
@@ -99,31 +99,41 @@ int	manage_in(char *tab, char *src, t_cmd *cmd, int i)
 	}
 	check_space_after(cmd->in);
 	cmd->in[ft_strlen(cmd->in)] = '\0';
-	// free(tmp);
+	free(tmp);
 	return (i);
 }
 
 int	manage_out(char *tab, char *src, t_cmd *cmd, int i)
 {
 	char	*tmp;
-	char	*new_tmp;
 
 	if (!cmd->out)
 	{
 		tmp = ft_strjoin_shell(tab, src, 1);
+		if (!tmp)
+			return (0);
 		tmp[ft_strlen(tmp)] = ' ';
-		cmd->out = tmp;
+		cmd->out = ft_strdup(tmp);
+		if (!cmd->out)
+			return (0);
 		i += 2;
 	}
 	else
 	{
 		tmp = ft_strjoin_shell(tab, src, 1);
+		if (!tmp)
+			return (0);
 		tmp[ft_strlen(tmp)] = ' ';
 		tmp = ft_strjoin(cmd->out, tmp);
+		if (!tmp)
+			return (0);
 		cmd->out = ft_strdup(tmp);
+		if (!cmd->out)
+			return (0);
 		i += 2;
 	}
 	check_space_after(cmd->out);
 	cmd->out[ft_strlen(cmd->out)] = '\0';
+	free(tmp);
 	return (i);
 }

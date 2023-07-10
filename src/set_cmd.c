@@ -6,13 +6,11 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/07/10 17:32:37 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:52:09 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// TODO protéger malloc
 
 int	get_redirection(char **tab, t_cmd *cmd)
 {
@@ -107,7 +105,7 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 		if (cmd->arg)
 			print_tab(cmd->arg);
 	}
-	free(tmp);
+	ft_free_tab(tmp, tab_size(tmp));
 	return (1);
 }
 
@@ -139,6 +137,6 @@ int	set_cmd(t_data *data)
 		lst_tmp = lst_tmp->next;
 		i++;
 	}
-	free(tmp);
+	ft_free_tab(tmp, tab_size(tmp));
 	return (1);
 }
