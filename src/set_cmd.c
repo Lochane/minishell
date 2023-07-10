@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/07/07 14:22:38 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:24:37 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 
 void	found_cmd(char **tab, t_cmd *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
 	{
-		// printf("%s\n", tab[i]);
 		if (tab[i][0] == '<')
 			i = manage_in(tab[i], tab[i + 1], cmd, i);
 		else if (tab[i][0] == '>')

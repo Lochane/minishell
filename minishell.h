@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/07 14:06:52 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/07/10 16:19:40 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+# include <signal.h>
+# include <sys/types.h>
 # include "struct.h"
 
 # define PROMPT "minishell>"
@@ -48,6 +50,7 @@ int		check_syntax(char *args);
 int		check_ampersand(char *args, int i);
 int		check_slash(char *args, int i);
 int		check_chevron(char *args, int i);
+
 
 /* Utils */
 void	print_tab(char **tab);
