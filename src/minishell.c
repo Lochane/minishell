@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/10 17:58:17 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:09:03 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,17 @@ int	main(int argc, char **argv, char **envp)
 		}
 		else
 			break ;
-		/*data.env_lst = env_lst(envp, &data);
-		copy_env_to_data(&data);
-		path_init(&data);
-		execute_cmd(&data);*/
-		int i = 1;
-		while (data.cmd)
+		// data.env_lst = env_lst(envp, &data);
+		// copy_env_to_data(&data);
+		// path_init(&data);
+		// execute_cmd(&data);
+		// int i = 1;
+		while (data.cmd->redirection)
 		{
-			printf("****maillon : %d *****\ncmd = %s\nin = %s\nout = %s\n **********\n", i, data.cmd->cmd, data.cmd->in, data.cmd->out);
-			data.cmd = data.cmd->next;
-			i++;
+		// 	// printf("****maillon : %d *****\ncmd = %s\nin = %s\nout = %s\n **********\n", i, data.cmd->cmd, data.cmd->in, data.cmd->out);
+			printf("redirection = %s\n", data.cmd->redirection->file);
+			data.cmd->redirection = data.cmd->redirection->next;
+		// 	// i++;
 		}
 		/*int i = 0;
 		while (data.envcpy[i])

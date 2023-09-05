@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:30:36 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/03 13:31:26 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:11:37 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define BUFFER_SIZE 1000
 # endif
 
+# include "../minishell.h"
 # include <stddef.h>
 # include <string.h>
 # include <stdlib.h>
@@ -28,6 +29,12 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strchr(const char *s, int c);
@@ -73,15 +80,6 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putendl_fd(char *s, int fd);
-
-
-typedef struct s_list
-{
-	void			*content;
-	int				index;
-	struct s_list	*next;
-}	t_list;
-
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstdelone(t_list *lst, void (*del)(void*));

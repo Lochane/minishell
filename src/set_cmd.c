@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/07/10 17:52:09 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:02:26 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,11 @@ int	get_redirection(char **tab, t_cmd *cmd)
 	i = 0;
 	while (tab[i])
 	{
-		if (tab[i][0] == '<')
+		if (tab[i][0] == '<' || tab[i][0] == '>')
 		{
-			i = manage_in(tab[i], tab[i + 1], cmd, i);
-			if (i == 0)
+			if (!manage_redirection(tab[i], tab[i + 1], cmd, i))
 				return (0);
-		}
-		else if (tab[i][0] == '>')
-		{
-			i = manage_out(tab[i], tab[i + 1], cmd, i);
-			if (i == 0)
-				return (0);
+			i += 2;
 		}
 		else
 			i++;

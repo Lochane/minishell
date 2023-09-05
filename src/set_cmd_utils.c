@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:40:19 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/06 15:20:11 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:41:54 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,9 @@ t_cmd	*init_cmd(void)
 	new = malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
+	new->redirection = NULL;
 	new->cmd = NULL;
 	new->arg = NULL;
-	new->in = NULL;
-	new->out = NULL;
 	new->next = NULL;
 	return (new);
 }
