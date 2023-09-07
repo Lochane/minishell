@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -g3 
+CFLAGS = -g3 -fsanitize=address
 
 SRCDIR = src
 OBJDIR = obj
@@ -19,7 +19,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) | lib
 		@echo "			-> Compiling $(NAME)..."
-		@$(CC) $(OBJS) $(LIBPATH) -lreadline -o $@
+		@$(CC) $(OBJS) $(LIBPATH) $(CFLAGS) -lreadline -o $@
 		@echo "			-> Finished $(NAME)"
 
 $(OBJDIR):

@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:53:21 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/05 15:58:29 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:51:46 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,21 @@ void	add_back(t_cmd *lst, t_cmd *new)
 	lst = new;
 }
 
-void	add_back_dir(t_dir *lst, t_dir *new)
+void	add_back_dir(t_dir **lst, t_dir *new)
 {
 	t_dir	*temp;
 
 	if (!lst || !new)
 		return ;
-	temp = lst;
-	if (lst)
+	temp = *lst;
+	if (lst && (*lst))
 	{
 		while (temp->next != NULL)
 			temp = temp->next;
 		temp->next = new;
 	}
 	else
-	lst = new;
+	*lst = new;
 }
 
 t_dir	*init_dir(char *file)
@@ -72,7 +72,7 @@ t_dir	*init_dir(char *file)
 	new = malloc(sizeof(t_dir));
 	if (!new)
 		return (NULL);
-	new->file = file;
+	new->file = ft_strdup(file);
 	new->token = 0;
 	return (new);
 }

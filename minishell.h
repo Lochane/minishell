@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/05 15:48:26 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:38:10 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**ft_split_shell(char const *s, char c);
 void	initialise_cmd(t_cmd *cmd);
 void	add_back(t_cmd *lst, t_cmd *new);
 void	*ft_free_tab(char **res, size_t i);
-void	add_back_dir(t_dir *lst, t_dir *new);
+void	add_back_dir(t_dir **lst, t_dir *new);
 t_dir	*init_dir(char *file);
 
 
