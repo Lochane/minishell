@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/07 19:38:10 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:01:29 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,20 @@
 
 # define PROMPT "minishell>"
 
-
 /* Set Cmd */
 int		tri_cmd(char *tab, t_cmd *cmd);
 int		get_arg(char **tab, t_cmd *cmd);
+int		get_redirection(char **tab, t_cmd *cmd);
 int		set_cmd(t_data	*data);
 
 /* Manage Redirection */
-void	check_space_before(char *tab);
-void	check_space_after(char *tab);
+char	*check_space_front(char *tab);
+char	*check_space_back(char *tab);
 int		manage_redirection(char *token, char *file, t_cmd *cmd, int i);
-
+char	*ft_str_insert_back(char *str, char *insert, int index);
+char	*ft_str_insert_front(char *str, char *insert, int index);
+char	*manage_space_front(int index, char *tab, int space_count);
+char	*manage_space_back(int index, char *tab, int space_count, int j_index);
 
 /* Set Cmd Utils */
 t_cmd	*init_cmd(void);
@@ -51,7 +54,7 @@ int		check_syntax(char *args);
 int		check_ampersand(char *args, int i);
 int		check_slash(char *args, int i);
 int		check_chevron(char *args, int i);
-
+int		check_pipe(char *args, int i);
 
 /* Utils */
 void	print_tab(char **tab);
@@ -61,6 +64,5 @@ void	add_back(t_cmd *lst, t_cmd *new);
 void	*ft_free_tab(char **res, size_t i);
 void	add_back_dir(t_dir **lst, t_dir *new);
 t_dir	*init_dir(char *file);
-
 
 #endif

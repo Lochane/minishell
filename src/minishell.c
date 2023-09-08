@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/08 14:14:06 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:28:18 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,22 @@ int	main(int argc, char **argv, char **envp)
 		}
 		else
 			break ;
-		while (data.cmd->redirection)
+		int i = 0;
+		while (data.cmd)
 		{
-			// printf("****maillon : %d *****\ncmd = %s\nin = %s\nout = %s\n **********\n", i, data.cmd->cmd, data.cmd->in, data.cmd->out);
-			printf("redirection = %s\n", data.cmd->redirection->file);
-			data.cmd->redirection = data.cmd->redirection->next;
-			// i++;
+			printf("****maillon*****\ncmd = %s\n", data.cmd->cmd);
+			// while (data.cmd->arg[i])
+			// {
+			// 	printf("arg = %s\n", data.cmd->arg[i]);
+			// 	i++;
+			// }
+			while (data.cmd->redirection)
+			{
+				printf("redirection = %s\n", data.cmd->redirection->file);
+				data.cmd->redirection = data.cmd->redirection->next;
+			}
+			printf("**********\n");
+			data.cmd = data.cmd->next;
 		}
 	}
 	return (0);

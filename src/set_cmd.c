@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/09/05 16:02:26 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:59:01 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 {
 	char	**tmp;
 
-	check_space_before(tab);
-	check_space_after(tab);
+	tab = check_space_front(tab);
+	tab = check_space_back(tab);
 	tmp = ft_split_shell(tab, ' ');
 	if (!tmp)
 		return (0);
@@ -102,9 +102,6 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 	ft_free_tab(tmp, tab_size(tmp));
 	return (1);
 }
-
-
-
 
 int	set_cmd(t_data *data)
 {

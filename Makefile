@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -g3 -fsanitize=address
+CFLAGS = -g3 #-fsanitize=address
 
 SRCDIR = src
 OBJDIR = obj
@@ -7,6 +7,7 @@ OBJDIR = obj
 SRCS = $(SRCDIR)/minishell.c $(SRCDIR)/utils.c $(SRCDIR)/set_cmd.c \
 		$(SRCDIR)/set_cmd_utils.c $(SRCDIR)/manage_redirection.c \
 		$(SRCDIR)/check_syntax.c $(SRCDIR)/ft_split_shell.c \
+		$(SRCDIR)/check_syntax_2.c $(SRCDIR)/manage_redirection_2.c \
 
 OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
  
