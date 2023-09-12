@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/08 16:58:47 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:51:51 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ char	*check_space_front(char *tab)
 	int		i;
 	int		j;
 	int		space_count;
-	char	*tmp;
 
 	i = ft_strlen(tab);
 	while (i > 0 && tab[--i])
 	{
 		space_count = 0;
-		if (tab[i] == '>' || tab[i] == '<' && i > 0)
+		if ((tab[i] == '>' || tab[i] == '<') && i > 0)
 		{
 			i--;
 			if (tab[i] == '>' || tab[i] == '<')
@@ -61,7 +60,7 @@ char	*check_space_back(char *tab)
 	return (tab);
 }
 
-int	manage_redirection(char *token, char *file, t_cmd *cmd, int i)
+int	manage_redirection(char *token, char *file, t_cmd *cmd)
 {
 	t_dir	*tmp;
 

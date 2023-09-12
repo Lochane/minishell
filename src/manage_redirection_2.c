@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/08 16:58:17 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:53:30 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*ft_str_insert_front(char *str, char *insert, int index)
 {
 	char	*tmp;
-	int		i;
 	int		strlen;
 
 	strlen = ft_strlen(str) + ft_strlen(insert);
@@ -31,7 +30,6 @@ char	*ft_str_insert_front(char *str, char *insert, int index)
 char	*ft_str_insert_back(char *str, char *insert, int index)
 {
 	char	*tmp;
-	int		i;
 	int		strlen;
 
 	strlen = ft_strlen(str) + ft_strlen(insert);

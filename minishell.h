@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/08 17:01:29 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:59:31 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,19 @@
 # include <stdbool.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <errno.h>
 
-# define PROMPT "minishell>"
+/* Code erreur */
+# define ERR_SYNTX 2
+# define ERR_CMD 127
+# define ERR_DIR 126
+# define ERR_IDENTIF 1
+
+/* Code signaux */
+# define CTRL_C 130
+# define CTRL_SLASH 131
+
+# define PROMPT "\1\033[38;5;223;1m\2Minishell->\1\x1b[0m\2"
 
 /* Set Cmd */
 int		tri_cmd(char *tab, t_cmd *cmd);
@@ -37,7 +48,7 @@ int		set_cmd(t_data	*data);
 /* Manage Redirection */
 char	*check_space_front(char *tab);
 char	*check_space_back(char *tab);
-int		manage_redirection(char *token, char *file, t_cmd *cmd, int i);
+int		manage_redirection(char *token, char *file, t_cmd *cmd);
 char	*ft_str_insert_back(char *str, char *insert, int index);
 char	*ft_str_insert_front(char *str, char *insert, int index);
 char	*manage_space_front(int index, char *tab, int space_count);

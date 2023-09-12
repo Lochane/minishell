@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/08 16:59:50 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:36:30 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	check_double_quotes(char *args, int i)
 			i++;
 		}
 		if (check == 0)
-			return ((printf("bash: syntax error\n")), 2);
+			return ((printf("\x1b[91;1mbash: syntax error\n\x1b[0m")), \
+				strerror(ERR_SYNTX), ERR_SYNTX);
 	}
 	return (0);
 }
@@ -45,7 +46,8 @@ int	check_quotes(char *args, int i)
 			i++;
 		}
 		if (check == 0)
-			return ((printf("bash: syntax error\n")), 2);
+			return ((printf("\x1b[91;1mbash: syntax error\n\x1b[0m")), \
+				strerror(ERR_SYNTX), ERR_SYNTX);
 	}
 	return (0);
 }
@@ -55,12 +57,14 @@ int	check_chevron(char *args, int i)
 	if (args[i] == '>' || args[i] == '<')
 	{
 		if (!args[i + 1])
-			return ((printf("bash: syntax error\n")), 2);
+			return ((printf("\x1b[91;1mbash: syntax error\n\x1b[0m")), \
+				strerror(ERR_SYNTX), ERR_SYNTX);
 		else
 		{
 			i++;
 			if (!args[i + 1])
-				return ((printf("bash: syntax error\n")), 2);
+				return ((printf("\x1b[91;1mbash: syntax error\n\x1b[0m")), \
+					strerror(ERR_SYNTX), ERR_SYNTX);
 		}
 	}
 	return (0);
@@ -71,13 +75,14 @@ int	check_slash(char *args, int i)
 	if (args[i] == '/')
 	{
 		if (!args[i + 1])
-			return ((printf("bash: %c: Is a directory\n", args[i])), 126);
+			return ((printf("\x1b[91;1mbash: %c: Is a directory\n\x1b[0m", args[i])), \
+				strerror(ERR_DIR), ERR_DIR);
 		else
 		{
 			i++;
 			if (!args[i + 1] || args[i + 1] == '.')
-				return ((printf("bash: %c%c: Is a directory\n", args[i - 1], \
-					args[i])), 126);
+				return ((printf("\x1b[91;1mbash: %c%c: Is a directory\n\x1b[0m", args[i - 1], \
+					args[i])), strerror(ERR_DIR), ERR_DIR);
 		}	
 	}
 	return (0);
@@ -95,9 +100,10 @@ int	check_syntax(char *args)
 			|| check_double_quotes(args, i) != 0)
 			return (2);
 		if (check_slash(args, i) != 0)
-			return (126);
+			return (ERR_DIR);
 		if (args[i] == '-' && !args[i + 1])
-			return ((printf("bash: %c: command not found\n", args[i])), 127);
+			return ((printf("\x1b[91;1mbash: %c: command not found\n\x1b[0m", args[i]), \
+				strerror(ERR_CMD)), ERR_CMD);
 		i++;
 	}
 	return (0);
