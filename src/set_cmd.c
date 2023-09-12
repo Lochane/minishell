@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/09/11 17:52:26 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:37:21 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ int	get_arg(char **tab, t_cmd *cmd)
 	int		j;
 	int		i;
 
-	i = 1;
+	i = 0;
+	i = find_index(i, tab, 0);
 	j = 0;
 	while (tab[i])
 	{
 		if (tab[i][0] == '<' || tab[i][0] == '>')
-			i += 2;
+			i = find_index(i, tab, 1);
 		else
 		{
 			if (!cmd->arg)

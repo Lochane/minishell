@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/12 14:24:54 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:07:42 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ int	main(int argc, char **argv, char **envp)
 		}
 		else
 		{
-			printf("\x1b[91;1mExit\n\x1b[0m\2");
+			printf(RED"Exit\n"RESET);
 			break ;
 		}
+		// int i = 0;
 			while (data.cmd)
 			{
 				printf("****maillon*****\ncmd = %s\n", data.cmd->cmd);

@@ -6,11 +6,30 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:40:19 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/12 14:31:19 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:36:12 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	find_index(int i, char **tab, int allow)
+{
+	if (allow == 0)
+	{
+		if (tab[0][0] == '<' || tab[0][0] == '>')
+			i = 0;
+		else
+			i = 1;
+	}
+	else
+	{
+		if (i == 0 && (tab[i][0] == '<' || tab[i][0] == '>'))
+			i += 3;
+		else if (tab[i][0] == '<' || tab[i][0] == '>')
+			i += 2;
+	}
+	return (i);
+}
 
 int	found_space(char *tab, int allow)
 {
