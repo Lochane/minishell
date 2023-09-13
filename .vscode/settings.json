@@ -2,6 +2,7 @@
 	"files.associations": {
 		"libft.h": "c",
 		"fcntl.h": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"struct.h": "c"
 	}
 }

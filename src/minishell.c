@@ -6,16 +6,35 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/12 16:07:42 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:15:08 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init_data(t_data *data)
+void	manage_data(t_data *data, int allow)
 {
-	data->args = NULL;
-	data->cmd = NULL;
+	if (allow == 0)
+	{
+		data->args = NULL;
+		data->cmd = NULL;
+	}
+	else
+	{
+		while (data->cmd)
+		{
+			while (data->cmd->redirection)
+			{
+				free(data->cmd->redirection->file);
+				free(data->cmd->redirection);
+				data->cmd->redirection = data->cmd->redirection->next;
+			}
+			ft_free_tab(data->cmd->arg, tab_size(data->cmd->arg));
+			free(data->cmd->cmd);
+			free(data->cmd);
+			data->cmd = data->cmd->next;
+		}
+	}
 }
 
 void	sig_handler(int signum)
@@ -73,7 +92,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	intercept_sig();
 	printf("\033[H\033[J");
-	init_data(&data);
+	manage_data(&data, 0);
 	while (1)
 	{
 		data.args = readline(PROMPT);
@@ -85,7 +104,7 @@ int	main(int argc, char **argv, char **envp)
 				{
 					if (!set_cmd(&data))
 					{
-						// TODO clean tout
+						manage_data(&data, 1);
 						break ;
 					}
 				}
@@ -93,40 +112,27 @@ int	main(int argc, char **argv, char **envp)
 		}
 		else
 		{
+			manage_data(&data, 1);
 			printf(RED"Exit\n"RESET);
 			break ;
 		}
 		// int i = 0;
-			while (data.cmd)
+		while (data.cmd)
+		{
+			printf("****maillon*****\ncmd = %s\n", data.cmd->cmd);
+			// while (data.cmd->arg[i])
+			// {
+			// 	printf("arg = %s\n", data.cmd->arg[i]);
+			// 	i++;
+			// }
+			while (data.cmd->redirection)
 			{
-				printf("****maillon*****\ncmd = %s\n", data.cmd->cmd);
-				// while (data.cmd->arg[i])
-				// {
-				// 	printf("arg = %s\n", data.cmd->arg[i]);
-				// 	i++;
-				// }
-				while (data.cmd->redirection)
-				{
-					printf("redirection = %s\n", data.cmd->redirection->file);
-					data.cmd->redirection = data.cmd->redirection->next;
-				}
-				printf("**********\n");
-				data.cmd = data.cmd->next;
+				printf("redirection = %s\ntoken = %d\n", data.cmd->redirection->file, data.cmd->redirection->token);
+				data.cmd->redirection = data.cmd->redirection->next;
+			}
+			printf("**********\n");
+			data.cmd = data.cmd->next;
 		}
 	}
 	return (0);
 }
-
-		// while(data.cmd)
-		// {
-		// 	while(data.cmd->redirection)
-		// 	{
-		// 		free(data.cmd->redirection->file);
-		// 		free(data.cmd->redirection);
-		// 		data.cmd->redirection = data.cmd->redirection->next;
-		// 	}
-		// 	ft_free_tab(data.cmd->arg, tab_size(data.cmd->arg));
-		// 	free(data.cmd->cmd);
-		// 	free(data.cmd);
-		// 	data.cmd = data.cmd->next;
-		// }

@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/12 16:36:20 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:42:40 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 
 # define RED "\x1b[91;1m"
 # define RESET "\x1b[0m\2"
+# define HEADER "\033[38;5;223;1m"
 
 # define PROMPT "\1\033[38;5;223;1m\2Minishell->\1\x1b[0m\2"
 
@@ -63,7 +64,6 @@ char	*ft_strjoin_shell(char const *s1, char const *s2, int j);
 int		tab_size(char **tab);
 int		found_space(char *tab, int allow);
 int		find_index(int i, char **tab, int allow);
-
 
 /* Check Syntax*/
 int		check_syntax(char *args);

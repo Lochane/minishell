@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/09/12 16:37:21 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:30:37 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 	{
 		if (!get_arg(tmp, cmd))
 			return (0);
-		if (cmd->arg)
-			print_tab(cmd->arg);
 	}
 	ft_free_tab(tmp, tab_size(tmp));
 	return (1);

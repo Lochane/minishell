@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/11 17:51:51 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:01:58 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*check_space_front(char *tab)
 			if (tab[i] == '>' || tab[i] == '<')
 				i--;
 			j = i;
-			while (tab[j--] == ' ')
+			while (j > 0 && tab[j--] == ' ')
 				space_count++;
 			tab = manage_space_front(i, tab, space_count);
 		}
