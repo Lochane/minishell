@@ -260,6 +260,5 @@ int handle_cmds(t_cmd *cmd, char **env)
 			close(tmp->prev_pipe);
 		tmp = tmp->next;
 	}
-	waiting(cmd, cmd_size(cmd));
-	return (0);
+	return (waiting(cmd, cmd_size(cmd)));
 }
