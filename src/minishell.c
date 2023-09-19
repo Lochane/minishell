@@ -34,6 +34,8 @@ void	manage_data(t_data *data, int allow)
 			free(data->cmd);
 			data->cmd = data->cmd->next;
 		}
+		data->args = NULL;
+		data->cmd = NULL;
 	}
 }
 
@@ -92,9 +94,9 @@ int	main(int argc, char **argv, char **envp)
 	}
 	intercept_sig();
 	printf("\033[H\033[J");
-	manage_data(&data, 0);
 	while (1)
 	{
+		manage_data(&data, 0);
 		data.args = readline(PROMPT);
 		if (data.args)
 		{
@@ -117,6 +119,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		print_cmds(data.cmd);
+		manage_data(&data, 0);
 	}
 	return (0);
 }
