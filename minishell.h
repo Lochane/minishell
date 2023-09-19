@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../libft/libft.h"
+# include "libft/libft.h"
 # include "struct.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -71,14 +71,19 @@ int		check_ampersand(char *args, int i);
 int		check_slash(char *args, int i);
 int		check_chevron(char *args, int i);
 int		check_pipe(char *args, int i);
+int 	count_chevron(char *args, int i);
 
 /* Utils */
-void	print_tab(char **tab);
 char	**ft_split_shell(char const *s, char c);
 void	initialise_cmd(t_cmd *cmd);
 void	add_back(t_cmd *lst, t_cmd *new);
 void	*ft_free_tab(char **res, size_t i);
 void	add_back_dir(t_dir **lst, t_dir *new);
 t_dir	*init_dir(char *file);
+
+/* Poubelle */
+
+void	print_tab(char **tab);
+void    print_cmds(t_cmd *cmd);
 
 #endif

@@ -20,17 +20,6 @@ void	*ft_free_tab(char **res, size_t i)
 	return (NULL);
 }
 
-void	print_tab(char **tab)
-{
-	int i = 0;
-
-	while (tab[i] != NULL)
-	{
-		printf("%s\n", tab[i]);
-		i++;
-	}
-}
-
 void	add_back(t_cmd *lst, t_cmd *new)
 {
 	t_cmd	*temp;

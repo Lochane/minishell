@@ -67,17 +67,19 @@ int	manage_redirection(char *token, char *file, t_cmd *cmd)
 	tmp = init_dir(file);
 	if (!tmp)
 		return (0);
+	if (token[0] == '<' && token[1] == '>')
+		tmp->token = DOUBLE;
+	else if (token[1] && token[1] == '<')
+		tmp->token = LESS_LESS;
+	else if (token[1] && token[1] == '>')
+		tmp->token = GREAT_GREAT;
+	else if (token[0] == '<')
+		tmp->token = LESS;
+	else if (token[0] == '>')
+		tmp->token = GREAT;
 	if (!cmd->redirection)
 		cmd->redirection = tmp;
 	else
 		add_back_dir(&cmd->redirection, tmp);
-	if (token[1] && token[1] == '<')
-		cmd->redirection->token = LESS_LESS;
-	else if (token[1] && token[1] == '>')
-		cmd->redirection->token = GREAT_GREAT;
-	else if (token[0] == '<')
-		cmd->redirection->token = LESS;
-	else if (token[0] == '>')
-		cmd->redirection->token = GREAT;
 	return (1);
 }

@@ -13,7 +13,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "../libft/libft.h"
+# include "libft/libft.h"
 
 typedef enum s_tokens
 {
@@ -21,6 +21,7 @@ typedef enum s_tokens
 	GREAT_GREAT,
 	LESS,
 	LESS_LESS,
+	DOUBLE,
 }	t_tokens;
 
 typedef struct s_dir
