@@ -14,6 +14,7 @@
 # define STRUCT_H
 
 # include "libft/libft.h"
+#include <unistd.h>
 
 typedef enum s_tokens
 {
@@ -37,6 +38,9 @@ typedef struct s_cmd
 	char			**arg;
 	t_dir			*redirection;
 	struct s_cmd	*next;
+	pid_t			pid;
+	int				pipe;
+	int				prev_pipe;
 }	t_cmd;
 
 typedef struct s_data

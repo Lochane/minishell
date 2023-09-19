@@ -86,7 +86,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	(void)envp;
 	if (argc != 1 || argv[1])
 	{
 		printf("Error:\nThis program don't take arguments\n");
@@ -118,7 +117,8 @@ int	main(int argc, char **argv, char **envp)
 			printf(RED"Exit\n"RESET);
 			break ;
 		}
-		print_cmds(data.cmd);
+		//print_cmds(dta.cmd);
+		handle_cmds(data.cmd, envp);
 		manage_data(&data, 0);
 	}
 	return (0);
