@@ -14,7 +14,7 @@
 # define STRUCT_H
 
 # include "libft/libft.h"
-#include <unistd.h>
+# include <unistd.h>
 
 typedef enum s_tokens
 {
@@ -47,6 +47,7 @@ typedef struct s_data
 {
 	char	*args;
 	t_cmd	*cmd;
+	//t_list	*env;
 }	t_data;
 
 #endif

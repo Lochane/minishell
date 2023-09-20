@@ -129,6 +129,79 @@ void	dup_pipe(t_cmd *cmd)
 	}
 }
 
+void	dup_redir(int in, int out)
+{
+	if (in > 0 && dup2(in , 0) == -1)
+	{
+		perror("redir dup2 in");
+		failure_critic();
+	}
+	if ( out > 0 && dup2(out, 1) == -1)
+	{
+		perror("redir dup2 out");
+		failure_critic();
+	}
+}
+
+void	open_redir(t_dir *redir)
+{
+	t_dir	*tmp;
+	int		in;
+	int		out;
+	int		i;
+
+	tmp = redir;
+	i = 0;
+	in = -2;
+	out = -2;
+	while (tmp)
+	{
+		if (tmp->token == GREAT || tmp->token == GREAT_GREAT)
+		{
+			if (out > 0)
+				close(out);
+			if (tmp->token == GREAT)
+				out = open((const char *)tmp->file, O_TRUNC | O_WRONLY | O_CREAT,
+					S_IWUSR | S_IRUSR | S_IROTH | S_IRGRP);
+			else
+				out = open((const char *)tmp->file, O_APPEND | O_WRONLY | O_CREAT, \
+					S_IWUSR | S_IRUSR | S_IROTH | S_IRGRP);
+		}
+		if (tmp->token == LESS || tmp->token == LESS_LESS)
+		{
+		
+			if (in > 0)
+				close(in);
+			if (tmp->token == LESS)
+				in = open((const char *)tmp->file, O_RDONLY);
+			//else
+		}
+		if (tmp->token == DOUBLE)
+		{
+			if (in > 0)
+				close(in);
+			if (out > 0)
+				close(out);
+			out = open((const char *)tmp->file, O_RDONLY | O_CREAT,
+				S_IWUSR | S_IRUSR | S_IROTH | S_IRGRP);	
+			if (out != -1)
+			{
+				in = out;
+				out = 0;
+			}
+		}
+		if (in == -1 || out == -1)
+			failure_critic();
+		tmp = tmp->next;
+	}
+	dup_redir(in, out);
+	if (in > 0 && out > 0)
+	{
+		close(in);
+		close(out);
+	}
+}
+
 void	exec(t_cmd *cmd_lst, char **env )
 {
 	char	**path;
@@ -137,6 +210,7 @@ void	exec(t_cmd *cmd_lst, char **env )
 	t_cmd	*tmp;
 
 	dup_pipe(cmd_lst);
+	open_redir(cmd_lst->redirection);
 	//if (env->infile.fd == -1 && i == 0)
 	//	handle_invalide_in(env);
 	//if (env->outfile.fd == -1 && i == env->nb_cmd -1)
@@ -234,7 +308,7 @@ int handle_cmds(t_cmd *cmd, char **env)
 	prev_pipe = -1;
 	pip[0] = -1;
 	pip[1] = -1;
-	//cnd_cmd = cmd_size;
+	//nb_cmd = cmd_size;
 	modif_cmd(tmp);
 	while (tmp)
 	{

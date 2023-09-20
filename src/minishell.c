@@ -93,6 +93,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	intercept_sig();
 	printf("\033[H\033[J");
+	//data.env = tab_to_list(envp);
 	while (1)
 	{
 		manage_data(&data, 0);
