@@ -93,7 +93,10 @@ int	main(int argc, char **argv, char **envp)
 	}
 	intercept_sig();
 	printf("\033[H\033[J");
-	//data.env = tab_to_list(envp);
+	data.env = tab_to_list(envp);
+	//if (!init_here_doc(&data.here_doc))
+	//	return (0);//free l'env
+	//modifier pour proteger l'erreur de malloc peut etre null si pas d'env
 	while (1)
 	{
 		manage_data(&data, 0);
@@ -119,7 +122,8 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		//print_cmds(dta.cmd);
-		handle_cmds(data.cmd, envp);
+		if (data.cmd)
+			handle_cmds(data.cmd, lst_to_tab(data.env));
 		manage_data(&data, 0);
 	}
 	return (0);

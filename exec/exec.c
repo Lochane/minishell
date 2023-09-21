@@ -1,6 +1,18 @@
 
 #include "../minishell.h"
 
+int	ft_strcmp(const char *s, const char *s1)
+{
+	int	i;
+	
+	i = 0;
+	if (!s || !s1)
+		return (s - s1);
+	while (s[i] && s[i] == s1[i])
+		i++;
+	return (s[i] - s1[i]);
+}
+
 void	failure_critic()
 {
 	exit(0);
@@ -202,7 +214,133 @@ void	open_redir(t_dir *redir)
 	}
 }
 
-void	exec(t_cmd *cmd_lst, char **env )
+int	ft_var_cmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (-1);
+	while (s1[i] && s1[i] == s2[i])
+		i++;
+	if (!s1[i] && s2[i] == '=')
+		return (0);
+	else
+		return (1);
+}
+
+char	*ft_get_env(char *var, char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (!ft_var_cmp(var, env[i]))
+			return (env[i]);
+		i++;
+	}
+	return (NULL);
+}
+
+
+int	print_env(t_cmd *cmd, char **env)
+{
+	int	i;
+
+	i = 0;
+
+	(void) cmd;
+	while (env[i])
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
+	return (0);
+}
+
+int	do_echo(t_cmd *cmd, char **env)
+{
+	(void) cmd;
+	(void) env;
+	return (0);
+}
+
+int	do_cd(t_cmd *cmd, char **env)
+{
+	(void) cmd;
+	(void) env;
+	return (0);
+}
+
+int	do_export(t_cmd *cmd, char **env)
+{
+	(void) cmd;
+	(void) env;
+	return (0);
+}
+
+int	do_unset(t_cmd *cmd, char **env)
+{
+	(void) cmd;
+	(void) env;
+	return (0);
+}
+
+int	do_exit(t_cmd *cmd, char **env)
+{
+	(void) cmd;
+	(void) env;
+	//long	nb;
+	if (!cmd->arg)
+		exit(25);
+	//if (ft_atol(cmd->arg[0], &nb))
+	//	exit (nb % 128);
+	return (0);
+}
+
+int	do_pwd(t_cmd *cmd, char **env)
+{
+	char	*var;
+	var = ft_get_env("PWD", env);
+	printf("%s\n", var);
+	(void) cmd;
+	return (0);
+}
+
+int	do_built_in(t_cmd *cmd, char **env)
+{
+	const char		*built_in_name[] = {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL};
+	const fct	built_in_fct[]  = {do_echo, do_cd, do_pwd, do_export, print_env, do_unset, do_exit};
+//faire un tableau de fct built in dans le meme ordre afin de donner la cmd a la fct de i
+	int	i;
+
+	i = 0;
+	while (built_in_name[i])
+	{
+		if (ft_strcmp(built_in_name[i], cmd->cmd) == 0)
+			built_in_fct[i](cmd, env);
+		i++;
+	}
+	return (0);
+}
+
+int	is_built_in(char *s)
+{
+	const char	*built_in[] = {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL};
+	int	i;
+
+	i = 0;
+	while (built_in[i])
+	{
+		if (ft_strcmp(built_in[i], s) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	exec(t_cmd *cmd_lst, char **env, int built_in)
 {
 	char	**path;
 	char	**cmd;
@@ -215,6 +353,12 @@ void	exec(t_cmd *cmd_lst, char **env )
 	//	handle_invalide_in(env);
 	//if (env->outfile.fd == -1 && i == env->nb_cmd -1)
 	//	handle_invalid_out(env);
+	built_in = is_built_in(cmd_lst->cmd);
+	if (built_in)
+	{
+		do_built_in(cmd_lst, env);
+		exit (0);
+	}
 	path = ft_split(get_path(env), ':');
 	cmd = join_cmd(cmd_lst->cmd, cmd_lst->arg);
 	if (!cmd)
@@ -222,7 +366,7 @@ void	exec(t_cmd *cmd_lst, char **env )
 	//	fail_cmd(env, cmd, path);
 	pathed = check_access(cmd[0], path);
 	if (!pathed)
-		exit(0) ;//fail_cmd();
+		exit(0);//fail_cmd();
 	//dup_all();
 	//close_all(cmd, i);
 	tmp = cmd_lst;
@@ -234,7 +378,7 @@ void	exec(t_cmd *cmd_lst, char **env )
 			close(tmp->prev_pipe);
 		tmp = tmp->next;
 	}
-	execve(pathed, cmd, NULL);
+	execve(pathed, cmd, env);
 	ft_free_tab(path, tab_size(path));
 	ft_free_tab(cmd, tab_size(cmd));
 	free(pathed);
@@ -301,15 +445,19 @@ int handle_cmds(t_cmd *cmd, char **env)
 	t_cmd *tmp;
 	int		i;
 	int		prev_pipe;
-	//int		nb_cmd;
+	int		built_in;
+	int		nb_cmd;
 
 	tmp = cmd;
 	i = 0;
 	prev_pipe = -1;
 	pip[0] = -1;
 	pip[1] = -1;
-	//nb_cmd = cmd_size;
+	nb_cmd = cmd_size(cmd);
 	modif_cmd(tmp);
+	built_in = is_built_in(cmd->cmd);
+	if (built_in && nb_cmd == 1)
+		return (do_built_in(cmd, env));
 	while (tmp)
 	{
 		if (tmp->next)
@@ -326,7 +474,7 @@ int handle_cmds(t_cmd *cmd, char **env)
 			return (0);
 		}
 		else if (tmp->pid == 0)
-			exec(tmp , env);
+			exec(tmp , env, built_in);
 		i++;
 		if (tmp->pipe != -1)
 			close(tmp->pipe);

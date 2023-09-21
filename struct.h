@@ -16,6 +16,12 @@
 # include "libft/libft.h"
 # include <unistd.h>
 
+typedef struct s_lst
+{
+	char			*data;
+	struct s_lst	*next;
+}					t_lst;
+
 typedef enum s_tokens
 {
 	GREAT = 1,
@@ -47,7 +53,8 @@ typedef struct s_data
 {
 	char	*args;
 	t_cmd	*cmd;
-	//t_list	*env;
+	t_lst	*env;
+	const	char return_value;
 }	t_data;
 
 #endif
