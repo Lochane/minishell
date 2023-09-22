@@ -6,7 +6,13 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-typedef int (*fct)(t_cmd *, char **);
+typedef struct s_fd
+{
+    int in;
+    int out;
+}       t_fd;
+
+typedef int (*fct)(t_cmd *, char **, t_fd);
 
 int handle_cmds(t_cmd *cmd, char **env);
 char **lst_to_tab(t_lst *lst);

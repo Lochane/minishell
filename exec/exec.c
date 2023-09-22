@@ -13,9 +13,11 @@ int	ft_strcmp(const char *s, const char *s1)
 	return (s[i] - s1[i]);
 }
 
-void	failure_critic()
+void	failure_critic(int res)
 {
-	exit(0);
+	//test de print strerror join avec "minishell :" via ft_join
+	//prendre en parametre retour d'erreur
+	exit(res);
 }
 
 void	modif_cmd(t_cmd *cmd)
@@ -59,14 +61,14 @@ char	*ft_join(char *s1, char *s2, char c)
 	s3 = malloc(sizeof(char) * size + 1);
 	if (!s3)
 		return (NULL);
-	while (s1[i])
+	while (s1 && s1[i])
 	{
 		s3[i] = s1[i];
 		i++;
 	}
 	if (c)
 		s3[i++] = c;
-	while (s2[j])
+	while (s2 && s2[j])
 		s3[i++] = s2[j++];
 	s3[i] = 0;
 	return (s3);
@@ -131,87 +133,89 @@ void	dup_pipe(t_cmd *cmd)
 {
 	if (cmd->prev_pipe != -1 && dup2(cmd->prev_pipe, 0) == -1)
 	{
-		perror("dup2 in");
-		failure_critic();
+		perror("dup2 pipe in");
+		failure_critic(1);
 	}
 	if ( cmd->pipe != -1 && dup2(cmd->pipe, 1) == -1)
 	{
-		perror("dup2 out");
-		failure_critic();
+		perror("dup2 pipe out");
+		failure_critic(1);
 	}
 }
 
-void	dup_redir(int in, int out)
+void	dup_redir(t_fd fd)
 {
-	if (in > 0 && dup2(in , 0) == -1)
+	if (fd.in > 0 && dup2(fd.in , 0) == -1)
 	{
 		perror("redir dup2 in");
-		failure_critic();
+		failure_critic(1);
 	}
-	if ( out > 0 && dup2(out, 1) == -1)
+	if (fd.out > 0 && dup2(fd.out, 1) == -1)
 	{
 		perror("redir dup2 out");
-		failure_critic();
+		failure_critic(1);
 	}
 }
 
-void	open_redir(t_dir *redir)
+int	open_redir(t_dir *redir, t_fd *fd)
 {
 	t_dir	*tmp;
-	int		in;
-	int		out;
 	int		i;
+	char	*str;
+	char	*str2;
 
 	tmp = redir;
 	i = 0;
-	in = -2;
-	out = -2;
+	fd->in = -2;
+	fd->out = -2;
 	while (tmp)
 	{
 		if (tmp->token == GREAT || tmp->token == GREAT_GREAT)
 		{
-			if (out > 0)
-				close(out);
+			if (fd->out > 0)
+				close(fd->out);
 			if (tmp->token == GREAT)
-				out = open((const char *)tmp->file, O_TRUNC | O_WRONLY | O_CREAT,
+				fd->out = open((const char *)tmp->file, O_TRUNC | O_WRONLY | O_CREAT,
 					S_IWUSR | S_IRUSR | S_IROTH | S_IRGRP);
 			else
-				out = open((const char *)tmp->file, O_APPEND | O_WRONLY | O_CREAT, \
+				fd->out = open((const char *)tmp->file, O_APPEND | O_WRONLY | O_CREAT, \
 					S_IWUSR | S_IRUSR | S_IROTH | S_IRGRP);
 		}
 		if (tmp->token == LESS || tmp->token == LESS_LESS)
 		{
 		
-			if (in > 0)
-				close(in);
+			if (fd->in > 0)
+				close(fd->in);
 			if (tmp->token == LESS)
-				in = open((const char *)tmp->file, O_RDONLY);
+				fd->in = open((const char *)tmp->file, O_RDONLY);
 			//else
 		}
 		if (tmp->token == DOUBLE)
 		{
-			if (in > 0)
-				close(in);
-			if (out > 0)
-				close(out);
-			out = open((const char *)tmp->file, O_RDONLY | O_CREAT,
+			if (fd->in > 0)
+				close(fd->in);
+			if (fd->out > 0)
+				close(fd->out);
+			fd->out = open((const char *)tmp->file, O_RDONLY | O_CREAT,
 				S_IWUSR | S_IRUSR | S_IROTH | S_IRGRP);	
-			if (out != -1)
+			if (fd->out != -1)
 			{
-				in = out;
-				out = 0;
+				fd->in = fd->out;
+				fd->out = 0;
 			}
 		}
-		if (in == -1 || out == -1)
-			failure_critic();
+		if (fd->in == -1 || fd->out == -1)
+		{
+			str = ft_join("minishel : ", tmp->file, 0);
+			str2 = ft_join(str, strerror(errno), 0);//proteger les allocs
+			free(str);
+			str = ft_join(str2, NULL, '\n');
+			write(2, str, ft_strlen(str));
+			return (1);
+		}
 		tmp = tmp->next;
 	}
-	dup_redir(in, out);
-	if (in > 0 && out > 0)
-	{
-		close(in);
-		close(out);
-	}
+	return (0);
 }
 
 int	ft_var_cmp(char *s1, char *s2)
@@ -244,53 +248,64 @@ char	*ft_get_env(char *var, char **env)
 }
 
 
-int	print_env(t_cmd *cmd, char **env)
+int	print_env(t_cmd *cmd, char **env, t_fd fd)
 {
 	int	i;
+	int	final_fd;
+	char	*str;
 
 	i = 0;
 
 	(void) cmd;
 	while (env[i])
 	{
-		printf("%s\n", env[i]);
+		if (fd.out > 0)
+			final_fd = fd.out;
+		str = ft_join(env[i], NULL, '\n');
+		//proteger echec allocation
+		write(final_fd, str, ft_strlen(str));
 		i++;
 	}
 	return (0);
 }
 
-int	do_echo(t_cmd *cmd, char **env)
+int	do_echo(t_cmd *cmd, char **env, t_fd fd)
 {
 	(void) cmd;
 	(void) env;
+	(void) fd;
 	return (0);
 }
 
-int	do_cd(t_cmd *cmd, char **env)
+int	do_cd(t_cmd *cmd, char **env, t_fd fd)
 {
 	(void) cmd;
 	(void) env;
+	(void) fd;
 	return (0);
 }
 
-int	do_export(t_cmd *cmd, char **env)
+int	do_export(t_cmd *cmd, char **env, t_fd fd)
 {
 	(void) cmd;
 	(void) env;
+	(void) fd;
 	return (0);
 }
 
-int	do_unset(t_cmd *cmd, char **env)
+int	do_unset(t_cmd *cmd, char **env, t_fd fd)
 {
 	(void) cmd;
 	(void) env;
+	(void) fd;
 	return (0);
 }
 
-int	do_exit(t_cmd *cmd, char **env)
+int	do_exit(t_cmd *cmd, char **env, t_fd fd)
 {
 	(void) cmd;
 	(void) env;
+	(void) fd;
 	//long	nb;
 	if (!cmd->arg)
 		exit(25);
@@ -299,11 +314,20 @@ int	do_exit(t_cmd *cmd, char **env)
 	return (0);
 }
 
-int	do_pwd(t_cmd *cmd, char **env)
+int	do_pwd(t_cmd *cmd, char **env, t_fd fd)
 {
 	char	*var;
+	int		final_fd;
+	char	*str;
+
+	final_fd = 1;
 	var = ft_get_env("PWD", env);
-	printf("%s\n", var);
+	if (fd.out > 0)
+		final_fd = fd.out;
+	str = ft_join(var, NULL, '\n');
+	//proteger echec allocation
+	write(final_fd, str, ft_strlen(str));
+	free(str);
 	(void) cmd;
 	return (0);
 }
@@ -312,16 +336,29 @@ int	do_built_in(t_cmd *cmd, char **env)
 {
 	const char		*built_in_name[] = {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL};
 	const fct	built_in_fct[]  = {do_echo, do_cd, do_pwd, do_export, print_env, do_unset, do_exit};
-//faire un tableau de fct built in dans le meme ordre afin de donner la cmd a la fct de i
+	//faire un tableau de fct built in dans le meme ordre afin de donner la cmd a la fct de i
 	int	i;
+	t_fd	fd;
 
+	if (open_redir(cmd->redirection, &fd) == 1)
+	{
+		if (fd.in > 0)
+			close(fd.in);
+		if (fd.out > 0)
+			close(fd.out);
+		return (0);
+	}
 	i = 0;
 	while (built_in_name[i])
 	{
 		if (ft_strcmp(built_in_name[i], cmd->cmd) == 0)
-			built_in_fct[i](cmd, env);
+			built_in_fct[i](cmd, env, fd);
 		i++;
 	}
+	if (fd.in > 0)
+		close(fd.in);
+	if (fd.out > 0)
+		close(fd.out);
 	return (0);
 }
 
@@ -346,9 +383,22 @@ void	exec(t_cmd *cmd_lst, char **env, int built_in)
 	char	**cmd;
 	char	*pathed;
 	t_cmd	*tmp;
+	t_fd	fd;
 
 	dup_pipe(cmd_lst);
-	open_redir(cmd_lst->redirection);
+	if (open_redir(cmd_lst->redirection, &fd) == 1)
+	{
+		if (fd.in > 0)
+			close(fd.in);
+		if (fd.out > 0)
+			close(fd.out);
+		failure_critic(1);
+	}
+	dup_redir(fd);
+	if (fd.in > 0)
+		close(fd.in);
+	if (fd.out > 0)
+		close(fd.out);
 	//if (env->infile.fd == -1 && i == 0)
 	//	handle_invalide_in(env);
 	//if (env->outfile.fd == -1 && i == env->nb_cmd -1)
@@ -382,8 +432,7 @@ void	exec(t_cmd *cmd_lst, char **env, int built_in)
 	ft_free_tab(path, tab_size(path));
 	ft_free_tab(cmd, tab_size(cmd));
 	free(pathed);
-	failure_critic();
-	exit(0);
+	failure_critic(0);
 }
 
 int	cmd_size(t_cmd *cmd)
@@ -462,7 +511,7 @@ int handle_cmds(t_cmd *cmd, char **env)
 	{
 		if (tmp->next)
 			if (pipe(pip) == -1)
-				failure_critic();
+				return (1); // erreur creation pipe message fd insuffiant? erno?
 		if (tmp->next)
 			tmp->pipe = pip[1];	
 		if (tmp->next)
@@ -470,7 +519,9 @@ int handle_cmds(t_cmd *cmd, char **env)
 		tmp->pid = fork();
 		if (tmp->pid == -1)
 		{
-			failure_critic();
+			write(2, "error to create process\n", 24);
+			perror("fork : ");
+			failure_critic(127);
 			return (0);
 		}
 		else if (tmp->pid == 0)
