@@ -13,39 +13,6 @@ int	ft_strcmp(const char *s, const char *s1)
 	return (s[i] - s1[i]);
 }
 
-void	failure_critic(int res)
-{
-	//test de print strerror join avec "minishell :" via ft_join
-	//prendre en parametre retour d'erreur
-	exit(res);
-}
-
-void	modif_cmd(t_cmd *cmd)
-{
-	while (cmd)
-	{	
-		cmd->pipe = -1;
-		cmd->prev_pipe = -1;
-		cmd->pid = -1;
-		cmd = cmd->next;
-	}
-
-}
-
-char	*get_path(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (!ft_strncmp(env[i], "PATH=", 5))
-			return (&env[i][5]);
-		i++;
-	}
-	return (NULL);
-}
-
 char	*ft_join(char *s1, char *s2, char c)
 {
 	int		i;
@@ -74,6 +41,73 @@ char	*ft_join(char *s1, char *s2, char c)
 	return (s3);
 }
 
+void	failure_critic(int res)
+{
+	(void) res;
+	//test de print strerror join avec "minishell :" via ft_join
+	//prendre en parametre retour d'erreur
+	exit(errno);
+}
+
+void	ft_error(char *message, char *message2)
+{
+	char	*str;
+	char	*str2;
+
+	str = ft_join("minishel : ", message, 0);
+	if (!message2)
+		str2 = ft_join(str, strerror(errno), ' ');//proteger les allocs
+	else
+		str2 = ft_join(str, message2, ' ');//proteger les allocs
+	free(str);
+	str = ft_join(str2, NULL, '\n');
+	free(str2);
+	write(2, str, ft_strlen(str));
+	free(str);
+}
+
+void	modif_cmd(t_cmd *cmd)
+{
+	while (cmd)
+	{	
+		cmd->pipe = -1;
+		cmd->prev_pipe = -1;
+		cmd->pid = -1;
+		cmd = cmd->next;
+	}
+
+}
+
+char	*get_path(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (!ft_strncmp(env[i], "PATH=", 5))
+			return (&env[i][5]);
+		i++;
+	}
+	return (NULL);
+}
+
+int	check_path(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	if (!cmd)
+		return (0);
+	while (cmd[i])
+	{
+		if (cmd[i] == '/')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 char	*check_access(char *cmd, char **path)
 {
 	int		i;
@@ -83,12 +117,13 @@ char	*check_access(char *cmd, char **path)
 	i = 0;
 	if (!cmd)
 		return (NULL);//free_and_exit();
-	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/') || \
-	(cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '/'))
+	//if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/') || \
+	//(cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '/'))
+	if (!check_path(cmd))
 	{
 		if (!access(cmd, F_OK | X_OK))
 			return (ft_strdup(cmd));
-	//	print_error(err, cmd, 1);
+		ft_error(cmd, NULL);
 		return (NULL);
 	}
 	while (path && path[i])
@@ -101,7 +136,7 @@ char	*check_access(char *cmd, char **path)
 		free(pathed);
 		i++;
 	}
-	//print_error(err, cmd, 2);
+	ft_error(cmd, "command not found");
 	return (NULL);
 }
 
@@ -129,40 +164,40 @@ char	**join_cmd(char *cmd, char **arg)
 	return (new);
 }
 
-void	dup_pipe(t_cmd *cmd)
+int	dup_pipe(t_cmd *cmd)
 {
 	if (cmd->prev_pipe != -1 && dup2(cmd->prev_pipe, 0) == -1)
 	{
 		perror("dup2 pipe in");
-		failure_critic(1);
+		return (1);
 	}
 	if ( cmd->pipe != -1 && dup2(cmd->pipe, 1) == -1)
 	{
 		perror("dup2 pipe out");
-		failure_critic(1);
+		return (1);
 	}
+	return (0);
 }
 
-void	dup_redir(t_fd fd)
+int	dup_redir(t_fd fd)
 {
 	if (fd.in > 0 && dup2(fd.in , 0) == -1)
 	{
 		perror("redir dup2 in");
-		failure_critic(1);
+		return (1);
 	}
 	if (fd.out > 0 && dup2(fd.out, 1) == -1)
 	{
 		perror("redir dup2 out");
-		failure_critic(1);
+		return (1);
 	}
+	return (0);
 }
 
 int	open_redir(t_dir *redir, t_fd *fd)
 {
 	t_dir	*tmp;
 	int		i;
-	char	*str;
-	char	*str2;
 
 	tmp = redir;
 	i = 0;
@@ -188,7 +223,7 @@ int	open_redir(t_dir *redir, t_fd *fd)
 				close(fd->in);
 			if (tmp->token == LESS)
 				fd->in = open((const char *)tmp->file, O_RDONLY);
-			//else
+			//else heredoc
 		}
 		if (tmp->token == DOUBLE)
 		{
@@ -206,11 +241,7 @@ int	open_redir(t_dir *redir, t_fd *fd)
 		}
 		if (fd->in == -1 || fd->out == -1)
 		{
-			str = ft_join("minishel : ", tmp->file, 0);
-			str2 = ft_join(str, strerror(errno), 0);//proteger les allocs
-			free(str);
-			str = ft_join(str2, NULL, '\n');
-			write(2, str, ft_strlen(str));
+			ft_error(tmp->file, NULL);
 			return (1);
 		}
 		tmp = tmp->next;
@@ -241,7 +272,7 @@ char	*ft_get_env(char *var, char **env)
 	while (env[i])
 	{
 		if (!ft_var_cmp(var, env[i]))
-			return (env[i]);
+			return (&env[i][ft_strlen(var) + 1]);
 		i++;
 	}
 	return (NULL);
@@ -385,7 +416,8 @@ void	exec(t_cmd *cmd_lst, char **env, int built_in)
 	t_cmd	*tmp;
 	t_fd	fd;
 
-	dup_pipe(cmd_lst);
+	if (dup_pipe(cmd_lst) == 1)
+		failure_critic(0);
 	if (open_redir(cmd_lst->redirection, &fd) == 1)
 	{
 		if (fd.in > 0)
@@ -394,7 +426,8 @@ void	exec(t_cmd *cmd_lst, char **env, int built_in)
 			close(fd.out);
 		failure_critic(1);
 	}
-	dup_redir(fd);
+	if (dup_redir(fd) == 1)
+		failure_critic(0);
 	if (fd.in > 0)
 		close(fd.in);
 	if (fd.out > 0)
