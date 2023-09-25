@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/13 16:21:28 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/25 21:16:30 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int	check_syntax(char *args)
 			|| check_ampersand(args, i) != 0 || check_quotes(args, i) != 0 \
 			|| check_double_quotes(args, i) != 0)
 			return (2);
-		if (check_slash(args, i) != 0)
-			return (ERR_DIR);
+		//if (check_slash(args, i) != 0)
+		//	return (ERR_DIR);
 		if (args[i] == '-' && !args[i + 1])
 			return ((printf(RED"minishell: %c: command not found\n"RESET, \
 			args[i]), strerror(ERR_CMD)), ERR_CMD);
