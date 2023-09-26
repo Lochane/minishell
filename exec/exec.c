@@ -79,15 +79,23 @@ void	failure_critic(int res)
 	exit(res);
 }
 
-void	ft_error(char *message, char *message2)
+void	ft_error(char *message, char *message2, int info)
 {
 	char	*str;
 	char	*str2;
+	char	*err;
 
-	str = ft_join("minishel: ", message, 0);
-	if (!message2)
+	str2 = NULL;
+	str = ft_join("minishel: ", message, 0);//protgeger alloc
+	if (!message2 && !info)
 		str2 = ft_join(str, strerror(errno), ' ');//proteger les allocs
-	else
+	else if (message && info)
+	{
+		err = ft_join(message2, strerror(errno), 0);//proteger allocs
+		str2 = ft_join(str, err, ' ');//proteger les allocs
+		free(err);
+	}
+	else if (message)
 		str2 = ft_join(str, message2, ' ');//proteger les allocs
 	free(str);
 	str = ft_join(str2, NULL, '\n');
@@ -158,7 +166,7 @@ char	*check_access(char *cmd, char **path)
 	{
 		if (!access(cmd, F_OK | X_OK))
 			return (ft_strdup(cmd));
-		ft_error(cmd, NULL);
+		ft_error(cmd, NULL, 0);
 		return (NULL);
 	}
 	while (path && path[i])
@@ -171,7 +179,7 @@ char	*check_access(char *cmd, char **path)
 		free(pathed);
 		i++;
 	}
-	ft_error(cmd, "command not found");
+	ft_error(cmd, "command not found", 0);
 	return (NULL);
 }
 
@@ -276,7 +284,7 @@ int	open_redir(t_dir *redir, t_fd *fd)
 		}
 		if (fd->in == -1 || fd->out == -1)
 		{
-			ft_error(tmp->file, NULL);
+			ft_error(tmp->file, NULL, 0);
 			return (1);
 		}
 		tmp = tmp->next;
@@ -291,58 +299,82 @@ int	ft_var_cmp(char *s1, char *s2)
 	i = 0;
 	if (!s1 || !s2)
 		return (-1);
-	while (s1[i] && s1[i] == s2[i])
+	while ((s1[i] && s1[i] != '=') && s1[i] == s2[i])
 		i++;
-	if (!s1[i] && s2[i] == '=')
+	if ((!s1[i] || s1[i] == '=') && s2[i] == '=')
 		return (0);
 	else
 		return (1);
 }
 
-char	*ft_get_env(char *var, char **env)
+char	*ft_get_env(char *var, t_lst *env, t_lst **lst)
 {
-	int	i;
+	t_lst	*tmp;
 
-	i = 0;
-	while (env[i])
+	tmp = env;
+	while (tmp)
 	{
-		if (!ft_var_cmp(var, env[i]))
-			return (&env[i][ft_strlen(var) + 1]);
-		i++;
+		if (!ft_var_cmp(var, tmp->data))
+		{
+			if (lst)
+				*lst = tmp;
+			return (&tmp->data[ft_strlen(var) + 1]);
+		}
+		tmp = tmp->next;
 	}
+	if (lst)
+		*lst = NULL;
 	return (NULL);
 }
 
-
-int	print_env(t_cmd *cmd, char **env, t_fd fd, t_data data)
+int remove_lst(t_lst **lst, char *name)
 {
-	int	i;
+	(void) lst;
+	t_lst	*tmp;
+	t_lst	*prev;
+
+	if (!*lst)
+		return (0);
+	prev = *lst;
+	ft_get_env(name, *lst, &tmp);
+	if (!tmp)
+		return (0);
+	while (prev && prev->next != tmp)
+		prev = prev->next;
+	prev->next = tmp->next;
+	free(tmp->data);
+	free(tmp);
+	return (1);
+}
+
+int	print_env(t_cmd *cmd, t_fd fd, t_data *data)
+{
 	int	final_fd;
 	char	*str;
+	t_lst	*tmp;
 
-	i = 0;
 	if (fd.out > 0)
 		final_fd = fd.out;
 	(void) cmd;
 	(void) data;
-	while (env[i])
+	tmp = data->env;
+	while (tmp)
 	{
-		str = ft_join(env[i], NULL, '\n');
+		str = ft_join(tmp->data, NULL, '\n');
 		//proteger echec allocation
 		if (write(final_fd, str, ft_strlen(str)) == -1)
 		{
-			ft_error(cmd->cmd, ": write error: No space left on device");
+			ft_error(cmd->cmd, "write error: ", 1);
 			return (125);
 		}
-		i++;
+		tmp = tmp->next;
 	}
 	return (0);
 }
 
-int	do_echo(t_cmd *cmd, char **env, t_fd fd, t_data data)
+int	do_echo(t_cmd *cmd, t_fd fd, t_data *data)
 {
 	(void) cmd;
-	(void) env;
 	(void) fd;
 	(void) data;
 	int	i;
@@ -362,7 +394,7 @@ int	do_echo(t_cmd *cmd, char **env, t_fd fd, t_data data)
 		if (write(final_fd, "\n", 1) == -1)
 		{
 			ret = 1;//check bonne valeur
-			ft_error(cmd->cmd, ": write error: No space left on device");
+			ft_error(cmd->cmd, "write error: ", 1);
 		}
 		return (ret);
 	}	
@@ -375,37 +407,84 @@ int	do_echo(t_cmd *cmd, char **env, t_fd fd, t_data data)
 	return (0);
 }
 
-int	do_cd(t_cmd *cmd, char **env, t_fd fd, t_data data)
+int	do_cd(t_cmd *cmd, t_fd fd, t_data *data)
 {
 	(void) cmd;
-	(void) env;
 	(void) fd;
 	(void) data;
 	return (0);
 }
 
-int	do_export(t_cmd *cmd, char **env, t_fd fd, t_data data)
+int	check_var(char *str)
 {
-	(void) cmd;
-	(void) env;
-	(void) fd;
-	(void) data;
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (1);
+		i++;
+	}
 	return (0);
 }
 
-int	do_unset(t_cmd *cmd, char **env, t_fd fd, t_data data)
+int	do_export(t_cmd *cmd, t_fd fd, t_data *data)
 {
 	(void) cmd;
-	(void) env;
 	(void) fd;
-	(void) data;
+	t_lst	*var;
+	t_lst	*new;
+	int		i;
+
+	//a faire en bouvle tant qu'il y a des args
+	if (cmd->arg)
+	{
+		i = 0;
+		while (cmd->arg[i])
+		{
+			if (check_var(cmd->arg[i]))
+			{
+				ft_get_env(cmd->arg[i], data->env, &var);
+				if (!var)
+				{
+					new = ft_new_lst(cmd->arg[i]);//proteger le malloc
+					ft_add_back(&data->env, new);
+				}
+				else
+				{
+					free(var->data);
+					var->data = ft_strdup(cmd->arg[i]);
+				}
+			}
+			i++;
+		}
+	}
 	return (0);
 }
 
-int	do_exit(t_cmd *cmd, char **env, t_fd fd, t_data data)
+int	do_unset(t_cmd *cmd, t_fd fd, t_data *data)
 {
 	(void) cmd;
-	(void) env;
+	(void) fd;
+	(void) data;
+	int	i;
+
+	if (cmd->arg)
+	{
+		i = 0;
+		while (cmd->arg[i])
+		{
+			remove_lst(&data->env, cmd->arg[i]);//a faire en boucle tant au'il y a des arg
+			i++;
+		}
+	}
+	return (0);
+}
+
+int	do_exit(t_cmd *cmd, t_fd fd, t_data *data)
+{
+	(void) cmd;
 	(void) fd;
 	int		check;
 	//long	nb;
@@ -415,30 +494,36 @@ int	do_exit(t_cmd *cmd, char **env, t_fd fd, t_data data)
 	check = 0;
 	//long	nb;
 	if (!cmd->arg)
-		exit(data.return_value);
+		exit(data->return_value);
 	//nb = ft_atol(cmd->arg[0], &check);
 	if (check)//check si different retour si nonnumeric ou overflow ou si les 2 juste non numeric
-		return (data.return_value);
+		return (data->return_value);
 	//	exit (nb % 130);
 	return (0);
 }
 
-int	do_pwd(t_cmd *cmd, char **env, t_fd fd, t_data data)
+int	do_pwd(t_cmd *cmd, t_fd fd, t_data *data)
 {
 	char	*var;
 	int		final_fd;
 	char	*str;
 
-	(void) data;
 	final_fd = 1;
-	var = ft_get_env("PWD", env);
+	var = ft_get_env("PWD", data->env, NULL);
 	if (fd.out > 0)
 		final_fd = fd.out;
+	if (!var)
+	{
+		ft_error(cmd->cmd, "PWD not set", 0);
+		return (0);
+	}
 	str = ft_join(var, NULL, '\n');
 	//proteger echec allocation
 	if (write(final_fd, str, ft_strlen(str)) == -1)
 	{
-		ft_error(cmd->cmd, ": write error: No space left on device");
+		printf("errno == %d\n", errno);
+		//ft_error(cmd->cmd, ": write error: No space left on device");
+		ft_error(cmd->cmd, "write error: ", 1);
 		free(str);
 		return (1);
 	}
@@ -447,13 +532,14 @@ int	do_pwd(t_cmd *cmd, char **env, t_fd fd, t_data data)
 	return (0);
 }
 
-int	do_built_in(t_cmd *cmd, char **env, t_data data)
+int	do_built_in(t_cmd *cmd, t_data *data)
 {
 	const char		*built_in_name[] = {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL};
 	const fct	built_in_fct[]  = {do_echo, do_cd, do_pwd, do_export, print_env, do_unset, do_exit};
 	//faire un tableau de fct built in dans le meme ordre afin de donner la cmd a la fct de i
 	int	i;
 	t_fd	fd;
+	int		ret;
 
 	if (open_redir(cmd->redirection, &fd) == 1)
 	{
@@ -461,20 +547,21 @@ int	do_built_in(t_cmd *cmd, char **env, t_data data)
 			close(fd.in);
 		if (fd.out > 0)
 			close(fd.out);
-		return (0);
+		return (1);
 	}
 	i = 0;
 	while (built_in_name[i])
 	{
 		if (ft_strcmp(built_in_name[i], cmd->cmd) == 0)
-			return (built_in_fct[i](cmd, env, fd, data));
+			break ;
 		i++;
 	}
+	ret = built_in_fct[i](cmd, fd, data);
 	if (fd.in > 0)
 		close(fd.in);
 	if (fd.out > 0)
 		close(fd.out);
-	return (0);
+	return (ret);
 }
 
 int	is_built_in(char *s)
@@ -492,7 +579,7 @@ int	is_built_in(char *s)
 	return (0);
 }
 
-void	exec(t_cmd *cmd_lst, char **env, int built_in , t_data data)
+void	exec(t_cmd *cmd_lst, char **env, int built_in , t_data *data)
 {
 	char	**path;
 	char	**cmd;
@@ -523,7 +610,7 @@ void	exec(t_cmd *cmd_lst, char **env, int built_in , t_data data)
 	built_in = is_built_in(cmd_lst->cmd);
 	if (built_in)
 	{
-		do_built_in(cmd_lst, env, data);
+		do_built_in(cmd_lst, data);
 		exit (0);
 	}
 	path = ft_split(get_path(env), ':');
@@ -608,7 +695,7 @@ int	waiting(t_cmd *cmd, int nb_cmd)
 	return (res);
 }
 
-int handle_cmds(t_cmd *cmd, char **env, t_data data)
+int handle_cmds(t_cmd *cmd, char **env, t_data *data)
 {
 	int pip[2];
 	t_cmd *tmp;
@@ -626,7 +713,7 @@ int handle_cmds(t_cmd *cmd, char **env, t_data data)
 	modif_cmd(tmp);
 	built_in = is_built_in(cmd->cmd);
 	if (built_in && nb_cmd == 1)
-		return (do_built_in(cmd, env, data));
+		return (do_built_in(cmd, data));
 	while (tmp)
 	{
 		if (tmp->next)

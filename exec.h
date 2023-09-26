@@ -13,10 +13,12 @@ typedef struct s_fd
     int out;
 }       t_fd;
 
-typedef int (*fct)(t_cmd *, char **, t_fd, t_data);
+typedef int (*fct)(t_cmd *, t_fd, t_data *);
 
-int handle_cmds(t_cmd *cmd, char **env, t_data data);
+int handle_cmds(t_cmd *cmd, char **env, t_data *data);
 char **lst_to_tab(t_lst *lst);
 t_lst  *tab_to_list(char **tab);
+t_lst  *ft_new_lst(char *data);
+void    ft_add_back(t_lst **lst, t_lst *new);
 
 #endif
