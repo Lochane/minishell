@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/13 17:15:08 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:24:42 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,21 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	(void)envp;
 	if (argc != 1 || argv[1])
 	{
 		printf("Error:\nThis program don't take arguments\n");
 		exit(0);
 	}
+	data.return_value = 0;
 	intercept_sig();
 	printf("\033[H\033[J");
+	data.env = tab_to_list(envp);
+	//if (!init_here_doc(&data.here_doc))
+	//	return (0);//free l'env
+	//modifier pour proteger l'erreur de malloc peut etre null si pas d'env
 	while (1)
 	{
+		printf("ret == %d\n", data.return_value);
 		manage_data(&data, 0);
 		data.args = readline(PROMPT);
 		if (data.args)
@@ -118,7 +123,9 @@ int	main(int argc, char **argv, char **envp)
 			printf(RED"Exit\n"RESET);
 			break ;
 		}
-		print_cmds(data.cmd);
+		//print_cmds(dta.cmd);
+		if (data.cmd)
+				data.return_value = handle_cmds(data.cmd, lst_to_tab(data.env), &data);
 		manage_data(&data, 0);
 	}
 	return (0);

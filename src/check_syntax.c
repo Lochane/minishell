@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/27 17:47:27 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:01:19 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int	check_syntax(char *args)
 			|| check_ampersand(args, i) != 0 || check_quotes(args, i) != 0 \
 			|| check_double_quotes(args, i) != 0)
 			return (2);
-		if (check_slash(args, i) != 0)
-			return (ERR_DIR);
+		//if (check_slash(args, i) != 0)
+		//	return (ERR_DIR);
 		if (args[i] == '-' && !args[i + 1])
 			return ((printf(RED"minishell: %c: command not found\n"RESET, \
 			args[i]), strerror(ERR_CMD)), ERR_CMD);
