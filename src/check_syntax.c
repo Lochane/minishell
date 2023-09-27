@@ -26,7 +26,7 @@ int	check_double_quotes(char *args, int i)
 			i++;
 		}
 		if (check == 0)
-			return ((printf(RED"bash: syntax error\n"RESET)), \
+			return ((printf(RED"minishell: syntax error\n"RESET)), \
 				strerror(ERR_SYNTX), ERR_SYNTX);
 	}
 	return (0);
@@ -46,7 +46,7 @@ int	check_quotes(char *args, int i)
 			i++;
 		}
 		if (check == 0)
-			return ((printf(RED"bash: syntax error\n"RESET)), \
+			return ((printf(RED"minishell: syntax error\n"RESET)), \
 				strerror(ERR_SYNTX), ERR_SYNTX);
 	}
 	return (0);
@@ -56,14 +56,16 @@ int	check_chevron(char *args, int i)
 {
 	if (args[i] == '>' || args[i] == '<')
 	{
+		if (count_chevron(args, i) != 0)
+			return (1);
 		if (!args[i + 1])
-			return ((printf(RED"bash: syntax error\n"RESET)), \
+			return ((printf(RED"minishell: syntax error\n"RESET)), \
 				strerror(ERR_SYNTX), ERR_SYNTX);
 		else
 		{
 			i++;
 			if (!args[i + 1])
-				return ((printf(RED"bash: syntax error\n"RESET)), \
+				return ((printf(RED"minishell: syntax error\n"RESET)), \
 					strerror(ERR_SYNTX), ERR_SYNTX);
 		}
 	}
@@ -75,13 +77,13 @@ int	check_slash(char *args, int i)
 	if (args[i] == '/')
 	{
 		if (!args[i + 1])
-			return ((printf(RED"bash: %c: Is a directory\n"RESET, \
+			return ((printf(RED"minishell: %c: Is a directory\n"RESET, \
 			args[i])), strerror(ERR_DIR), ERR_DIR);
 		else
 		{
 			i++;
 			if (!args[i + 1] || args[i + 1] == '.')
-				return ((printf(RED"bash: %c%c: Is a directory\n"RESET, \
+				return ((printf(RED"minishell: %c%c: Is a directory\n"RESET, \
 				args[i - 1], args[i])), strerror(ERR_DIR), ERR_DIR);
 		}	
 	}
@@ -102,7 +104,7 @@ int	check_syntax(char *args)
 		if (check_slash(args, i) != 0)
 			return (ERR_DIR);
 		if (args[i] == '-' && !args[i + 1])
-			return ((printf(RED"bash: %c: command not found\n"RESET, \
+			return ((printf(RED"minishell: %c: command not found\n"RESET, \
 			args[i]), strerror(ERR_CMD)), ERR_CMD);
 		i++;
 	}

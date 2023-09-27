@@ -34,6 +34,8 @@ void	manage_data(t_data *data, int allow)
 			free(data->cmd);
 			data->cmd = data->cmd->next;
 		}
+		data->args = NULL;
+		data->cmd = NULL;
 	}
 }
 
@@ -92,9 +94,9 @@ int	main(int argc, char **argv, char **envp)
 	}
 	intercept_sig();
 	printf("\033[H\033[J");
-	manage_data(&data, 0);
 	while (1)
 	{
+		manage_data(&data, 0);
 		data.args = readline(PROMPT);
 		if (data.args)
 		{
@@ -116,23 +118,8 @@ int	main(int argc, char **argv, char **envp)
 			printf(RED"Exit\n"RESET);
 			break ;
 		}
-		// int i = 0;
-		while (data.cmd)
-		{
-			printf("****maillon*****\ncmd = %s\n", data.cmd->cmd);
-			// while (data.cmd->arg[i])
-			// {
-			// 	printf("arg = %s\n", data.cmd->arg[i]);
-			// 	i++;
-			// }
-			while (data.cmd->redirection)
-			{
-				printf("redirection = %s\ntoken = %d\n", data.cmd->redirection->file, data.cmd->redirection->token);
-				data.cmd->redirection = data.cmd->redirection->next;
-			}
-			printf("**********\n");
-			data.cmd = data.cmd->next;
-		}
+		print_cmds(data.cmd);
+		manage_data(&data, 0);
 	}
 	return (0);
 }

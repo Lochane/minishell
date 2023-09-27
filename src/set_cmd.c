@@ -67,16 +67,17 @@ int	get_arg(char **tab, t_cmd *cmd)
 		{
 			if (!cmd->arg)
 			{
-				cmd->arg = malloc(sizeof(char *) * tab_size(tab));
+				cmd->arg = malloc(sizeof(char *) * (tab_size(tab) + 1));
 				if (!cmd->arg)
 					return (0);
-				cmd->arg[tab_size(tab) - 1] = NULL;
 			}
 			cmd->arg[j++] = ft_strdup(tab[i++]);
 			if (!cmd->arg)
 				return (0);
 		}
 	}
+	if (cmd->arg)
+		cmd->arg[j] = NULL;
 	return (1);
 }
 
@@ -112,7 +113,7 @@ int	set_cmd(t_data *data)
 	i = 0;
 	j = 0;
 	lst_tmp = NULL;
-	tmp = ft_split(data->args, '|');
+	tmp = ft_split_shell(data->args, '|');
 	if (!tmp)
 		return (0);
 	while (tmp[i])
