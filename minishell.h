@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/13 14:42:40 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:37:28 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int		check_ampersand(char *args, int i);
 int		check_slash(char *args, int i);
 int		check_chevron(char *args, int i);
 int		check_pipe(char *args, int i);
-int 	count_chevron(char *args, int i);
+int		count_chevron(char *args, int i);
+
 
 /* Utils */
 char	**ft_split_shell(char const *s, char c);

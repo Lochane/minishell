@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/13 16:21:28 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:47:27 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_chevron(char *args, int i)
 		else
 		{
 			i++;
-			if (!args[i + 1])
+			if (!args[i + 1] && (args[i] == '<' || args[i] == '>'))
 				return ((printf(RED"minishell: syntax error\n"RESET)), \
 					strerror(ERR_SYNTX), ERR_SYNTX);
 		}

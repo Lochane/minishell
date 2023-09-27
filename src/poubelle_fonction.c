@@ -22,13 +22,13 @@ void    print_cmds(t_cmd *cmd)
     }
 }
 
-void	print_tab(char **tab)
-{
-	int i = 0;
+// void	print_tab(char **tab)
+// {
+// 	int i = 0;
 
-	while (tab[i] != NULL)
-	{
-		printf("%s\n", tab[i]);
-		i++;
-	}
-}
+// 	while (tab[i] != NULL)
+// 	{
+// 		printf("%s\n", tab[i]);
+// 		i++;
+// 	}
+// }
