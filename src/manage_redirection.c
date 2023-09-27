@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/13 17:01:58 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:38:00 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	manage_redirection(char *token, char *file, t_cmd *cmd)
 	if (!cmd->redirection)
 		cmd->redirection = tmp;
 	else
-		add_back_dir(&cmd->redirection, tmp);
+	add_back_dir(&cmd->redirection, tmp);
 	if (token[1] && token[1] == '<')
 		cmd->redirection->token = LESS_LESS;
 	else if (token[1] && token[1] == '>')
@@ -79,5 +79,6 @@ int	manage_redirection(char *token, char *file, t_cmd *cmd)
 		cmd->redirection->token = LESS;
 	else if (token[0] == '>')
 		cmd->redirection->token = GREAT;
+	// cmd->redirection = cmd->redirection->next;
 	return (1);
 }
