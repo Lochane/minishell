@@ -86,7 +86,7 @@ void	ft_error(char *message, char *message2, int info)
 	char	*err;
 
 	str2 = NULL;
-	str = ft_join("minishel: ", message, 0);//protgeger alloc
+	str = ft_join("minishell: ", message, 0);//protgeger alloc
 	if (!message2 && !info)
 		str2 = ft_join(str, strerror(errno), ' ');//proteger les allocs
 	else if (message && info)
@@ -409,7 +409,10 @@ int	do_echo(t_cmd *cmd, t_fd fd, t_data *data)
 
 int	do_cd(t_cmd *cmd, t_fd fd, t_data *data)
 {
-	(void) cmd;
+	if(cmd->arg[1])
+		printf("too many argument\n"); // TODO sortie d'erreur
+	if(chdir(cmd->arg[0]))
+		printf("No such file\n"); // TODO sortie d'erreur
 	(void) fd;
 	(void) data;
 	return (0);
