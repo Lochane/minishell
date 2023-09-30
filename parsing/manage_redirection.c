@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/27 18:47:33 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/30 09:39:32 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ int	manage_redirection(char *token, char *file, t_cmd *cmd)
 		cmd->redirection = tmp;
 	else
 		add_back_dir(&cmd->redirection, tmp);
+	return (1);
 }
