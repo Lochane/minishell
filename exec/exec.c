@@ -582,13 +582,14 @@ int	is_built_in(char *s)
 	return (0);
 }
 
-void	exec(t_cmd *cmd_lst, char **env, int built_in , t_data *data)
+void	exec(t_cmd *cmd_lst, int built_in , t_data *data)
 {
 	char	**path;
 	char	**cmd;
 	char	*pathed;
 	t_cmd	*tmp;
 	t_fd	fd;
+	char **env;
 
 	if (dup_pipe(cmd_lst) == 1)
 		failure_critic(1);
@@ -616,6 +617,7 @@ void	exec(t_cmd *cmd_lst, char **env, int built_in , t_data *data)
 		do_built_in(cmd_lst, data);
 		exit (0);
 	}
+	env = lst_to_tab(data->env);
 	path = ft_split(get_path(env), ':');
 	cmd = join_cmd(cmd_lst->cmd, cmd_lst->arg);
 	if (!cmd)
@@ -698,7 +700,7 @@ int	waiting(t_cmd *cmd, int nb_cmd)
 	return (res);
 }
 
-int handle_cmds(t_cmd *cmd, char **env, t_data *data)
+int handle_cmds(t_cmd *cmd, t_data *data)
 {
 	int pip[2];
 	t_cmd *tmp;
@@ -735,7 +737,7 @@ int handle_cmds(t_cmd *cmd, char **env, t_data *data)
 			return (0);
 		}
 		else if (tmp->pid == 0)
-			exec(tmp , env, built_in, data);
+			exec(tmp , built_in, data);
 		i++;
 		if (tmp->pipe != -1)
 			close(tmp->pipe);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/09/14 02:37:28 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/30 13:40:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	get_arg(char **tab, t_cmd *cmd)
 	i = 0;
 	i = find_index(i, tab, 0);
 	j = 0;
-	while (tab[i])
+	while (tab && tab[i])
 	{
 		if (tab[i][0] == '<' || tab[i][0] == '>')
 			i = find_index(i, tab, 1);
