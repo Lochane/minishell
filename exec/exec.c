@@ -409,10 +409,22 @@ int	do_echo(t_cmd *cmd, t_fd fd, t_data *data)
 
 int	do_cd(t_cmd *cmd, t_fd fd, t_data *data)
 {
-	if(cmd->arg[1])
-		printf("too many argument\n"); // TODO sortie d'erreur
-	if(chdir(cmd->arg[0]))
-		printf("No such file\n"); // TODO sortie d'erreur
+	if (cmd->arg)
+	{
+		if(cmd->arg[1])
+		{
+			printf("too many argument\n"); // TODO sortie d'erreur
+			return(0);
+		}
+		if(chdir(cmd->arg[0]))
+		{
+			printf("No such file\n"); // TODO sortie d'erreur
+			return(0);
+		}
+		// ft_get_env()
+	}
+	else
+		printf("No arguments\n"); // TODO sortie d'erreur
 	(void) fd;
 	(void) data;
 	return (0);

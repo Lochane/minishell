@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lochane <lochane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:40:19 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/12 16:36:12 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/09/30 15:39:21 by lochane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	find_index(int i, char **tab, int allow)
 	}
 	else
 	{
-		if (i == 0 && (tab[i][0] == '<' || tab[i][0] == '>'))
+		if ((i == 0 && (tab[i][0] == '<' || tab[i][0] == '>')) && tab[i + 2])
 			i += 3;
 		else if (tab[i][0] == '<' || tab[i][0] == '>')
 			i += 2;
