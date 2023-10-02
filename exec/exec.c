@@ -409,6 +409,13 @@ int	do_echo(t_cmd *cmd, t_fd fd, t_data *data)
 
 int	do_cd(t_cmd *cmd, t_fd fd, t_data *data)
 {
+	t_lst *pwd;
+	t_lst *oldpwd;
+
+	
+
+	ft_get_env("PWD", data->env, &pwd);
+	ft_get_env("OLDPWD", data->env, &oldpwd);
 	if (cmd->arg)
 	{
 		if(cmd->arg[1])
@@ -421,7 +428,11 @@ int	do_cd(t_cmd *cmd, t_fd fd, t_data *data)
 			printf("No such file\n"); // TODO sortie d'erreur
 			return(0);
 		}
-		// ft_get_env()
+		if(oldpwd && pwd)
+		{
+			free(oldpwd->data);
+			oldpwd->data = pwd->data;
+		}
 	}
 	else
 		printf("No arguments\n"); // TODO sortie d'erreur
@@ -543,7 +554,6 @@ int	do_pwd(t_cmd *cmd, t_fd fd, t_data *data)
 		return (1);
 	}
 	free(str);
-	(void) cmd;
 	return (0);
 }
 

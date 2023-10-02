@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -g3 #-Wall -Werror -Wextra #-fsanitize=address
+CFLAGS = -g3 -Wall -Werror -Wextra #-fsanitize=address
 
 SRCPARSING  = parsing
 SRCEXEC = exec
