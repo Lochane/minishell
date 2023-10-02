@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/30 14:03:20 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:22:39 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int argc, char **argv, char **envp)
 	//modifier pour proteger l'erreur de malloc peut etre null si pas d'env
 	while (1)
 	{
-		printf("ret == %d\n", data.return_value);
+		// printf("ret == %d\n", data.return_value);
 		manage_data(&data, 0);
 		data.args = readline(PROMPT);
 		if (data.args)

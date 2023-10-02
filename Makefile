@@ -5,7 +5,7 @@ SRCPARSING  = parsing
 SRCEXEC = exec
 OBJDIR  = obj
 
-SRCS = $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCPARSING)/minishell.c $(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
+SRCS = $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/ft_strjoin_pool.c $(SRCPARSING)/minishell.c $(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
 		$(SRCPARSING)/set_cmd_utils.c $(SRCPARSING)/manage_redirection.c \
 		$(SRCPARSING)/check_syntax.c $(SRCPARSING)/ft_split_shell.c \
 		$(SRCPARSING)/check_syntax_2.c $(SRCPARSING)/manage_redirection_2.c \

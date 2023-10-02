@@ -372,6 +372,31 @@ int	print_env(t_cmd *cmd, t_fd fd, t_data *data)
 	return (0);
 }
 
+int	check_option(char **arg)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 1;
+	while(arg[i])
+	{
+		if (arg[i][0] && arg[i][0] == '-')
+		{
+			while(arg[i][j])
+			{
+				if (arg[i][j] != 'n')
+					return (i);
+				j++;
+			}
+			i++;
+		}
+		else
+			break ;
+	}
+	return(i);
+}
+
 int	do_echo(t_cmd *cmd, t_fd fd, t_data *data)
 {
 	(void) cmd;
@@ -381,6 +406,7 @@ int	do_echo(t_cmd *cmd, t_fd fd, t_data *data)
 	int	ret;
 	int	n;
 	int	final_fd;
+	char	*stash;
 
 	i = 0;
 	ret = 0;
@@ -398,12 +424,13 @@ int	do_echo(t_cmd *cmd, t_fd fd, t_data *data)
 		}
 		return (ret);
 	}	
-	while (cmd->arg[i])
-	{
-		//buffiuriser le print
-		i++;
-	}
+	i = check_option(cmd->arg);
+	stash = ft_strjoin_pool(tab_size(&cmd->arg[i]), &cmd->arg[i], " ", i);
+	if (!stash)
+		return (0); // TODOO Erreur malloc
+	write(final_fd, stash, ft_strlen(stash));
 	//set le \n si option
+
 	return (0);
 }
 

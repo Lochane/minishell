@@ -20,5 +20,6 @@ char **lst_to_tab(t_lst *lst);
 t_lst  *tab_to_list(char **tab);
 t_lst  *ft_new_lst(char *data);
 void    ft_add_back(t_lst **lst, t_lst *new);
+char	*ft_strjoin_pool(int size, char **strs, char *sep, int bool);
 
 #endif
