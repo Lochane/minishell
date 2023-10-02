@@ -411,9 +411,8 @@ int	do_cd(t_cmd *cmd, t_fd fd, t_data *data)
 {
 	t_lst *pwd;
 	t_lst *oldpwd;
-
 	
-
+	
 	ft_get_env("PWD", data->env, &pwd);
 	ft_get_env("OLDPWD", data->env, &oldpwd);
 	if (cmd->arg)
