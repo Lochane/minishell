@@ -44,6 +44,10 @@ int	    do_unset(t_cmd *cmd, t_fd fd, t_data *data);
 int	    print_env(t_cmd *cmd, t_fd fd, t_data *data);
 char	*ft_get_env(char *var, t_lst *env, t_lst **lst);
 
+/* Heredoc */
+
+int	get_infile_heredoc(char *limiter);
+
 /* utils builtin */
 char	*ft_strjoin_pool(int size, char **strs, char *sep, int bool);
 

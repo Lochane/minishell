@@ -1,8 +1,6 @@
 
 #include "../minishell.h"
 
-
-
 void	failure_critic(int res)
 {
 	//(void) res;
@@ -174,7 +172,8 @@ int	open_redir(t_dir *redir, t_fd *fd)
 				close(fd->in);
 			if (tmp->token == LESS)
 				fd->in = open((const char *)tmp->file, O_RDONLY);
-			//else heredoc
+			else
+				fd->in = tmp->fd;
 		}
 		if (tmp->token == DOUBLE)
 		{
@@ -236,7 +235,7 @@ void	exec(t_cmd *cmd_lst, int built_in , t_data *data)
 		do_built_in(cmd_lst, data);
 		exit (0);
 	}
-	env = lst_to_tab(data->env);
+	env = lst_to_tab(data->env);//proteger malloc
 	path = ft_split(get_path(env), ':');
 	cmd = join_cmd(cmd_lst->cmd, cmd_lst->arg);
 	if (!cmd)

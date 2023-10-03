@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:51:16 by lochane           #+#    #+#             */
-/*   Updated: 2023/09/25 20:44:52 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:53:18 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_dir
 {
 	char			*file;
 	t_tokens		token;
+	int				fd;
 	struct s_dir	*next;
 }	t_dir;
 

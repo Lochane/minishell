@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/30 09:39:32 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:31:16 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ int	manage_redirection(char *token, char *file, t_cmd *cmd)
 	if (token[0] == '<' && token[1] == '>')
 		tmp->token = DOUBLE;
 	else if (token[1] && token[1] == '<')
+	{
 		tmp->token = LESS_LESS;
+		tmp->fd = get_infile_heredoc(tmp->file);
+	}
 	else if (token[1] && token[1] == '>')
 		tmp->token = GREAT_GREAT;
 	else if (token[0] == '<')
