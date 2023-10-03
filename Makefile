@@ -6,8 +6,8 @@ SRCBUILTIN = builtin
 SRCEXEC = exec
 OBJDIR  = obj
 
-SRCS = $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils.c $(SRCEXEC)/ft_strjoin_pool.c $(SRCPARSING)/minishell.c \
-		$(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
+SRCS = $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils.c $(SRCBUILTIN)/ft_strjoin_pool.c \
+		$(SRCPARSING)/minishell.c $(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
 		$(SRCPARSING)/set_cmd_utils.c $(SRCPARSING)/manage_redirection.c \
 		$(SRCPARSING)/check_syntax.c $(SRCPARSING)/ft_split_shell.c \
 		$(SRCPARSING)/check_syntax_2.c $(SRCPARSING)/manage_redirection_2.c \
@@ -15,7 +15,8 @@ SRCS = $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils.c $(SRCEXEC)/ft_strjo
 		$(SRCBUILTIN)/builtin.c $(SRCBUILTIN)/cd.c $(SRCBUILTIN)/echo.c $(SRCBUILTIN)/exit.c \
 		$(SRCBUILTIN)/export.c $(SRCBUILTIN)/pwd.c $(SRCBUILTIN)/unset.c \
 
-OBJS = $(patsubst $(SRCBUILTIN)/%.c $(SRCEXEC)/exec.c $(SRCEXEC)/utils.c $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
+OBJS = $(patsubst $(SRCBUILTIN)/%.c $(SRCEXEC)/exec.c $(SRCEXEC)/utils.c $(SRCDIR)/%.c,\
+		$(OBJDIR)/%.o,$(SRCS))
  
 
 NAME = minishell

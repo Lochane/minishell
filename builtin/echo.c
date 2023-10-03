@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/03 12:02:17 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:15:01 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	check_option(char **arg)
 
 	i = 0;
 	j = 1;
-	while(arg[i])
+	while (arg[i])
 	{
 		if (arg[i][0] && arg[i][0] == '-')
 		{
-			while(arg[i][j])
+			while (arg[i][j])
 			{
 				if (arg[i][j] != 'n')
 					return (i);
