@@ -2,16 +2,20 @@ CC = cc
 CFLAGS = -g3 -Wall -Werror -Wextra #-fsanitize=address
 
 SRCPARSING  = parsing
+SRCBUILTIN = builtin
 SRCEXEC = exec
 OBJDIR  = obj
 
-SRCS = $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/ft_strjoin_pool.c $(SRCPARSING)/minishell.c $(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
+SRCS = $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils.c $(SRCEXEC)/ft_strjoin_pool.c $(SRCPARSING)/minishell.c \
+		$(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
 		$(SRCPARSING)/set_cmd_utils.c $(SRCPARSING)/manage_redirection.c \
 		$(SRCPARSING)/check_syntax.c $(SRCPARSING)/ft_split_shell.c \
 		$(SRCPARSING)/check_syntax_2.c $(SRCPARSING)/manage_redirection_2.c \
 		$(SRCPARSING)/poubelle_fonction.c \
+		$(SRCBUILTIN)/builtin.c $(SRCBUILTIN)/cd.c $(SRCBUILTIN)/echo.c $(SRCBUILTIN)/exit.c \
+		$(SRCBUILTIN)/export.c $(SRCBUILTIN)/pwd.c $(SRCBUILTIN)/unset.c \
 
-OBJS = $(patsubst $(SRCEXEC)/exec.c $(SRCEXEC)/exec.c $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
+OBJS = $(patsubst $(SRCBUILTIN)/%.c $(SRCEXEC)/exec.c $(SRCEXEC)/utils.c $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
  
 
 NAME = minishell
