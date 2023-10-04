@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/03 12:03:19 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/04 22:47:39 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int remove_lst(t_lst **lst, char *name)
 	if (!*lst)
 		return (0);
 	prev = *lst;
-	ft_get_env(name, *lst, &tmp);
+	ft_get_env(name, ft_strlen(name), *lst, &tmp);
 	if (!tmp)
 		return (0);
 	while (prev && prev->next != tmp)

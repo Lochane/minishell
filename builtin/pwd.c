@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/03 11:54:00 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/04 23:20:25 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	print_env(t_cmd *cmd, t_fd fd, t_data *data)
 	char	*str;
 	t_lst	*tmp;
 
+	final_fd = 1;
 	if (fd.out > 0)
 		final_fd = fd.out;
 	(void) cmd;
@@ -44,7 +45,7 @@ int	do_pwd(t_cmd *cmd, t_fd fd, t_data *data)
 	char	*str;
 
 	final_fd = 1;
-	var = ft_get_env("PWD", data->env, NULL);
+	var = ft_get_env("PWD", 3, data->env, NULL);
 	if (fd.out > 0)
 		final_fd = fd.out;
 	if (!var)

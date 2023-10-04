@@ -5,7 +5,7 @@
 int	check_char(char c)
 {
 	unsigned int	i;
-	const char		*protected = "$:=\"'` ";
+	const char		*protected = "$:=\"'` ?";
 
 	if (c == 0)
 		return (0);
@@ -41,10 +41,7 @@ void	get_buf(char **buf, unsigned long *size, unsigned long max)
 	}
 	i = -1;
 	while (++i < max)
-	{
-		printf("i == %lu, max == %lu\n", i, max);
 		tmp[i] = (*buf)[i];
-	}
 	free(*buf);
 	*buf = tmp;
 	*size *= 2;
@@ -69,20 +66,56 @@ char	*ft_strndup(char *str, int size)
 	return (new);
 }
 
-void	cpy_var(char *str, int *i, char **res, unsigned long *res_i, unsigned long *size, t_lst *env)
+static void	stack_itoa(char n[11], unsigned int nb)
+{
+	int	size;
+	unsigned int nbr;
+
+	nbr = nb;
+	size = 0;
+	while (nbr)
+	{
+		size++;
+		nbr /= 10;
+	}
+	n[size] = 0;
+	if (nb == 0)
+	{
+		n[0] = 48;
+		n[1] = 0;
+	}
+	while (nb > 0)
+	{
+		n[--size] = (nb % 10) + 48;
+		nb /= 10;
+	}
+}
+
+void	cpy_var(char *str, int *i, char **res, unsigned long *res_i, unsigned long *size, t_data data)
 {
 	int		tmp;
 	char	*content;
-	char	*var;
+	//char	*var;
 	t_lst	*lst;
+	char	nb[11];
 
 	tmp = 0;
 	while (str[*i + 1 + tmp] && check_char(str[*i + 1 + tmp]))
 		tmp++;
-	var = ft_strndup(&str[*i + 1], tmp);//proteger malloc
-	(*i) += tmp + 1;
-	content = ft_get_env(var, env, &lst);
-	if (lst)
+	if (tmp == 0 && str[*i + 1] == '?')
+	{
+		stack_itoa(nb, data.return_value);
+		content = nb;
+		(*i) += 2;
+	}
+	else
+	{
+		//var = ft_strndup(&str[*i + 1], tmp);//proteger malloc ou modifier ptr et size fct a voir vendredi
+		//content = ft_get_env(var, data.env, &lst);
+		content = ft_get_env(&str[*i + 1], tmp, data.env, &lst);
+		(*i) += tmp + 1;
+	}
+	if (content)
 	{
 		if (*res_i + ft_strlen(content) >= *size)
 			get_buf(res, size, *res_i);//proteger le null
@@ -131,7 +164,7 @@ char	*do_expand(char *str, t_data data)
 			if (str[i] != '$' || quote[1])
 				res[res_i++] = str[i++];
 			else
-				cpy_var(str, &i, &res, &res_i, &size, data.env);
+				cpy_var(str, &i, &res, &res_i, &size, data);
 		}
 		res[res_i] = 0;
 	}

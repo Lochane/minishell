@@ -33,8 +33,8 @@ void	ft_error(char *message, char *message2, int info);
 /* Builtin */
 
 int	    is_built_in(char *s);
-int	    do_built_in(t_cmd *cmd, t_data *data);
-int	    ft_var_cmp(char *s1, char *s2);
+int	    do_built_in(t_cmd *cmd, t_data *data, int check);
+int	    ft_var_cmp(char *s1, int size,char *s2);
 int	    do_exit(t_cmd *cmd, t_fd fd, t_data *data);
 int	    do_pwd(t_cmd *cmd, t_fd fd, t_data *data);
 int	    do_echo(t_cmd *cmd, t_fd fd, t_data *data);
@@ -42,7 +42,7 @@ int	    do_cd(t_cmd *cmd, t_fd fd, t_data *data);
 int	    do_export(t_cmd *cmd, t_fd fd, t_data *data);
 int	    do_unset(t_cmd *cmd, t_fd fd, t_data *data);
 int	    print_env(t_cmd *cmd, t_fd fd, t_data *data);
-char	*ft_get_env(char *var, t_lst *env, t_lst **lst);
+char	*ft_get_env(char *var, int size, t_lst *env, t_lst **lst);
 
 /* Heredoc */
 

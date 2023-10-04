@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/03 12:02:47 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/04 22:45:35 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	do_export(t_cmd *cmd, t_fd fd, t_data *data)
 		{
 			if (check_var(cmd->arg[i]))
 			{
-				ft_get_env(cmd->arg[i], data->env, &var);
+				ft_get_env(cmd->arg[i], ft_strlen(cmd->arg[i]), data->env, &var);
 				if (!var)
 				{
 					new = ft_new_lst(cmd->arg[i]);//proteger le malloc

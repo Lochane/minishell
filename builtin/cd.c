@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/03 14:42:04 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/04 22:44:57 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	do_cd(t_cmd *cmd, t_fd fd, t_data *data)
 	char	*pwdpath;
 
 	(void) fd;
-	pwdpath = ft_get_env("PWD", data->env, &pwd);
-	ft_get_env("OLDPWD", data->env, &oldpwd);
+	pwdpath = ft_get_env("PWD", 3, data->env, &pwd);
+	ft_get_env("OLDPWD", 6, data->env, &oldpwd);
 	if (cmd->arg)
 	{
 		if (cmd->arg[1])

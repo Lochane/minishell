@@ -71,9 +71,6 @@ char	*check_access(char *cmd, char **path)
 	i = 0;
 	if (!cmd)
 		return (NULL);//free_and_exit();
-	//if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/') || \
-	//(cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '/'))
-	//if ((cmd[0] && !check_cmd(cmd)) || cmd[ft_strlen(cmd) - 1] == '/')//pas bon
 	if (!check_path(cmd))
 	{
 		if (!access(cmd, F_OK | X_OK))
@@ -252,7 +249,7 @@ void	exec(t_cmd *cmd_lst, int built_in , t_data *data)
 	built_in = is_built_in(cmd_lst->cmd);
 	if (built_in)
 	{
-		do_built_in(cmd_lst, data);
+		do_built_in(cmd_lst, data, 0);
 		exit (0);
 	}
 	env = lst_to_tab(data->env);//proteger malloc
@@ -356,7 +353,7 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 	modif_cmd(tmp);
 	built_in = is_built_in(cmd->cmd);
 	if (built_in && nb_cmd == 1)
-		return (do_built_in(cmd, data));
+		return (do_built_in(cmd, data, 1));
 	while (tmp)
 	{
 		if (tmp->next)
