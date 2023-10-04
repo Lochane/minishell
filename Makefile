@@ -7,7 +7,7 @@ SRCHEREDOC = heredoc
 SRCEXEC = exec
 OBJDIR  = obj
 
-SRCS = $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils.c  \
+SRCS = expansion/expansion.c $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils.c  \
 		$(SRCPARSING)/minihell.c $(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
 		$(SRCPARSING)/set_cmd_utils.c $(SRCPARSING)/manage_redirection.c \
 		$(SRCPARSING)/check_syntax.c $(SRCPARSING)/ft_split_shell.c \

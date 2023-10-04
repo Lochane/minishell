@@ -49,7 +49,7 @@ char	*ft_get_env(char *var, t_lst *env, t_lst **lst);
 int	get_infile_heredoc(char *limiter);
 
 /* utils builtin */
-char	*ft_strjoin_pool(int size, char **strs, char *sep, int bool);
+char	*ft_strjoin_pool(int size, char **strs, char *sep, int new_line);
 
 
 #endif

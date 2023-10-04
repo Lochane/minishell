@@ -52,6 +52,16 @@ int	check_path(char *cmd)
 	return (1);
 }
 
+
+int is_dir(const char* fileName)
+{
+    struct stat path;
+
+    stat(fileName, &path);
+
+    return (S_ISREG(path.st_mode));
+}
+
 char	*check_access(char *cmd, char **path)
 {
 	int		i;
@@ -63,15 +73,18 @@ char	*check_access(char *cmd, char **path)
 		return (NULL);//free_and_exit();
 	//if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/') || \
 	//(cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '/'))
-	if (cmd[0] == '/' && !cmd[1])
-	{
-		write(2, "minishell: /: Is a directory\n", 29);
-		return (NULL);
-	}
+	//if ((cmd[0] && !check_cmd(cmd)) || cmd[ft_strlen(cmd) - 1] == '/')//pas bon
 	if (!check_path(cmd))
 	{
 		if (!access(cmd, F_OK | X_OK))
+		{
+			if (!is_dir(cmd))
+			{
+				ft_error(cmd,"Is a directory", 0);
+				return (NULL);
+			}
 			return (ft_strdup(cmd));
+		}
 		ft_error(cmd, NULL, 0);
 		return (NULL);
 	}
@@ -81,7 +94,14 @@ char	*check_access(char *cmd, char **path)
 		if (!pathed)
 			return (NULL);
 		if (!access(pathed, F_OK | X_OK))
+		{
+			if (!is_dir(pathed))
+			{
+				ft_error(pathed,"Is a directory", 0);
+				return (NULL);
+			}
 			return (pathed);
+		}
 		free(pathed);
 		i++;
 	}

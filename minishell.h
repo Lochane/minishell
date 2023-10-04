@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/27 17:37:28 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:13:52 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@
 # define HEADER "\033[38;5;223;1m"
 
 # define PROMPT "\1\033[38;5;223;1m\2Minishell->\1\x1b[0m\2"
+
+/* expand */
+void    expansion(t_data *data);
+
 
 /* Set Cmd */
 int		tri_cmd(char *tab, t_cmd *cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_pool.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:39:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/02 17:19:55 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:16:30 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ static int	ultimate_length(int size, char **strs, char *sep)
 	return (final_size);
 }
 
-char	*ft_strjoin_pool(int size, char **strs, char *sep, int bool)
+char	*ft_strjoin_pool(int size, char **strs, char *sep, int new_line)
 {
 	int		index;
 	int		ultimate_size;
 	char	*tab;
 
 	index = 0;
-	ultimate_size = ultimate_length(size, strs, sep) + (bool == 0);
+	ultimate_size = ultimate_length(size, strs, sep) + (new_line == 0);
 	tab = malloc((ultimate_size + 1) * sizeof(char));
 	if (!tab)
 		return (NULL);
@@ -90,7 +90,7 @@ char	*ft_strjoin_pool(int size, char **strs, char *sep, int bool)
 	index++;
 	}
 	// printf("ultimate = %d\n, bool = %d\n", ultimate_size, bool);
-	if (bool == 0)
+	if (new_line == 0)
 		tab[ultimate_size - 1] = '\n';
 	tab[ultimate_size] = '\0';
 	return (tab);
