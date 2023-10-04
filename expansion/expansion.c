@@ -124,8 +124,10 @@ void	cpy_var(char *str, int *i, char **res, unsigned long *res_i, unsigned long 
 			(*res)[(*res_i)++] = *content;
 			content++;
 		}
-		(*res)[*res_i] = 0;
 	}
+	else if (tmp == 0)
+		(*res)[(*res_i)++] = '$';
+	(*res)[*res_i] = 0;
 }
 
 char	*do_expand(char *str, t_data data)

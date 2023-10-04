@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/04 14:13:52 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/04 23:37:03 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@
 # define PROMPT "\1\033[38;5;223;1m\2Minishell->\1\x1b[0m\2"
 
 /* expand */
-void    expansion(t_data *data);
+void	expansion(t_data *data);
+int		check_char(char c);
 
 
 /* Set Cmd */

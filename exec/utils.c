@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:55:03 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/03 14:16:02 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/05 00:06:48 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	ft_error(char *message, char *message2, int info)
 		str2 = ft_join(str, strerror(errno), ' ');//proteger les allocs
 	else if (message && info)
 	{
-		err = ft_join(message2, strerror(errno), 0);//proteger allocs
-		str2 = ft_join(str, err, ' ');//proteger les allocs
+		err = ft_join(message2, strerror(errno), ' ');//proteger allocs
+		str2 = ft_join(str, err, 0);//proteger les allocs
 		free(err);
 	}
 	else if (message)

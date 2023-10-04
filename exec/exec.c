@@ -92,11 +92,11 @@ char	*check_access(char *cmd, char **path)
 			return (NULL);
 		if (!access(pathed, F_OK | X_OK))
 		{
-			if (!is_dir(pathed))
-			{
-				ft_error(pathed,"Is a directory", 0);
-				return (NULL);
-			}
+			//if (!is_dir(pathed))//je ne sais pas, confirmer par un test
+			//{
+			//	ft_error(pathed,"Is a directory", 0);
+			//	return (NULL);
+			//}
 			return (pathed);
 		}
 		free(pathed);
