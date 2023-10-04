@@ -19,7 +19,7 @@ int	check_char(char c)
 	return (1);
 }
 
-void	get_buf(char **buf, unsigned long *size)
+void	get_buf(char **buf, unsigned long *size, unsigned long max)
 {
 	char			*tmp;
 	unsigned long	i;
@@ -40,8 +40,11 @@ void	get_buf(char **buf, unsigned long *size)
 		return ;
 	}
 	i = -1;
-	while (++i < *size)
-		tmp[i] = *buf[i];
+	while (++i < max)
+	{
+		printf("i == %lu, max == %lu\n", i, max);
+		tmp[i] = (*buf)[i];
+	}
 	free(*buf);
 	*buf = tmp;
 	*size *= 2;
@@ -81,8 +84,8 @@ void	cpy_var(char *str, int *i, char **res, unsigned long *res_i, unsigned long 
 	content = ft_get_env(var, env, &lst);
 	if (lst)
 	{
-		if (*res_i + ft_strlen(content) == *size)
-			get_buf(res, size);//proteger le null
+		if (*res_i + ft_strlen(content) >= *size)
+			get_buf(res, size, *res_i);//proteger le null
 		while (*content)
 		{
 			(*res)[(*res_i)++] = *content;
@@ -111,7 +114,7 @@ char	*do_expand(char *str, t_data data)
 	while (str[i])
 	{
 		if (res_i == size)
-			get_buf(&res, &size);
+			get_buf(&res, &size, res_i);
 		if (!res)
 			return(NULL);//set erreur malloc
 		if ((str[i] == '"' && !quote[1]) || (str[i] == 39 && !quote[0]))
@@ -130,6 +133,7 @@ char	*do_expand(char *str, t_data data)
 			else
 				cpy_var(str, &i, &res, &res_i, &size, data.env);
 		}
+		res[res_i] = 0;
 	}
 	res[res_i] = 0;
 	if (!res_i && !quoted)
