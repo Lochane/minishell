@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/04 23:50:08 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/05 00:12:33 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_var(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '=')
+		if (str[i] == '=' && str[i + 1] != '=')
 			return (1);
 		if (!check_char(str[i]))
 			return (-1);
