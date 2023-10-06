@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:55:03 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/06 19:37:50 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/06 21:46:17 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ long ft_atol(char *nbr, int *check)
 	//1 si overflow 2 si non numeric? 0 si ok
 	if (sign)
 		nb *= -1;
-	return (sign);
+	return (nb);
 }
 
 int	ft_strcmp(const char *s, const char *s1)
