@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansion.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 21:44:43 by madaguen          #+#    #+#             */
+/*   Updated: 2023/10/06 21:44:47 by madaguen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXPANSION_H
 # define EXPANSION_H
 
@@ -7,11 +19,11 @@
 
 typedef struct s_buf
 {
-    char	*buf;
-    unsigned long	size;
-    unsigned long	index;
+	char			*buf;
+	unsigned long	size;
+	unsigned long	index;
 
-}       			t_buf;
+}					t_buf;
 
 int		check_char(char c);
 void	get_buf(t_buf *buffer);
