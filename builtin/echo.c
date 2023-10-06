@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/03 14:15:01 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:27:11 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_option(char **arg)
 	return(i);
 }
 
-int	do_echo(t_cmd *cmd, t_fd fd, t_data *data)
+int	do_echo(t_cmd *cmd, t_fd *fd, t_data *data)
 {
 	(void) fd;
 	(void)data;
@@ -51,8 +51,8 @@ int	do_echo(t_cmd *cmd, t_fd fd, t_data *data)
 	ret = 0;
 	n = 0;
 	final_fd = 1;
-	if (fd.out > 0)
-		final_fd = fd.out;
+	if (fd->out > 0)
+		final_fd = fd->out;
 	//check -n
 	if (!cmd->arg)
 	{

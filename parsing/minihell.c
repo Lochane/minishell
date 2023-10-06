@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/04 14:20:09 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:21:51 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	main(int argc, char **argv, char **envp)
 		else
 		{
 			manage_data(&data, 1);
-			printf(RED"Exit\n"RESET);
+			do_exit(data.cmd, NULL, &data);
 			break ;
 		}
 		//print_cmds(dta.cmd);

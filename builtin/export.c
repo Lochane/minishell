@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/05 00:12:33 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:26:20 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,16 @@ int	check_var(char *str)
 	return (0);
 }
 
-int	do_export(t_cmd *cmd, t_fd fd, t_data *data)
+int	do_export(t_cmd *cmd, t_fd *fd, t_data *data)
 {
-	(void) cmd;
-	(void) fd;
 	t_lst	*var;
 	t_lst	*new;
 	int		i;
 	int		check;
 	char	*message;
 
-	//a faire en bouvle tant qu'il y a des args
+	(void) cmd;
+	(void) fd;
 	if (cmd->arg)
 	{
 		i = 0;

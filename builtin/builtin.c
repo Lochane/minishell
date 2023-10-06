@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/04 23:09:50 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:24:50 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_var_cmp(char *s1, int size, char *s2)
 		return (-1);
 	while ((s1[i] && s1[i] != '=') && s1[i] == s2[i] && i < size)
 		i++;
-	if ((!s1[i] || s1[i] == '=') && s2[i] == '=')
+	if ((!s1[i] || !check_char(s1[i])) && s2[i] == '=')
 		return (0);
 	else
 		return (1);
@@ -38,7 +38,7 @@ char	*ft_get_env(char *var, int size, t_lst *env, t_lst **lst)
 		{
 			if (lst)
 				*lst = tmp;
-			return (&tmp->data[ft_strlen(var) + 1]);
+			return (&tmp->data[tmp->size + 1]);
 		}
 		tmp = tmp->next;
 	}
@@ -49,7 +49,7 @@ char	*ft_get_env(char *var, int size, t_lst *env, t_lst **lst)
 
 int	do_built_in(t_cmd *cmd, t_data *data, int check)
 {
-	const char		*built_in_name[] = {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL};
+	const char		*built_in_name[] = BUILT_IN_LIST;
 	const fct	built_in_fct[]  = {do_echo, do_cd, do_pwd, do_export, print_env, do_unset, do_exit};
 	int		i;
 	t_fd	fd;
@@ -73,7 +73,7 @@ int	do_built_in(t_cmd *cmd, t_data *data, int check)
 			break ;
 		i++;
 	}
-	ret = built_in_fct[i](cmd, fd, data);
+	ret = built_in_fct[i](cmd, &fd, data);
 	if (fd.in > 0)
 		close(fd.in);
 	if (fd.out > 0)
@@ -83,7 +83,7 @@ int	do_built_in(t_cmd *cmd, t_data *data, int check)
 
 int	is_built_in(char *s)
 {
-	const char	*built_in[] = {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL};
+	const char	*built_in[] = BUILT_IN_LIST;
 	int	i;
 
 	i = 0;

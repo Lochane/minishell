@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/04 22:44:57 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:25:19 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 
-int	do_cd(t_cmd *cmd, t_fd fd, t_data *data)
+int	do_cd(t_cmd *cmd, t_fd *fd, t_data *data)
 {
 	t_lst	*pwd;
 	t_lst	*oldpwd;

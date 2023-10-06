@@ -6,21 +6,21 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/04 23:20:25 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:29:37 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	print_env(t_cmd *cmd, t_fd fd, t_data *data)
+int	print_env(t_cmd *cmd, t_fd *fd, t_data *data)
 {
 	int	final_fd;
 	char	*str;
 	t_lst	*tmp;
 
 	final_fd = 1;
-	if (fd.out > 0)
-		final_fd = fd.out;
+	if (fd->out > 0)
+		final_fd = fd->out;
 	(void) cmd;
 	(void) data;
 	tmp = data->env;
@@ -38,7 +38,7 @@ int	print_env(t_cmd *cmd, t_fd fd, t_data *data)
 	return (0);
 }
 
-int	do_pwd(t_cmd *cmd, t_fd fd, t_data *data)
+int	do_pwd(t_cmd *cmd, t_fd *fd, t_data *data)
 {
 	char	*var;
 	int		final_fd;
@@ -46,8 +46,8 @@ int	do_pwd(t_cmd *cmd, t_fd fd, t_data *data)
 
 	final_fd = 1;
 	var = ft_get_env("PWD", 3, data->env, NULL);
-	if (fd.out > 0)
-		final_fd = fd.out;
+	if (fd->out > 0)
+		final_fd = fd->out;
 	if (!var)
 	{
 		ft_error(cmd->cmd, "PWD not set", 0);

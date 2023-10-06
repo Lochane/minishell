@@ -4,10 +4,11 @@ CFLAGS = -g3 -Wall -Werror -Wextra #-fsanitize=address
 SRCPARSING  = parsing
 SRCBUILTIN = builtin
 SRCHEREDOC = heredoc
+SRCEXPAND = expansion
 SRCEXEC = exec
 OBJDIR  = obj
 
-SRCS = expansion/expansion.c $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils.c  \
+SRCS = $(SRCEXPAND)/expansion.c $(SRCEXPAND)/utils.c $(SRCEXPAND)/utils2.c $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils.c  \
 		$(SRCPARSING)/minihell.c $(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
 		$(SRCPARSING)/set_cmd_utils.c $(SRCPARSING)/manage_redirection.c \
 		$(SRCPARSING)/check_syntax.c $(SRCPARSING)/ft_split_shell.c \
@@ -17,7 +18,7 @@ SRCS = expansion/expansion.c $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils
 		$(SRCBUILTIN)/export.c $(SRCBUILTIN)/pwd.c $(SRCBUILTIN)/unset.c $(SRCBUILTIN)/ft_strjoin_pool.c\
 		$(SRCHEREDOC)/heredoc.c \
 
-OBJS = $(patsubst $(SRCHEREDOC)/%.c $(SRCBUILTIN)/%.c $(SRCEXEC)/exec.c $(SRCEXEC)/utils.c $(SRCDIR)/%.c,\
+OBJS = $(patsubst $(SRCHEREDOC)/%.c $(SRCEXPAND)%.c $(SRCBUILTIN)/%.c $(SRCEXEC)/exec.c $(SRCEXEC)/utils.c $(SRCDIR)/%.c,\
 		$(OBJDIR)/%.o,$(SRCS))
  
 

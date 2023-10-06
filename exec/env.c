@@ -3,12 +3,17 @@
 t_lst  *ft_new_lst(char *data)
 {
     t_lst   *new;
+    int     i;
 
     new = malloc(sizeof(t_lst));
     if (!new)
         return (NULL);
+    i = 0;
+    while (data[i] && data[i] != '=')
+        i++;
     new->next = NULL;
     new->data = data; 
+    new->size = i;
     return (new);
 }
 

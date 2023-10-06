@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/04 23:37:03 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/06 20:27:56 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include "struct.h"
 # include "exec.h"
+# include "expansion.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -44,10 +45,8 @@
 
 # define PROMPT "\1\033[38;5;223;1m\2Minishell->\1\x1b[0m\2"
 
-/* expand */
-void	expansion(t_data *data);
-int		check_char(char c);
-
+/*builtin*/
+# define BUILT_IN_LIST {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL}
 
 /* Set Cmd */
 int		tri_cmd(char *tab, t_cmd *cmd);

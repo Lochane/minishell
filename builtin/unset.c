@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/04 22:47:39 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:29:01 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ int remove_lst(t_lst **lst, char *name)
 	return (1);
 }
 
-int	do_unset(t_cmd *cmd, t_fd fd, t_data *data)
+int	do_unset(t_cmd *cmd, t_fd *fd, t_data *data)
 {
+	int	i;
+	
 	(void) cmd;
 	(void) fd;
 	(void) data;
-	int	i;
-
 	if (cmd->arg)
 	{
 		i = 0;
 		while (cmd->arg[i])
 		{
-			remove_lst(&data->env, cmd->arg[i]);//a faire en boucle tant au'il y a des arg
+			remove_lst(&data->env, cmd->arg[i]);
 			i++;
 		}
 	}

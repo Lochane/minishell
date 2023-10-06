@@ -6,13 +6,13 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:55:03 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/05 00:06:48 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:37:50 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-long ft_atol(char *nbr, char *check)
+long ft_atol(char *nbr, int *check)
 {
 	int				sign;
 	unsigned long	nb;

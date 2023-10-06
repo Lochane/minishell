@@ -1,185 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansion.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 21:16:13 by madaguen          #+#    #+#             */
+/*   Updated: 2023/10/06 21:38:51 by madaguen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../exec.h"
-//#include <stdio.h>
+#include "../expansion.h"
 
-int	check_char(char c)
-{
-	unsigned int	i;
-	const char		*protected = "$:=\"'` ?";
+//set param erreur de malloc
 
-	if (c == 0)
-		return (0);
-	i = 0;
-	while (protected[i])
-	{
-		if (c == protected[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	get_buf(char **buf, unsigned long *size, unsigned long max)
-{
-	char			*tmp;
-	unsigned long	i;
-
-	if (!*buf)
-	{
-		*buf = malloc(sizeof(char) * 151);
-		if (!*buf)
-			return ;
-		*size = 150;
-		return ;
-	}
-	tmp = malloc((*size * 2) + 1);
-	if (!tmp)
-	{
-		free (*buf);
-		*size = 0;
-		return ;
-	}
-	i = -1;
-	while (++i < max)
-		tmp[i] = (*buf)[i];
-	free(*buf);
-	*buf = tmp;
-	*size *= 2;
-}
-
-char	*ft_strndup(char *str, int size)
-{
-	char	*new;
-	int		i;
-
-	new = malloc(size + 1);
-	if (new)
-	{
-		i = 0;
-		while (i < size)
-		{
-			new[i] = str[i];
-			i++;
-		}
-		new[i] = 0;
-	}
-	return (new);
-}
-
-static void	stack_itoa(char n[11], unsigned int nb)
-{
-	int	size;
-	unsigned int nbr;
-
-	nbr = nb;
-	size = 0;
-	while (nbr)
-	{
-		size++;
-		nbr /= 10;
-	}
-	n[size] = 0;
-	if (nb == 0)
-	{
-		n[0] = 48;
-		n[1] = 0;
-	}
-	while (nb > 0)
-	{
-		n[--size] = (nb % 10) + 48;
-		nb /= 10;
-	}
-}
-
-void	cpy_var(char *str, int *i, char **res, unsigned long *res_i, unsigned long *size, t_data data)
-{
-	int		tmp;
-	char	*content;
-	//char	*var;
-	t_lst	*lst;
-	char	nb[11];
-
-	tmp = 0;
-	while (str[*i + 1 + tmp] && check_char(str[*i + 1 + tmp]))
-		tmp++;
-	if (tmp == 0 && str[*i + 1] == '?')
-	{
-		stack_itoa(nb, data.return_value);
-		content = nb;
-		(*i) += 2;
-	}
-	else
-	{
-		//var = ft_strndup(&str[*i + 1], tmp);//proteger malloc ou modifier ptr et size fct a voir vendredi
-		//content = ft_get_env(var, data.env, &lst);
-		content = ft_get_env(&str[*i + 1], tmp, data.env, &lst);
-		(*i) += tmp + 1;
-	}
-	if (content)
-	{
-		if (*res_i + ft_strlen(content) >= *size)
-			get_buf(res, size, *res_i);//proteger le null
-		while (*content)
-		{
-			(*res)[(*res_i)++] = *content;
-			content++;
-		}
-	}
-	else if (tmp == 0)
-		(*res)[(*res_i)++] = '$';
-	(*res)[*res_i] = 0;
-}
-
-char	*do_expand(char *str, t_data data)
-{
-	int		i;
-	int		quote[2];// 0 == " 1 == ' mettre defin SIMPLE DOUBLE?
-	int		quoted;
-	unsigned long	size;
-	unsigned long	res_i;
-	char	*res;
-
-	i = 0;
-	res_i = 0;
-	quote[0] = 0;
-	quote[1] = 0;
-	quoted = 0;
-	res = NULL;
-	size = 0;
-	while (str[i])
-	{
-		if (res_i == size)
-			get_buf(&res, &size, res_i);
-		if (!res)
-			return(NULL);//set erreur malloc
-		if ((str[i] == '"' && !quote[1]) || (str[i] == 39 && !quote[0]))
-		{
-			if (str[i] == '"')
-				quote[0] = (quote[0] != 1);
-			else
-				quote[1] = (quote[1] != 1);
-			quoted++;
-			i++;
-		}
-		else
-		{
-			if (str[i] != '$' || quote[1])
-				res[res_i++] = str[i++];
-			else
-				cpy_var(str, &i, &res, &res_i, &size, data);
-		}
-		res[res_i] = 0;
-	}
-	res[res_i] = 0;
-	if (!res_i && !quoted)
-	{
-		free(res);
-		res = NULL;
-	}
-	return (res);
-}
-
-void	expand_arg(char **args, t_data data)
+void	expand_arg(char **args, t_data *data)
 {
 	int		i;
 	char	*str;
@@ -189,40 +24,47 @@ void	expand_arg(char **args, t_data data)
 		return ;
 	while (args[i])
 	{
-		str = do_expand(args[i], data);//proteger alloc
+		str = do_expand(args[i], *data);
+		if (str)
+			return ;
 		free(args[i]);
 		args[i] = str;
 		i++;
 	}
 }
+//set pram erreur de malloc
 
-void	expand_redir(t_dir *redir, t_data data)
+void	expand_redir(t_dir *redir, t_data *data)
 {
 	char	*str;
 
 	while (redir)
 	{
-		str = do_expand(redir->file, data);//proteger alloc
+		str = do_expand(redir->file, *data);
+		if (!str)
+			return ;
 		free(redir->file);
 		redir->file = str;
 		redir = redir->next;
 	}
 }
+//set dans data un paramettre pour l'erreur de malloc  verifier dans le main
 
-void    expansion(t_data *data)
+void	expansion(t_data *data)
 {
-    t_cmd	*tmp_cmd;
-	//int		i;
+	t_cmd	*tmp_cmd;
 	char	*str;
 
 	tmp_cmd = data->cmd;
 	while (tmp_cmd)
 	{
-		str = do_expand(tmp_cmd->cmd, *data);//proteger alloc
+		str = do_expand(tmp_cmd->cmd, *data);
+		if (!str)
+			return ;
 		free(tmp_cmd->cmd);
 		tmp_cmd->cmd = str;
-		expand_arg(tmp_cmd->arg, *data);//proteger alloc
-		expand_redir(tmp_cmd->redirection, *data);//proteger alloc
+		expand_arg(tmp_cmd->arg, data);//check le paamettre erruer de malloc
+		expand_redir(tmp_cmd->redirection, data);//check le parametre erreur de malloc
 		tmp_cmd = tmp_cmd->next;
 	}
 }
