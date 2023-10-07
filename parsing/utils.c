@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:53:21 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:38:55 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:42:00 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	fill_arg(t_cmd *cmd, char **tab)
 	cmd->arg = malloc(sizeof(char *) * (tab_size(tab) + 1));
 	if (!cmd->arg)
 		return (0);
+	return (1);
 }
 
 void	*ft_free_tab(char **res, size_t i)
