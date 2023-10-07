@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minihell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:33:16 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:41:13 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int	main(int argc, char **argv, char **envp)
 	//if (!init_here_doc(&data.here_doc))
 	//	return (0);//free l'env
 	//modifier pour proteger l'erreur de malloc peut etre null si pas d'env
-	printf("ici\n");
 	while (1)
 	{
 		manage_data(&data, 0);
