@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minihell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:44:06 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 22:55:42 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,18 @@ void	sig_handler(int signum)
 		return ;
 }
 
+void	sig_handler_exec_loop(int signum)
+{
+	(void) signum;
+}
+
+void	restore_sig(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGTSTP, SIG_IGN);
+}
+
 void	intercept_sig(void)
 {
 	struct sigaction	ca;
@@ -66,6 +78,13 @@ void	intercept_sig(void)
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
 	sigaction(SIGINT, &ca, NULL);
+}
+
+void	ignore_sig(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 }
 
 int	history(char *str)
@@ -85,6 +104,32 @@ int	history(char *str)
 	return (1);
 }
 
+void	handle_sig(t_data *data)
+{
+	dup2(data->fd, 0);
+	data->return_value = g_g;
+	g_g = 0;
+	if (!data->new_line++)
+		write(1, "\n", 1);
+}
+
+char	*get_line(t_data data)
+{
+	char	*line;
+	int		len;
+	
+	if (data.tty == 0)
+	{
+		line = get_next_line(0);
+		len = ft_strlen(line);
+		len -= (line[len - 1] == '\n');
+		line[len] = 0;
+		return (line);
+	}	
+	else
+		return (readline(PROMPT));
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
@@ -94,29 +139,24 @@ int	main(int argc, char **argv, char **envp)
 		printf("Error:\nThis program don't take arguments\n");
 		exit(0);
 	}
+	data.tty = isatty(0);
+	if (data.tty)
+		printf("\033[H\033[J");
 	g_g = 0;
-	data.fd = dup(0);
 	data.new_line = 0;
 	data.return_value = 0;
-	intercept_sig();
-	printf("\033[H\033[J");
 	data.env = tab_to_list(envp);
 	//if (!init_here_doc(&data.here_doc))
 	//	return (0);//free l'env
 	//modifier pour proteger l'erreur de malloc peut etre null si pas d'env
+	data.fd = dup(0);
 	while (1)
 	{
+		intercept_sig();
 		manage_data(&data, 0);
-		data.args = readline(PROMPT);
+		data.args = get_line(data);
 		if (g_g == 130)
-		{
-			dup(data.fd);
-			g_g = CTRL_C;
-			data.return_value = g_g;
-			g_g = 0;
-			if (!data.new_line++)
-				write(1, "\n", 1);
-		}
+			handle_sig(&data);
 		else
 		{	
 			if (data.args)
@@ -127,8 +167,15 @@ int	main(int argc, char **argv, char **envp)
 					{
 						if (!set_cmd(&data))
 						{
+							printf("MMMM?\n");
+							if (g_g == 130)
+							{
+								handle_sig(&data);
+								data.new_line = 0;
+							}	
 							manage_data(&data, 1);
-							break ;
+							printf("??\n");
+							//break ;
 						}
 					}
 				}

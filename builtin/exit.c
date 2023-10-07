@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:01:30 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:39:03 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,50 @@
 int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 {
 	int		check;
+	int		is_num;
 	long	nb;
-	int	i;
+	int		i;
+	int		tty;
 	
 	(void) cmd;
 	(void) fd;
-	i = 1;
-	check = 0;
-	//long	nb;
 	close(data->fd);
-	rl_clear_history();
+	i = 0;
+	tty = isatty(1);
+	//print exit seulement si dansun tty?
+	check = 0;
+	is_num = 0;
 	if (!data->cmd || !cmd->arg)
 	{
-		printf(RED"Exit\n"RESET);
+		rl_clear_history();
+		printf(RED"exit\n"RESET);
 		exit(data->return_value);
 	}
-	nb = ft_atol(cmd->arg[0], &check);
-	printf("check == %d\n", check);
-	printf("nb == %ld\n", nb);
-	if (check)//check si different retour si nonnumeric ou overflow ou si les 2 juste non numeric
-		return (data->return_value);
-	//	exit (nb % 130);
+	if (cmd->arg[i])
+	{
+		nb = ft_atol(cmd->arg[0], &check);
+		printf("check == %d\n", check);
+		printf("nb == %ld\n", nb);
+		is_num = check;
+		if (i == 0 && !is_num && cmd->arg[i + 1])
+		{
+			printf(RED"exit\n"RESET);
+			write(2, "bash: exit: too many arguments\n", 32);//join fct error
+			return (2);
+		}
+		else if (!is_num)
+		{
+			//exit avec retour atol
+		}
+		else
+		{
+			rl_clear_history();
+			data->return_value = nb % 256;
+			printf(RED"exit\n"RESET);
+			if (cmd->arg[1] == NULL)
+				exit(data->return_value);
+		}
+	}	
 	return (0);
 }
 //utliser join pool fct error qui set un double tab et qui print a la fin

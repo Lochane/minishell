@@ -226,6 +226,7 @@ void	exec(t_cmd *cmd_lst, int built_in , t_data *data)
 	t_fd	fd;
 	char **env;
 
+	restore_sig();
 	if (dup_pipe(cmd_lst) == 1)
 		failure_critic(1);
 	if (open_redir(cmd_lst->redirection, &fd) == 1)
@@ -295,19 +296,26 @@ int	cmd_size(t_cmd *cmd)
 	return (i);
 }
 
-int	get_status(int *status)
+int	get_status(int *status, t_data *data)
 {
 	int	res;
 
 	res = 0;
 	if (WIFEXITED(*status))
+	{
 		res = WEXITSTATUS(*status);
+	}
 	else if (WIFSIGNALED(*status))
+	{
 		res = (WTERMSIG(*status));
+		res += 128;
+		write(1, "\n", 1);
+	}
+	data->new_line = 0;
 	return (res);
 }
 
-int	waiting(t_cmd *cmd, int nb_cmd)
+int	waiting(t_cmd *cmd, int nb_cmd , t_data *data)
 {
 	pid_t	pid;
 	int		res;
@@ -324,7 +332,7 @@ int	waiting(t_cmd *cmd, int nb_cmd)
 		if (pid > 0 && tmp->pid != -1)
 		{
 			if (!tmp->next)
-				res = get_status(&status);
+				res = get_status(&status, data);
 			tmp->pid = -1;
 			pid_waited++;
 		}
@@ -346,6 +354,7 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 
 	tmp = cmd;
 	i = 0;
+
 	prev_pipe = -1;
 	pip[0] = -1;
 	pip[1] = -1;
@@ -354,6 +363,7 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 	built_in = is_built_in(cmd->cmd);
 	if (built_in && nb_cmd == 1)
 		return (do_built_in(cmd, data, 1));
+	ignore_sig();
 	while (tmp)
 	{
 		if (tmp->next)
@@ -380,5 +390,5 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 			close(tmp->prev_pipe);
 		tmp = tmp->next;
 	}
-	return (waiting(cmd, cmd_size(cmd)));
+	return (waiting(cmd, cmd_size(cmd), data));
 }

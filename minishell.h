@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:36:24 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:38:13 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ void	*ft_free_tab(char **res, size_t i);
 void	add_back_dir(t_dir **lst, t_dir *new);
 t_dir	*init_dir(char *file);
 void	ft_syntax_error(char *message);
+
+/*signaux*/
+void	restore_sig(void);
+void	ignore_sig(void);
+void	intercept_sig(void);
 
 /* Poubelle */
 

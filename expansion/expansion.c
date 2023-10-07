@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:13 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/06 21:38:51 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:05:41 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	expand_arg(char **args, t_data *data)
 	while (args[i])
 	{
 		str = do_expand(args[i], *data);
-		if (str)
+		if (!str)
 			return ;
 		free(args[i]);
 		args[i] = str;
