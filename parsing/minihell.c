@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:41:13 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:44:06 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	manage_data(t_data *data, int allow)
 			{
 				free(data->cmd->redirection->file);
 				free(data->cmd->redirection);
+				if (data->cmd->redirection->fd != -1)
+					close(data->cmd->redirection->fd);
 				data->cmd->redirection = data->cmd->redirection->next;
 			}
 			ft_free_tab(data->cmd->arg, tab_size(data->cmd->arg));

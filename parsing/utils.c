@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:53:21 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:42:00 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:42:33 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ t_dir	*init_dir(char *file)
 	new->file = ft_strdup(file);
 	new->token = 0;
 	new->next = NULL;
+	new->fd = -1;
 	return (new);
 }
