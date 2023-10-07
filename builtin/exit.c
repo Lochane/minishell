@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 15:21:49 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:01:30 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 	i = 1;
 	check = 0;
 	//long	nb;
+	close(data->fd);
+	rl_clear_history();
 	if (!data->cmd || !cmd->arg)
 	{
 		printf(RED"Exit\n"RESET);

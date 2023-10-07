@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/03 15:31:16 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:17:55 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	manage_redirection(char *token, char *file, t_cmd *cmd)
 	{
 		tmp->token = LESS_LESS;
 		tmp->fd = get_infile_heredoc(tmp->file);
+		if (g_g == 130)
+			return (0);
 	}
 	else if (token[1] && token[1] == '>')
 		tmp->token = GREAT_GREAT;

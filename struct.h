@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:51:16 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/07 15:10:27 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:12:13 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ typedef struct s_cmd
 
 typedef struct s_data
 {
-	char	*args;
-	t_cmd	*cmd;
-	t_lst	*env;
+	char			*args;
+	t_cmd			*cmd;
+	t_lst			*env;
 	unsigned char	return_value;
+	int				fd;
+	int				new_line;
 }	t_data;
 
 #endif

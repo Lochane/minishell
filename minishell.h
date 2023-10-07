@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 15:16:24 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:25:25 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define HEADER "\033[38;5;223;1m"
 
 # define PROMPT "\1\033[38;5;223;1m\2Minishell->\1\x1b[0m\2"
+
+unsigned char	g_g;
 
 /*builtin*/
 # define BUILT_IN_LIST {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL}
