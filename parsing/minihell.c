@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minihell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:25:18 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:33:16 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+unsigned char	g_g;
 
 void	manage_data(t_data *data, int allow)
 {

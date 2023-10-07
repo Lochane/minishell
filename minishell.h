@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:25:25 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:33:05 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@
 /* Code signaux */
 # define CTRL_C 130
 # define CTRL_SLASH 131
+extern unsigned char	g_g;
 
 # define RED "\x1b[91;1m"
 # define RESET "\x1b[0m\2"
 # define HEADER "\033[38;5;223;1m"
 
 # define PROMPT "\1\033[38;5;223;1m\2Minishell->\1\x1b[0m\2"
-
-unsigned char	g_g;
 
 /*builtin*/
 # define BUILT_IN_LIST {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL}
