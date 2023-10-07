@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/06 20:27:56 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/07 14:55:28 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int		check_chevron(char *args, int i);
 int		check_pipe(char *args, int i);
 int		count_chevron(char *args, int i);
 
-
 /* Utils */
 char	**ft_split_shell(char const *s, char c);
 void	initialise_cmd(t_cmd *cmd);
@@ -86,6 +85,7 @@ void	add_back(t_cmd *lst, t_cmd *new);
 void	*ft_free_tab(char **res, size_t i);
 void	add_back_dir(t_dir **lst, t_dir *new);
 t_dir	*init_dir(char *file);
+void	ft_syntax_error(char *message);
 
 /* Poubelle */
 

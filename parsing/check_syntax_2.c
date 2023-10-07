@@ -6,20 +6,27 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:17:38 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/27 17:57:19 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 13:52:32 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	ft_syntax_error(char *message)
+{
+	char	*str;
+
+	str = ft_strjoin("minishell: ", message);
+	write(2, str, ft_strlen(str));
+	free(str);
+}
+
 int	check_pipe(char *args, int i)
 {
 	if (args[i] == '|' && !args[i - 1])
-		return ((printf(RED"minishell: syntax error near unexpected token '%c'\n"\
-		RESET, args[i])), strerror(ERR_SYNTX), ERR_SYNTX);
+		return (ft_syntax_error("syntax error near unexpected token\n"), 1);
 	if (args[i] == '|' && !args[i + 1])
-		return ((printf(RED"minishell: syntax error near unexpected token '%c'\n"\
-		RESET, args[i])), strerror(ERR_SYNTX), ERR_SYNTX);
+		return (ft_syntax_error("syntax error near unexpected token\n"), 1);
 	return (0);
 }
 
@@ -28,16 +35,12 @@ int	check_ampersand(char *args, int i)
 	if (args[i] == '&')
 	{
 		if (!args[i + 1])
-			return ((printf \
-			(RED"minishell: syntax error near unexpected token '%c'\n"RESET, \
-			args[i])), strerror(ERR_SYNTX), ERR_SYNTX);
+			return (ft_syntax_error("syntax error near unexpected token\n"), 1);
 		else
 		{
 			i++;
 			if (args[i] == '&' && !args[i + 1])
-				return ((printf (RED"minishell: syntax error near unexpected token \
-'%c%c'\n"RESET, args[i - 1], args[i])), \
-					strerror(ERR_SYNTX), ERR_SYNTX);
+			return (ft_syntax_error("syntax error near unexpected token\n"), 1);
 		}
 	}
 	return (0);
@@ -62,7 +65,6 @@ int	count_chevron(char *args, int i)
 		i++;
 	}
 	if (count > 2)
-		return ((printf(RED"minishell: syntax error\n"RESET)), \
-					strerror(ERR_SYNTX), ERR_SYNTX);
+		return (ft_syntax_error("syntax error\n"), 1);
 	return (0);
 }
