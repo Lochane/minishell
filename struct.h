@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:51:16 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/06 18:43:52 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:10:27 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_data
 	char	*args;
 	t_cmd	*cmd;
 	t_lst	*env;
-	char	return_value;
+	unsigned char	return_value;
 }	t_data;
 
 #endif

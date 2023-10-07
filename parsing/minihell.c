@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 13:55:51 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:16:42 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,18 +100,16 @@ int	main(int argc, char **argv, char **envp)
 	//modifier pour proteger l'erreur de malloc peut etre null si pas d'env
 	while (1)
 	{
-		// printf("ret == %d\n", data.return_value);
 		manage_data(&data, 0);
 		data.args = readline(PROMPT);
 		if (data.args)
 		{
 			if (history(data.args) == 0)
 			{
-				if (check_syntax(data.args) == 0)
+				if (check_syntax(data.args, &data) == 0)
 				{
 					if (!set_cmd(&data))
 					{
-						rl_clear_history();
 						manage_data(&data, 1);
 						break ;
 					}
@@ -120,11 +118,11 @@ int	main(int argc, char **argv, char **envp)
 		}
 		else
 		{
+			rl_clear_history();
 			manage_data(&data, 1);
 			do_exit(data.cmd, NULL, &data);
 			break ;
 		}
-		//print_cmds(dta.cmd);
 		expansion(&data);
 		if (data.cmd)
 				data.return_value = handle_cmds(data.cmd, &data);

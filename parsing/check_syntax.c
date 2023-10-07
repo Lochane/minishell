@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 13:53:14 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:16:08 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_chevron(char *args, int i)
 	return (0);
 }
 
-int	check_syntax(char *args)
+int	check_syntax(char *args, t_data *data)
 {
 	int	i;
 
@@ -79,9 +79,15 @@ int	check_syntax(char *args)
 		if (check_chevron(args, i) != 0 || check_pipe(args, i) != 0 \
 			|| check_ampersand(args, i) != 0 || check_quotes(args, i) != 0 \
 			|| check_double_quotes(args, i) != 0)
+		{
+			data->return_value = 2;
 			return (2);
+		}
 		if (args[i] == '-' && !args[i + 1])
+		{
+			data->return_value = 127;
 			return (ft_syntax_error("command not found\n"), 1);
+		}
 		i++;
 	}
 	return (0);

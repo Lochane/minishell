@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/06 21:52:56 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:21:49 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 	//long	nb;
 	if (!data->cmd || !cmd->arg)
 	{
-		printf(RED"exit\n"RESET);
+		printf(RED"Exit\n"RESET);
 		exit(data->return_value);
 	}
 	nb = ft_atol(cmd->arg[0], &check);
