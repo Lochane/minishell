@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 15:16:08 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:39:17 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	check_double_quotes(char *args, int i)
 		}
 		if (check == 0)
 			return (ft_syntax_error("syntax error\n"), 1);
-
 	}
 	return (0);
 }

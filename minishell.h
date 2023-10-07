@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:33:05 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:36:24 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ extern unsigned char	g_g;
 # define RESET "\x1b[0m\2"
 # define HEADER "\033[38;5;223;1m"
 
-# define PROMPT "\1\033[38;5;223;1m\2Minishell->\1\x1b[0m\2"
+# define PROMPT "🌈\1\033[38;5;223;1m\2Minishell->\1\x1b[0m\2"
 
 /*builtin*/
 # define BUILT_IN_LIST {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL}
@@ -80,6 +80,7 @@ int		check_pipe(char *args, int i);
 int		count_chevron(char *args, int i);
 
 /* Utils */
+int		fill_arg(t_cmd *cmd, char **tab);
 char	**ft_split_shell(char const *s, char c);
 void	initialise_cmd(t_cmd *cmd);
 void	add_back(t_cmd *lst, t_cmd *new);
