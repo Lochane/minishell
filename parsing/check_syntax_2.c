@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:17:38 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 15:20:05 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:24:10 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ft_syntax_error(char *message)
 	char	*str;
 
 	str = ft_strjoin("minishell: ", message);
-	write(1, RED, 7);
+	write(2, RED, 7);
 	write(2, str, ft_strlen(str));
-	write(1, RESET, 4);
+	write(2, RESET, 4);
 	free(str);
 }
 

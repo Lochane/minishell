@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:55:03 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 15:21:13 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:23:53 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ void	ft_error(char *message, char *message2, int info)
 	free(str);
 	str = ft_join(str2, NULL, '\n');
 	free(str2);
-	write(1, RED, 7);
+	write(2, RED, 7);
 	write(2, str, ft_strlen(str));
-	write(1, RESET, 4);
+	write(2, RESET, 4);
 	free(str);
 }
