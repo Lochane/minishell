@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/06 19:29:01 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:49:27 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ int remove_lst(t_lst **lst, char *name)
 	ft_get_env(name, ft_strlen(name), *lst, &tmp);
 	if (!tmp)
 		return (0);
+	if (tmp == *lst)
+	{
+		prev = prev->next;
+		free(tmp->data);
+		free(tmp);
+		*lst = prev;
+		return (1);
+	}
 	while (prev && prev->next != tmp)
 		prev = prev->next;
 	prev->next = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 22:55:42 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:29:13 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ unsigned char	g_g;
 
 void	manage_data(t_data *data, int allow)
 {
+	t_cmd	*tmp;
+	t_dir	*tmp_dir;
+	
 	if (allow == 0)
 	{
 		data->args = NULL;
@@ -28,15 +31,17 @@ void	manage_data(t_data *data, int allow)
 			while (data->cmd->redirection)
 			{
 				free(data->cmd->redirection->file);
+				tmp_dir = data->cmd->redirection->next;
 				free(data->cmd->redirection);
 				if (data->cmd->redirection->fd != -1)
 					close(data->cmd->redirection->fd);
-				data->cmd->redirection = data->cmd->redirection->next;
+				data->cmd->redirection = tmp_dir;
 			}
 			ft_free_tab(data->cmd->arg, tab_size(data->cmd->arg));
 			free(data->cmd->cmd);
+			tmp = data->cmd->next;
 			free(data->cmd);
-			data->cmd = data->cmd->next;
+			data->cmd = tmp;
 		}
 		data->args = NULL;
 		data->cmd = NULL;
@@ -121,6 +126,8 @@ char	*get_line(t_data data)
 	if (data.tty == 0)
 	{
 		line = get_next_line(0);
+		if (!line)
+			return (NULL);
 		len = ft_strlen(line);
 		len -= (line[len - 1] == '\n');
 		line[len] = 0;
@@ -133,10 +140,11 @@ char	*get_line(t_data data)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
-
-	if (argc != 1 || argv[1])
+	
+	(void) argv;
+	if (argc != 1)
 	{
-		printf("Error:\nThis program don't take arguments\n");
+		write(2, "Error:\nThis program don't take arguments\n", 42);
 		exit(0);
 	}
 	data.tty = isatty(0);
@@ -145,11 +153,12 @@ int	main(int argc, char **argv, char **envp)
 	g_g = 0;
 	data.new_line = 0;
 	data.return_value = 0;
-	data.env = tab_to_list(envp);
-	//if (!init_here_doc(&data.here_doc))
-	//	return (0);//free l'env
-	//modifier pour proteger l'erreur de malloc peut etre null si pas d'env
 	data.fd = dup(0);
+	if (data.fd == -1)
+		return (perror("dup"), errno);
+	data.env = tab_to_list(envp);
+	if (envp[0] && !data.env)
+		return (ft_putstr_fd("echec d'allocation\n", 2), errno);
 	while (1)
 	{
 		intercept_sig();
@@ -167,15 +176,12 @@ int	main(int argc, char **argv, char **envp)
 					{
 						if (!set_cmd(&data))
 						{
-							printf("MMMM?\n");
 							if (g_g == 130)
 							{
 								handle_sig(&data);
 								data.new_line = 0;
 							}	
 							manage_data(&data, 1);
-							printf("??\n");
-							//break ;
 						}
 					}
 				}

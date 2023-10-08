@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/06 19:25:19 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:52:57 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,31 @@ int	do_cd(t_cmd *cmd, t_fd *fd, t_data *data)
 			printf("No such file\n"); // TODO sortie d'erreur
 			return (0);
 		}
+		pwdpath = getcwd(NULL, 0);
 		if (oldpwd && pwd)
 		{
 			free(oldpwd->data);
-			oldpwd->data = ft_join("OLDPWD=", pwdpath, 0);//proteger allloc cas ou ca peut etre null et normal?
+			oldpwd->data = ft_join("OLDPWD=", pwdpath, 0);
 			free(pwd->data);
-			pwdpath = getcwd(NULL, 0);
 			pwd->data = ft_join("PWD=", pwdpath, 0);
-			free(pwdpath);
+			if (!pwd->data || !oldpwd->data)
+				return (fail_malloc(), errno);
 		}
+		if (!pwd)
+		{
+			pwd = ft_new_lst(ft_join("PWD=", pwdpath, 0));//bouvcle infinie si on fait env???
+			if (!pwd)
+				return (fail_malloc(), errno);
+			ft_add_back(&data->env, pwd);
+		}
+		if (!oldpwd)
+		{
+			oldpwd = ft_new_lst(ft_join("OLDPWD=", pwdpath, 0));
+			if (!oldpwd)
+				return (fail_malloc(), errno);
+			ft_add_back(&data->env, pwd);
+		}
+		free(pwdpath);
 	}
 	else
 		printf("No arguments\n"); // TODO sortie d'erreur

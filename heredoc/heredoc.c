@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:43:46 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/03 15:30:21 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:33:20 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,21 @@ int	get_fd(unsigned char *file_name, int type)
 	return (fd);
 }
 
+void	error(char *str)
+{
+	ft_putstr_fd(str, 2);
+}
+
+void	bash_error(char *s1, char *s2, char *s3)
+{
+	if (s1)
+		error(s1);
+	if (s2)
+		error(s2);
+	if (s3)
+		error(s3);
+}
+
 void	fill_here_doc(const char *limiter, int tmp_fd)
 {
 	char	*line;
@@ -87,12 +102,12 @@ void	fill_here_doc(const char *limiter, int tmp_fd)
 		line = get_next_line(0);
 		if (!line)
 		{
-// 			error("\nbash: warning: here-document at at line 0
-//  delimited by ");
-			// bash_error("end-of-file (wanted `", limiter, "')\n");
+ 			error("\nbash: warning: here-document at at line 0\
+ delimited by ");
+			bash_error("end-of-file (wanted `", (char *)limiter, "')\n");
 			break ;
 		}
-		if (!verif_heredoc(line, limiter, ft_strlen(limiter)))
+		if (!verif_heredoc(line, (char *)limiter, ft_strlen(limiter)))
 			break ;
 		ft_putstr_fd(line, tmp_fd);
 		free(line);

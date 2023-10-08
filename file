@@ -1,0 +1,17 @@
+builtin
+exec
+exec.h
+expansion
+expansion.h
+file
+heredoc
+here_doc.h
+ignore
+ignore_readline
+libft
+Makefile
+minishell
+minishell.h
+parsing
+struct.h
+test_file

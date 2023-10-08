@@ -27,6 +27,8 @@ char	*get_path(char **env)
 	int	i;
 
 	i = 0;
+	if (!env)
+		return (NULL);
 	while (env[i])
 	{
 		if (!ft_strncmp(env[i], "PATH=", 5))
@@ -66,12 +68,11 @@ char	*check_access(char *cmd, char **path)
 {
 	int		i;
 	char	*pathed;
-	//char	err[2048];
 
 	i = 0;
 	if (!cmd)
 		return (NULL);//free_and_exit();
-	if (!check_path(cmd))
+	if (!path || !check_path(cmd))
 	{
 		if (!access(cmd, F_OK | X_OK))
 		{
@@ -94,7 +95,7 @@ char	*check_access(char *cmd, char **path)
 		{
 			//if (!is_dir(pathed))//je ne sais pas, confirmer par un test
 			//{
-			//	ft_error(pathed,"Is a directory", 0);
+				//ft_error(cmd,"Is a directory", 0);
 			//	return (NULL);
 			//}
 			return (pathed);

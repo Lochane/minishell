@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 17:38:13 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/08 21:44:06 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	*ft_free_tab(char **res, size_t i);
 void	add_back_dir(t_dir **lst, t_dir *new);
 t_dir	*init_dir(char *file);
 void	ft_syntax_error(char *message);
+void	manage_data(t_data *data, int allow);
 
 /*signaux*/
 void	restore_sig(void);

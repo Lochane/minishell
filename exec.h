@@ -28,7 +28,7 @@ long    ft_atol(char *nbr, int *check);
 int	    ft_strcmp(const char *s, const char *s1);
 char	*ft_join(char *s1, char *s2, char c);
 void	ft_error(char *message, char *message2, int info);
-
+void	fail_malloc();
 
 /* Builtin */
 

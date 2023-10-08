@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:55:03 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 15:23:53 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:04:48 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ long ft_atol(char *nbr, int *check)
 		*check = 1;
 	else if (*nbr != 0)
 		*check = 2;
-	//1 si overflow 2 si non numeric? 0 si ok
 	if (sign)
 		nb *= -1;
 	return (nb);
@@ -81,29 +80,46 @@ char	*ft_join(char *s1, char *s2, char c)
 	return (s3);
 }
 
+void	fail_malloc()
+{
+	const char *str = "\x1b[91;1mechec malloc\n\x1b[0m\2";
+	write(2, str, ft_strlen(str));
+}
+
 void	ft_error(char *message, char *message2, int info)
 {
+	char	*tab[9];
 	char	*str;
-	char	*str2;
-	char	*err;
+	int		i;
 
-	str2 = NULL;
-	str = ft_join("minishell: ", message, 0);//protgeger alloc
+	i = 0;
+	tab[i++] = RED;
+	tab[i++] = "minishell: ";
+	tab[i++] = message;
 	if (!message2 && !info)
-		str2 = ft_join(str, strerror(errno), ' ');//proteger les allocs
+	{
+		tab[i++] = " ";
+		tab[i++] = strerror(errno);
+		tab[i++] = " ";
+	}
 	else if (message && info)
 	{
-		err = ft_join(message2, strerror(errno), ' ');//proteger allocs
-		str2 = ft_join(str, err, 0);//proteger les allocs
-		free(err);
+		tab[i++] = message2;
+		tab[i++] = " ";
+		tab[i++] = strerror(errno);
+		tab[i++] = " ";
 	}
 	else if (message)
-		str2 = ft_join(str, message2, ' ');//proteger les allocs
-	free(str);
-	str = ft_join(str2, NULL, '\n');
-	free(str2);
-	write(2, RED, 7);
+	{
+		tab[i++] = " ";
+		tab[i++] = message2;
+		tab[i++] = " ";
+	}
+	tab[i++] = RESET;
+	tab[i] = NULL;
+	str = ft_strjoin_pool(tab_size(tab) ,tab, "", 0);
+	if (!str)
+		return (fail_malloc());
 	write(2, str, ft_strlen(str));
-	write(2, RESET, 4);
 	free(str);
 }
