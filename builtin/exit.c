@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:37:14 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 		if (!check)
 		{
 			if (tty)
-				printf(RED"exit\n"RESET);
+				printf(RED"Exit\n"RESET);
 			exit(nb % 256);
 		}
 		else
