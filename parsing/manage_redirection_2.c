@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 16:19:53 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:57:56 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,27 @@ char	*ft_str_insert_front(char *str, char *insert, int index)
 {
 	char	*tmp;
 	int		strlen;
+	int		size;
+	int		str_size;
 
 	strlen = ft_strlen(str) + ft_strlen(insert);
 	tmp = malloc(sizeof(char) * (strlen + 1));
 	if (!tmp)
 		return (fail_malloc(), NULL);
+	size = ft_strlen(insert);
+	if (ft_strlen(str) < (size_t)index)
+	{
+		ft_printf("index: %d\n", index);
+		ft_printf("str: %s\n", str);
+		ft_printf("parametres chelous\n");
+		return(NULL);
+	}
+	str_size = ft_strlen(&str[index]);
 	tmp[strlen] = 0;
 	ft_strlcpy(tmp, str, index + 2);
-	ft_strlcpy(&tmp[index + 1], insert, ft_strlen(insert) + 1);
-	ft_strlcpy(&tmp[index + ft_strlen(insert) + 1], &str[index + 1], \
-		ft_strlen(&str[index]));
+	ft_strlcpy(&tmp[index + 1], insert, size + 1);
+	ft_strlcpy(&tmp[index + size + 1], &str[index + 1], \
+		str_size);
 	return (tmp);
 }
 
@@ -77,6 +88,7 @@ char	*manage_space_front(int index, char *tab, int space_count)
 	char	*tmp2;
 
 	tmp = tab;
+	printf("index = %d\n", index);
 	if (space_count == 0)
 	{
 		tmp2 = ft_str_insert_front(tmp, " ", index);
