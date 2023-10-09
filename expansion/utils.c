@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:29 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/09 14:31:09 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:42:22 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,35 @@ int	check_char(char c)
 	return (1);
 }
 
-void	get_buf(t_buf *buffer)
+void	get_buf(t_buf *buffer, unsigned long size)
 {
 	char			*tmp;
 	unsigned long	index;
 
 	if (!buffer->buf)
 	{
-		buffer->buf = malloc(sizeof(char) * 151);
+		buffer->buf = malloc(sizeof(char) * 31);
 		if (!buffer->buf)
 			return ;
-		buffer->size = 150;
+		ft_memset((buffer->buf), '\0', 31);
+		buffer->size = 30;
 		return ;
 	}
-	tmp = malloc((buffer->size * 2) + 1);
+	tmp = malloc((buffer->size + size) + 1);
 	if (!tmp)
 	{
 		free (buffer->buf);
+		buffer->buf = NULL;
 		buffer->size = 0;
 		return ;
 	}
 	index = -1;
 	while (++index < buffer->index)
 		tmp[index] = buffer->buf[index];
+	tmp[index] = 0;
 	free(buffer->buf);
 	buffer->buf = tmp;
-	buffer->size *= 2;
+	buffer->size += size;
 }
 
 void	stack_itoa(char n[11], unsigned int nb)
@@ -111,7 +114,7 @@ void	cpy_var(char *str, int *index, t_buf *buffer, t_data data)
 	if (content)
 	{
 		if (buffer->index + ft_strlen(content) >= buffer->size)
-			get_buf(buffer);//proteger le null
+			get_buf(buffer, ft_strlen(content));//proteger le null
 		while (*content)
 		{
 			(buffer->buf)[buffer->index++] = *content;

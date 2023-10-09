@@ -253,9 +253,10 @@ void	close_pipe_child(t_cmd *cmd)
 	}
 }
 
-void	exec(t_cmd *cmd_lst, int built_in , t_data *data)
+void	exec(t_cmd *cmd_lst, t_data *data)
 {
 	t_fork fork;
+	int		built_in;
 	
 	restore_sig();
 	init_fork(&fork);
@@ -284,6 +285,7 @@ void	exec(t_cmd *cmd_lst, int built_in , t_data *data)
 		close(fork.fd.in);
 	if (fork.fd.out > 0)
 		close(fork.fd.out);
+	built_in = is_built_in(cmd_lst->cmd);
 	if (built_in)
 	{
 		do_built_in(cmd_lst, data, 0);
@@ -392,7 +394,6 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 	t_cmd *tmp;
 	int		i;
 	int		prev_pipe;
-	int		built_in;
 	int		nb_cmd;
 
 	tmp = cmd;
@@ -403,8 +404,7 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 	pip[1] = -1;
 	nb_cmd = cmd_size(cmd);
 	modif_cmd(tmp);
-	built_in = is_built_in(cmd->cmd);
-	if (built_in && nb_cmd == 1)
+	if (nb_cmd == 1 && is_built_in(cmd->cmd))
 		return (do_built_in(cmd, data, 1));
 	ignore_sig();
 	while (tmp)
@@ -416,7 +416,6 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 			tmp->pipe = pip[1];	
 		if (tmp->next)
 			tmp->next->prev_pipe = pip[0];
-		built_in = is_built_in(cmd->cmd);
 		tmp->pid = fork();
 		if (tmp->pid == -1)
 		{
@@ -426,7 +425,7 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 			return (0);
 		}
 		else if (tmp->pid == 0)
-			exec(tmp , built_in, data);
+			exec(tmp , data);
 		i++;
 		// if (prev_pipe != -1)
 		// {

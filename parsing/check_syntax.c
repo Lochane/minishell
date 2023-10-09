@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:11:05 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ int	check_syntax(char *args, t_data *data)
 			data->return_value = 2;
 			return (2);
 		}
-		if (args[i] == '-' && !args[i + 1])
-		{
-			data->return_value = 127;
-			return (ft_syntax_error("command not found\n"), 1);
-		}
+		// if (args[i] == '-' && !args[i + 1])
+		// {
+		// 	data->return_value = 127;
+		// 	return (ft_syntax_error("command not found\n"), 1);
+		// }
 		i++;
 	}
 	return (0);

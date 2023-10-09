@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:31:16 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ int	print_env(t_cmd *cmd, t_fd *fd, t_data *data)
 		if (write(final_fd, str, ft_strlen(str)) == -1)
 		{
 			ft_error(cmd->cmd, "write error: ", 1);
+			free(str);
 			return (125);
 		}
+		free(str);
 		tmp = tmp->next;
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:44:43 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/06 21:44:47 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:43:49 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_buf
 }					t_buf;
 
 int		check_char(char c);
-void	get_buf(t_buf *buffer);
+void	get_buf(t_buf *buffer, unsigned long size);
 void	stack_itoa(char n[11], unsigned int nb);
 char	*get_var_content(int *tmp, int *index, char *str, t_data data);
 void	cpy_var(char *str, int *index, t_buf *buffer, t_data data);

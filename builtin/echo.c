@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 17:34:38 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:07:13 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_option(char **arg)
 		{
 			while (arg[i][j])
 			{
-				if (arg[i][j] != 'n')
+				if (arg[i][j] != 'n' || arg[i][j] == '-')
 					return (i);
 				j++;
 			}
@@ -67,5 +67,6 @@ int	do_echo(t_cmd *cmd, t_fd *fd, t_data *data)
 	if (!stash)
 		return (fail_malloc(), 0);
 	write(final_fd, stash, ft_strlen(stash));
+	free(stash);
 	return (0);
 }
