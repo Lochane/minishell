@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:13 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/08 21:41:46 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:30:50 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../expansion.h"
+#include "../includes/expansion.h"
 
 //set param erreur de malloc
 

@@ -1,5 +1,5 @@
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 
 void    print_cmds(t_cmd *cmd)

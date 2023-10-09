@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/08 19:38:11 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:37:50 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 {
@@ -29,7 +29,7 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 	{
 		rl_clear_history();
 		if (tty)
-			printf(RED"exit\n"RESET);
+			printf(RED"Exit\n"RESET);
 		exit(data->return_value);
 	}
 	if (cmd->arg[i])
@@ -47,7 +47,7 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 		if (!check)
 		{
 			if (tty)
-				printf(RED"exit\n"RESET);
+				printf(RED"Exit\n"RESET);
 			exit(nb % 256);
 		}
 		else

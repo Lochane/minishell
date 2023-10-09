@@ -6,11 +6,11 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 17:04:42 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:19:03 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "includes/minishell.h"
 
 unsigned char	g_g;
 

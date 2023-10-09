@@ -6,17 +6,17 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:53:21 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 16:42:33 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:24:56 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 int	fill_arg(t_cmd *cmd, char **tab)
 {
 	cmd->arg = malloc(sizeof(char *) * (tab_size(tab) + 1));
 	if (!cmd->arg)
-		return (0);
+		return (fail_malloc(), 0);
 	return (1);
 }
 

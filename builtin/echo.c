@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/08 21:16:23 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:34:38 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 int	check_option(char **arg)
 {
@@ -65,7 +65,7 @@ int	do_echo(t_cmd *cmd, t_fd *fd, t_data *data)
 	i = check_option(cmd->arg);
 	stash = ft_strjoin_pool(tab_size(&cmd->arg[i]), &cmd->arg[i], " ", i);
 	if (!stash)
-		return (0); // TODOO Erreur malloc
+		return (fail_malloc(), 0);
 	write(final_fd, stash, ft_strlen(stash));
 	return (0);
 }

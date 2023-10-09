@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:30:36 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/09/05 15:11:37 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 1000
 # endif
 
-# include "../minishell.h"
+# include "../includes/minishell.h"
 # include <stddef.h>
 # include <string.h>
 # include <stdlib.h>

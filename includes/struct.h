@@ -6,14 +6,13 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:51:16 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/09 13:51:54 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:19:18 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "libft/libft.h"
 # include <unistd.h>
 
 typedef struct s_fd

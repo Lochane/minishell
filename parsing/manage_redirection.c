@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 21:49:12 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:02:52 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 char	*check_space_front(char *tab)
 {
@@ -30,7 +30,8 @@ char	*check_space_front(char *tab)
 			j = i;
 			while (j > 0 && tab[j--] == ' ')
 				space_count++;
-			tab = manage_space_front(i, tab, space_count);
+			if (i > 0)
+				tab = manage_space_front(i, tab, space_count);
 		}
 	}
 	return (tab);
@@ -66,7 +67,7 @@ int	manage_redirection(char *token, char *file, t_cmd *cmd)
 
 	tmp = init_dir(file);
 	if (!tmp)
-		return (0);
+		return (fail_malloc(), 0);
 	if (token[0] == '<' && token[1] == '>')
 		tmp->token = DOUBLE;
 	else if (token[1] && token[1] == '<')

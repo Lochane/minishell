@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/07 22:14:08 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:24:05 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 int	get_redirection(char **tab, t_cmd *cmd)
 {
@@ -44,7 +44,7 @@ int	get_cmd(char **tab, t_cmd *cmd)
 		{
 			cmd->cmd = ft_strdup(tab[i]);
 			if (!cmd->cmd)
-				return (0);
+				return (fail_malloc(), 0);
 			break ;
 		}
 	}
@@ -72,7 +72,7 @@ int	get_arg(char **tab, t_cmd *cmd)
 			}
 			cmd->arg[j++] = ft_strdup(tab[i++]);
 			if (!cmd->arg)
-				return (0);
+				return (fail_malloc(), 0);
 		}
 	}
 	if (cmd->arg)
@@ -85,10 +85,14 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 	char	**tmp;
 
 	tab = check_space_front(tab);
+	if (!tab)
+		return (0);
 	tab = check_space_back(tab);
+	if (!tab)
+		return (0);
 	tmp = ft_split_shell(tab, ' ');
 	if (!tmp)
-		return (0);
+		return (fail_malloc(), 0);
 	if (!get_redirection(tmp, cmd))
 		return (0);
 	if (!get_cmd(tmp, cmd))
@@ -107,17 +111,17 @@ int	set_cmd(t_data *data)
 	char	**tmp;
 	t_cmd	*lst_tmp;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	lst_tmp = NULL;
 	tmp = ft_split_shell(data->args, '|');
 	if (!tmp)
-		return (0);
+		return (fail_malloc(), 0);
 	while (tmp[i])
 	{
 		lst_tmp = init_cmd();
+		if (!lst_tmp)
+			return (fail_malloc(), 0);
 		if (!tri_cmd(tmp[i], lst_tmp))
 			return (0);
 		if (i == 0)
