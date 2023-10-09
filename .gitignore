@@ -1,4 +1,8 @@
 # Ignorer tous les fichiers /obj
+*.o
 # Ignorer tous les fichiers .nfs
+*.nfs
 # Ignorer tous les fichiers minishell
+./minishell
 # Ignorer tous les fichiers /test_file
+./test_file/
