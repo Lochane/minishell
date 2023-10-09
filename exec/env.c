@@ -24,7 +24,7 @@ void    ft_clear_lst(t_lst **lst)
     while (*lst)
     {
         tmp = (*lst)->next;
-        free((*lst)->next);
+        free((*lst)->data);
         free(*lst);
         *lst = tmp;
     }

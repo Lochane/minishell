@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:43:46 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/08 18:33:20 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:00:30 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,16 @@ void	fill_here_doc(const char *limiter, int tmp_fd)
 	(void)limiter;
 	while (1)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(0);
+		//write(1, "> ", 2);
+		line = readline(">");
 		if (!line)
 		{
- 			error("\nbash: warning: here-document at at line 0\
+			if (g_g != 130)
+			{
+ 				error("minishell: warning: here-document at at line 0\
  delimited by ");
-			bash_error("end-of-file (wanted `", (char *)limiter, "')\n");
+				bash_error("end-of-file (wanted `", (char *)limiter, "')\n");
+			}
 			break ;
 		}
 		if (!verif_heredoc(line, (char *)limiter, ft_strlen(limiter)))
@@ -128,7 +131,8 @@ int	get_infile_heredoc(char *limiter)
 	if (tmp_fd == -1)
 		return (0);
 	fd = get_fd(file_name, 1);
-	unlink((const char *)file_name);//free filename
+	unlink((const char *)file_name);
+	free(file_name);
 	fill_here_doc((const char *)limiter, tmp_fd);
 	close(tmp_fd);
 	return (fd);

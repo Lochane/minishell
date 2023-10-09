@@ -7,12 +7,6 @@
 # include <sys/wait.h>
 # include <limits.h>
 
-typedef struct s_fd
-{
-    int in;
-    int out;
-}       t_fd;
-
 typedef int (*fct)(t_cmd *, t_fd *, t_data *);
 
 int		open_redir(t_dir *redir, t_fd *fd);

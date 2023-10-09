@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:51:16 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/07 22:36:22 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 13:51:54 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include "libft/libft.h"
 # include <unistd.h>
+
+typedef struct s_fd
+{
+    int in;
+    int out;
+}       t_fd;
 
 typedef struct s_lst
 {
@@ -31,6 +37,15 @@ typedef enum s_tokens
 	LESS_LESS,
 	DOUBLE,
 }	t_tokens;
+
+typedef struct s_fork
+{
+	char	**path;
+	char	**cmd;
+	char	*pathed;
+	char	**env;
+	t_fd	fd;
+}			t_fork;
 
 typedef struct s_dir
 {

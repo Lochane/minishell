@@ -58,6 +58,9 @@ valgrind: all
 		--leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes    \
     	./minishell
 
+valgrind2: all
+		valgrind --trace-children=yes --track-fds=yes --leak-check=full ./minishell
+
 re: fclean all
 
 .PHONY: all lib clean fclean re norme

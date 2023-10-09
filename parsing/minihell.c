@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/08 22:29:13 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:04:42 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	manage_data(t_data *data, int allow)
 			free(data->cmd);
 			data->cmd = tmp;
 		}
+		free(data->args);
 		data->args = NULL;
 		data->cmd = NULL;
 	}
@@ -54,8 +55,6 @@ void	sig_handler(int signum)
 	{
 		close(0);
 		g_g = CTRL_C;
-		//rl_on_new_line();
-		//rl_replace_line("", 0);
 	}
 	else
 		return ;
@@ -114,6 +113,7 @@ void	handle_sig(t_data *data)
 	dup2(data->fd, 0);
 	data->return_value = g_g;
 	g_g = 0;
+	manage_data(data, 1);
 	if (!data->new_line++)
 		write(1, "\n", 1);
 }
@@ -177,10 +177,7 @@ int	main(int argc, char **argv, char **envp)
 						if (!set_cmd(&data))
 						{
 							if (g_g == 130)
-							{
 								handle_sig(&data);
-								data.new_line = 0;
-							}	
 							manage_data(&data, 1);
 						}
 					}

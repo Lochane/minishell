@@ -217,70 +217,112 @@ int	open_redir(t_dir *redir, t_fd *fd)
 	return (0);
 }
 
+void	free_child(t_fork fork, t_data *data)
+{
+	if (data->fd > -1)
+		close(data->fd);
+	data->fd = -1;
+	ft_free_tab(fork.path, tab_size(fork.path));
+	fork.path = NULL;
+	free(fork.cmd);
+	fork.cmd = NULL;
+	free(fork.pathed);
+	rl_clear_history();
+	manage_data(data, 1);
+	ft_clear_lst(&data->env);
+}
+
+void	init_fork(t_fork *fork)
+{
+	fork->env = NULL;
+	fork->path = NULL;
+	fork->pathed = NULL;
+	fork->cmd = NULL;
+}
+
+void	close_pipe_child(t_cmd *cmd)
+{
+	while (cmd)
+	{
+		printf("%s\n", cmd->cmd);
+		if (cmd->pipe != -1)
+			close(cmd->pipe);
+		if (cmd->prev_pipe != -1)
+			close(cmd->prev_pipe);
+		cmd = cmd->next;
+	}
+}
 
 void	exec(t_cmd *cmd_lst, int built_in , t_data *data)
 {
-	char	**path;
-	char	**cmd;
-	char	*pathed;
-	t_cmd	*tmp;
-	t_fd	fd;
-	char **env;
-
+	t_fork fork;
+	
 	restore_sig();
+	init_fork(&fork);
 	if (dup_pipe(cmd_lst) == 1)
-		failure_critic(1);
-	if (open_redir(cmd_lst->redirection, &fd) == 1)
 	{
-		if (fd.in > 0)
-			close(fd.in);
-		if (fd.out > 0)
-			close(fd.out);
+		free_child(fork, data);
 		failure_critic(1);
 	}
-	if (dup_redir(fd) == 1)
+	if (open_redir(cmd_lst->redirection, &fork.fd) == 1)
+	{
+		if (fork.fd.in > 0)
+			close(fork.fd.in);
+		if (fork.fd.out > 0)
+			close(fork.fd.out);
+		free_child(fork, data);
+		close_pipe_child(data->cmd);
 		failure_critic(1);
-	if (fd.in > 0)
-		close(fd.in);
-	if (fd.out > 0)
-		close(fd.out);
-	//if (env->infile.fd == -1 && i == 0)
-	//	handle_invalide_in(env);
-	//if (env->outfile.fd == -1 && i == env->nb_cmd -1)
-	//	handle_invalid_out(env);
-	built_in = is_built_in(cmd_lst->cmd);
+	}
+	if (dup_redir(fork.fd) == 1)
+	{
+		free_child(fork, data);
+		close_pipe_child(data->cmd);
+		failure_critic(1);
+	}
+	if (fork.fd.in > 0)
+		close(fork.fd.in);
+	if (fork.fd.out > 0)
+		close(fork.fd.out);
 	if (built_in)
 	{
 		do_built_in(cmd_lst, data, 0);
-		exit (0);
+		close_pipe_child(data->cmd);
+		free_child(fork, data);
+		exit (data->return_value);
 	}
-	env = lst_to_tab(data->env);//proteger malloc
-	path = ft_split(get_path(env), ':');
-	cmd = join_cmd(cmd_lst->cmd, cmd_lst->arg);
-	if (!cmd)
+	fork.env = lst_to_tab(data->env);
+	if (!fork.env)
 	{
+		free_child(fork, data);
+		close_pipe_child(data->cmd);
+		exit(errno);
+	}
+	fork.path = ft_split(get_path(fork.env), ':');
+	fork.cmd = join_cmd(cmd_lst->cmd, cmd_lst->arg);
+	if (!fork.cmd)
+	{
+		close_pipe_child(data->cmd);
+		free_child(fork, data);
 		write(2, strerror(errno), ft_strlen(strerror(errno)));
 		exit(errno);
 	}
-	//	fail_cmd(env, cmd, path);
-	pathed = check_access(cmd[0], path);
-	if (!pathed)
-		failure_critic(127);//fail_cmd();
-	//dup_all();
-	//close_all(cmd, i);
-	tmp = cmd_lst;
-	while (tmp)
+	fork.pathed = check_access(fork.cmd[0], fork.path);
+	if (!fork.pathed)
 	{
-		if (tmp->pipe != -1)
-			close(tmp->pipe);
-		if (tmp->prev_pipe != -1)
-			close(tmp->prev_pipe);
-		tmp = tmp->next;
+		close_pipe_child(data->cmd);
+		free_child(fork, data);
+		manage_data(data, 1);
+		if (data->fd != -1)
+			close(data->fd);
+		exit(127);
 	}
-	execve(pathed, cmd, env);
-	ft_free_tab(path, tab_size(path));
-	ft_free_tab(cmd, tab_size(cmd));
-	free(pathed);
+	if (data->fd > -1)
+		close(data->fd);
+	data->fd = -1;
+	close_pipe_child(data->cmd);
+	execve(fork.pathed, fork.cmd, fork.env);
+	free_child(fork, data);
 	failure_critic(0);
 }
 
@@ -374,6 +416,7 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 			tmp->pipe = pip[1];	
 		if (tmp->next)
 			tmp->next->prev_pipe = pip[0];
+		built_in = is_built_in(cmd->cmd);
 		tmp->pid = fork();
 		if (tmp->pid == -1)
 		{
@@ -385,6 +428,21 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 		else if (tmp->pid == 0)
 			exec(tmp , built_in, data);
 		i++;
+		// if (prev_pipe != -1)
+		// {
+		// 	close(prev_pipe);
+		// 	prev_pipe = -1;
+		// }
+		// if (pip[1] != -1)
+		// {
+		// 	close(pip[1]);
+		// 	pip[1] = -1;
+		// }
+		// if (pip[0] != -1)
+		// {
+		// 	prev_pipe = pip[0];
+		// 	pip[0] = -1;
+		// }
 		if (tmp->pipe != -1)
 			close(tmp->pipe);
 		if (tmp->prev_pipe != -1)
