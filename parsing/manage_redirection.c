@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:20:29 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	manage_redirection(char *token, char *file, t_cmd *cmd)
 
 	tmp = init_dir(file);
 	if (!tmp)
-		return (0);
+		return (fail_malloc(), 0);
 	if (token[0] == '<' && token[1] == '>')
 		tmp->token = DOUBLE;
 	else if (token[1] && token[1] == '<')

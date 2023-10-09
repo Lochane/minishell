@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_pool.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:39:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/04 14:16:30 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:26:27 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_strjoin_pool(int size, char **strs, char *sep, int new_line)
 	ultimate_size = ultimate_length(size, strs, sep) + (new_line == 0);
 	tab = malloc((ultimate_size + 1) * sizeof(char));
 	if (!tab)
-		return (NULL);
+		return (fail_malloc(), NULL);
 	tab[index] = '\0';
 	while (index < size)
 	{
