@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/09 18:48:21 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:36:36 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ int	set_cmd(t_data *data)
 			data->cmd = lst_tmp;
 		else
 			add_back(data->cmd, lst_tmp);
-		lst_tmp = lst_tmp->next;
 		i++;
 	}
 	ft_free_tab(tmp, tab_size(tmp));
