@@ -9,7 +9,7 @@ SRCEXEC = exec
 OBJDIR  = obj
 
 SRCS = $(SRCEXPAND)/expansion.c $(SRCEXPAND)/utils.c $(SRCEXPAND)/utils2.c $(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils.c  \
-		$(SRCPARSING)/minihell.c $(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
+		minihell.c $(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
 		$(SRCPARSING)/set_cmd_utils.c $(SRCPARSING)/manage_redirection.c \
 		$(SRCPARSING)/check_syntax.c $(SRCPARSING)/ft_split_shell.c \
 		$(SRCPARSING)/check_syntax_2.c $(SRCPARSING)/manage_redirection_2.c \
