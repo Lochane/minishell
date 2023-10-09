@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 19:16:43 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:38:10 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 	if (!data->cmd || !cmd->arg)
 	{
 		rl_clear_history();
+		ft_clear_lst(&data->env);
 		if (tty)
 			printf(RED"exit\n"RESET);
 		manage_data(data, 1);
@@ -36,8 +37,6 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 	if (cmd->arg[i])
 	{
 		nb = ft_atol(cmd->arg[0], &check);
-		printf("check == %d\n", check);
-		printf("nb == %ld\n", nb);
 		if (i == 0 && !check && cmd->arg[i + 1])
 		{
 			printf(RED"exit\n"RESET);
@@ -45,6 +44,7 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 			return (1);
 		}
 		rl_clear_history();
+		ft_clear_lst(&data->env);
 		if (!check)
 		{
 			if (tty)
