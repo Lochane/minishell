@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/07 22:14:08 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 int	get_redirection(char **tab, t_cmd *cmd)
 {

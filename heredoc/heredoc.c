@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:43:46 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/08 18:33:20 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 int	verif_heredoc(char *s1, const char *s2, int n)
 {

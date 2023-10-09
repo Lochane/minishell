@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:40:19 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/08 22:24:45 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 int	find_index(int i, char **tab, int allow)
 {

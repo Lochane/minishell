@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/07 21:49:12 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 char	*check_space_front(char *tab)
 {

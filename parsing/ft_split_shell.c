@@ -6,11 +6,11 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:03:04 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/07/03 15:18:08 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 static int	count_quote(const char *str)
 {
