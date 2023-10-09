@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/09 18:45:58 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:48:21 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 		if (!get_arg(tmp, cmd))
 			return (0);
 	}
-	free(tab);
 	ft_free_tab(tmp, tab_size(tmp));
 	return (1);
 }

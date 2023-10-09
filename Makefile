@@ -1,3 +1,4 @@
+cat
 CC = cc
 CFLAGS = -g3 -Wall -Werror -Wextra #-fsanitize=address
 
