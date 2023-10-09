@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 18:19:03 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:37:46 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	manage_data(t_data *data, int allow)
 			{
 				free(data->cmd->redirection->file);
 				tmp_dir = data->cmd->redirection->next;
-				free(data->cmd->redirection);
 				if (data->cmd->redirection->fd != -1)
 					close(data->cmd->redirection->fd);
+				free(data->cmd->redirection);
 				data->cmd->redirection = tmp_dir;
 			}
 			ft_free_tab(data->cmd->arg, tab_size(data->cmd->arg));

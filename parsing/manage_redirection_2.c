@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirection_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 17:57:56 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:44:11 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ char	*ft_str_insert_front(char *str, char *insert, int index)
 	if (!tmp)
 		return (fail_malloc(), NULL);
 	size = ft_strlen(insert);
-	if (ft_strlen(str) < (size_t)index)
-	{
-		ft_printf("index: %d\n", index);
-		ft_printf("str: %s\n", str);
-		ft_printf("parametres chelous\n");
-		return(NULL);
-	}
 	str_size = ft_strlen(&str[index]);
 	tmp[strlen] = 0;
 	ft_strlcpy(tmp, str, index + 2);
@@ -70,7 +63,8 @@ char	*manage_space_back(int index, char *tab, int space_count, int j_index)
 			return (NULL);
 		tmp = ft_strdup(tmp2);
 		if (!tmp)
-			return (fail_malloc(), NULL);
+			return (free(tmp2), fail_malloc(), NULL);
+		free(tmp2);
 	}
 	if (space_count > 1)
 	{

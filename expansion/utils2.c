@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:39:32 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/09 14:31:13 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:35:10 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	fill_buf(char *str, t_data data, int quote[2], t_buf *buf)
 		}
 		buf->buf[buf->index] = 0;
 	}
+	quote[2] = index;
 }
 
 char	*do_expand(char *str, t_data data)
@@ -60,6 +61,8 @@ char	*do_expand(char *str, t_data data)
 	quote[2] = 0;
 	buffer.buf = NULL;
 	buffer.size = 0;
+	if (!str)
+		return (NULL);
 	fill_buf(str, data, quote, &buffer);
 	index = quote[2];
 	if (!buffer.buf)
