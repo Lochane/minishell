@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:17:38 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 16:17:10 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:11:53 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_syntax_error(char *message)
 
 int	check_pipe(char *args, int i)
 {
-	if (args[i] == '|' && !args[i - 1])
+	if (args[i] == '|' && i == 0)
 		return (ft_syntax_error("syntax error near unexpected token\n"), 1);
 	if (args[i] == '|' && !args[i + 1])
 		return (ft_syntax_error("syntax error near unexpected token\n"), 1);
