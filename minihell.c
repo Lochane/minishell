@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/10 15:08:55 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:12:22 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,7 @@ char	*get_line(t_data data)
 		return (line);
 	}	
 	else
-	{
-		printf(PROMPT);
-		return (readline(""));
-	}
+		return (readline(PROMPT));
 }
 
 int	main(int argc, char **argv, char **envp)
