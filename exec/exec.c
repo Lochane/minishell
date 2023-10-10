@@ -3,10 +3,6 @@
 
 void	failure_critic(int res)
 {
-	//(void) res;
-	//test de print strerror join avec "minishell :" via ft_join
-	//prendre en parametre retour d'erreur
-	//dprintf(2,"errno == %d\n", errno);
 	exit(res);
 }
 
@@ -245,7 +241,6 @@ void	close_pipe_child(t_cmd *cmd)
 {
 	while (cmd)
 	{
-		printf("%s\n", cmd->cmd);
 		if (cmd->pipe != -1)
 			close(cmd->pipe);
 		if (cmd->prev_pipe != -1)
@@ -298,7 +293,6 @@ void	exec(t_cmd *cmd_lst, t_data *data)
 		exit (data->return_value);
 	}
 	fork.env = lst_to_tab(data->env);
-	printf("env == %p\n", fork.env);
 	if (!fork.env)
 	{
 		free_child(fork, data);

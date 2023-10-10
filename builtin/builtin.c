@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 20:29:37 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:24:21 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ int	do_built_in(t_cmd *cmd, t_data *data, int check)
 			break ;
 		i++;
 	}
-		dprintf(2, "cmd = %p, %s\n", cmd, built_in_name[i]);
-		dprintf(2, "data = %p\n", data);
 	ret = built_in_fct[i](cmd, &fd, data);
 	if (fd.in > 0)
 		close(fd.in);
@@ -90,7 +88,6 @@ int	is_built_in(char *s)
 	int	i;
 
 	i = 0;
-	dprintf(2, "built_in ft = %s\n", s);
 	while (built_in[i])
 	{
 

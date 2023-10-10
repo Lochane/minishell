@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_pool.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:39:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 17:34:08 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:24:48 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ char	*ft_strjoin_pool(int size, char **strs, char *sep, int new_line)
 			ft_strcat(tab, sep);
 	index++;
 	}
-	// printf("ultimate = %d\n, bool = %d\n", ultimate_size, bool);
 	if (new_line == 0)
 		tab[ultimate_size - 1] = '\n';
 	tab[ultimate_size] = '\0';

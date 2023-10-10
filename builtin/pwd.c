@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 20:31:16 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:25:05 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,8 @@ int	do_pwd(t_cmd *cmd, t_fd *fd, t_data *data)
 		return (0);
 	}
 	str = ft_join(var, NULL, '\n');
-	//proteger echec allocation
 	if (write(final_fd, str, ft_strlen(str)) == -1)
 	{
-		printf("errno == %d\n", errno);
-		//ft_error(cmd->cmd, ": write error: No space left on device");
 		ft_error(cmd->cmd, "write error: ", 1);
 		free(str);
 		return (1);
