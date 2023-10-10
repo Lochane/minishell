@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minihell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 19:50:11 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:08:55 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,10 @@ char	*get_line(t_data data)
 		return (line);
 	}	
 	else
-		return (readline(PROMPT));
+	{
+		printf(PROMPT);
+		return (readline(""));
+	}
 }
 
 int	main(int argc, char **argv, char **envp)

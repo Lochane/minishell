@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:39:32 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/09 20:42:32 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:55:33 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	fill_buf(char *str, t_data data, int quote[2], t_buf *buf)
 	index = quote[2];
 	while (str[index])
 	{
-		if (buf->index == buf->size)
+		if (buf->index >= buf->size - 1)
 			get_buf(buf, 0);
 		if (!buf->buf)
 			return ;
