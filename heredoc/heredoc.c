@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:43:46 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 18:19:39 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:30:12 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	verif_heredoc(char *s1, const char *s2, int n)
 	i = 0;
 	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
 		i++;
-	if (s1[i + 1] == '\n' && s2[i + 1] == '\0')
+	if (s1 && s1[i + 1] == '\n' && s2[i + 1] == '\0')
 		return (0);
 	return (1);
 }
