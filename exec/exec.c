@@ -230,6 +230,7 @@ void	free_child(t_fork fork, t_data *data)
 	rl_clear_history();
 	manage_data(data, 1);
 	ft_clear_lst(&data->env);
+	free(fork.env);
 }
 
 void	init_fork(t_fork *fork)
@@ -259,6 +260,9 @@ void	exec(t_cmd *cmd_lst, t_data *data)
 	int		built_in;
 	
 	restore_sig();
+	if (data->fd > -1)
+		close(data->fd);
+	data->fd = -1;
 	init_fork(&fork);
 	if (dup_pipe(cmd_lst) == 1)
 	{
@@ -294,6 +298,7 @@ void	exec(t_cmd *cmd_lst, t_data *data)
 		exit (data->return_value);
 	}
 	fork.env = lst_to_tab(data->env);
+	printf("env == %p\n", fork.env);
 	if (!fork.env)
 	{
 		free_child(fork, data);
@@ -319,11 +324,9 @@ void	exec(t_cmd *cmd_lst, t_data *data)
 			close(data->fd);
 		exit(127);
 	}
-	if (data->fd > -1)
-		close(data->fd);
-	data->fd = -1;
 	close_pipe_child(data->cmd);
 	execve(fork.pathed, fork.cmd, fork.env);
+	free(fork.env);
 	free_child(fork, data);
 	failure_critic(0);
 }

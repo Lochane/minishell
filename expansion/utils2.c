@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:39:32 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/10 14:55:33 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:26:39 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ char	*do_expand(char *str, t_data data)
 	buffer.size = 0;
 	if (!str)
 		return (NULL);
-	fill_buf(str, data, quote, &buffer);
-	index = quote[2];
+	get_buf(&buffer, 0);
 	if (!buffer.buf)
 		return (NULL);
+	fill_buf(str, data, quote, &buffer);
+	index = quote[2];
 	buffer.buf[buffer.index] = 0;
 	if (!buffer.index)
 	{
