@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/10 14:59:43 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:34:22 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ int	set_cmd(t_data *data)
 
 	i = 0;
 	lst_tmp = NULL;
-	tmp = ft_split_shell(data->args, '|');
+	tmp = split_and_check(data);
 	if (!tmp)
-		return (fail_malloc(), 0);
+		return (0);
 	while (tmp[i])
 	{
 		lst_tmp = init_cmd();

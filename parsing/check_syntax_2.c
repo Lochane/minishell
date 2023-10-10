@@ -6,11 +6,29 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:17:38 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/10 15:11:53 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:33:17 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	**split_and_check(t_data *data)
+{
+	char	**tmp;
+	int		i;
+
+	i = 0;
+	tmp = ft_split_shell(data->args, '|');
+	if (!tmp)
+		return (fail_malloc(), NULL);
+	while (tmp[i])
+	{
+		if (!check_syntax(tmp[i], data))
+			return (NULL);
+		i++;
+	}
+	return (tmp);
+}
 
 void	ft_syntax_error(char *message)
 {

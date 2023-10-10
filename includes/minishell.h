@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/10 15:02:58 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:33:39 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int		check_slash(char *args, int i);
 int		check_chevron(char *args, int i);
 int		check_pipe(char *args, int i);
 int		count_chevron(char *args, int i);
+char	**split_and_check(t_data *data);
+
 
 /* Utils */
 int		fill_arg(t_cmd *cmd, char **tab);
