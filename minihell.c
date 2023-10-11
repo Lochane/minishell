@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minihell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/10 17:20:18 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:21:49 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,11 @@ int	main(int argc, char **argv, char **envp)
 						if (!set_cmd(&data))
 						{
 							if (g_g == 130)
+							{
+								if (data.new_line)
+									write(1, "\n", 1);
 								handle_sig(&data);
+							}
 							manage_data(&data, 1);
 						}
 					}

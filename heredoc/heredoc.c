@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:43:46 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/10 17:30:12 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:20:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	verif_heredoc(char *s1, const char *s2, int n)
 	int	i;
 
 	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
+	while (s1[i] && s1[i] == s2[i] && i < n)
 		i++;
-	if (s1 && s1[i + 1] == '\n' && s2[i + 1] == '\0')
+	if (!s1[i] && !s2[i])
 		return (0);
 	return (1);
 }
@@ -98,9 +98,8 @@ void	fill_here_doc(const char *limiter, int tmp_fd)
 	(void)limiter;
 	while (1)
 	{
-		//write(1, "> ", 2);
 		line = readline(">");
-		if (!line)
+		if (!line || g_g == 130)
 		{
 			if (g_g != 130)
 			{
@@ -108,6 +107,7 @@ void	fill_here_doc(const char *limiter, int tmp_fd)
  delimited by ");
 				bash_error("end-of-file (wanted `", (char *)limiter, "')\n");
 			}
+			free(line);
 			break ;
 		}
 		if (!verif_heredoc(line, (char *)limiter, ft_strlen(limiter)))
@@ -135,5 +135,10 @@ int	get_infile_heredoc(char *limiter)
 	free(file_name);
 	fill_here_doc((const char *)limiter, tmp_fd);
 	close(tmp_fd);
+	if (g_g == 130)
+	{
+		close(fd);
+		fd = -1;	
+	}
 	return (fd);
 }
