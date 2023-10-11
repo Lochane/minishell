@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:39:32 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/10 18:05:10 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/11 19:38:27 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	fill_buf(char *str, t_data data, int quote[2], t_buf *buf)
 	int	index;
 
 	index = quote[2];
+	if (!str)
+		return ;
 	while (str[index])
 	{
 		if (buf->index >= buf->size - 1)

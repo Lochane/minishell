@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:29 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/11 17:19:05 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:28:35 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_char(char c)
 {
 	unsigned int	i;
-	const char		*protected = "$:=\"'` ?";
+	const char		*protected = "$:\"'` ?";
 
 	if (c == 0)
 		return (0);
@@ -108,9 +108,9 @@ void	cpy_var(char *str, int *index, t_buf *buffer, t_data data)
 
 	tmp = 0;
 	expand.content = NULL;
-	while (str[*index + 1 + tmp] && check_char(str[*index + 1 + tmp]))
+	while (str[*index + 1 + tmp] && check_char(str[*index + 1 + tmp]) && str[*index + 1 + tmp] != '=')
 		tmp++;
-	*index += get_var_content(&expand, index, str + *index, data);
+	*index += get_var_content(&expand, &tmp, str + *index, data);
 	if (expand.content)
 	{
 		len = ft_strlen(expand.content);

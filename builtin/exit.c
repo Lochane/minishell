@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 19:38:10 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/11 19:58:29 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 	
 	(void) cmd;
 	(void) fd;
-	close(data->fd);
 	i = 0;
 	tty = isatty(0);
 	check = 0;
@@ -32,6 +31,7 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 		if (tty)
 			printf(RED"exit\n"RESET);
 		manage_data(data, 1);
+		close(data->fd);
 		exit(data->return_value);
 	}
 	if (cmd->arg[i])
@@ -45,6 +45,7 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 		}
 		rl_clear_history();
 		ft_clear_lst(&data->env);
+		close(data->fd);
 		if (!check)
 		{
 			if (tty)
