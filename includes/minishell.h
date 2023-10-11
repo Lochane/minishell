@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/10 16:33:39 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:28:52 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ extern unsigned char	g_g;
 # define RESET "\x1b[0m\2"
 # define HEADER "\033[38;5;223;1m"
 
-# define PROMPT "\1🌈\033[38;5;223;1m\2Minishell->\1\x1b[0m\2"
+# define PROMPT "\1🌈\033[38;5;223;1m\2Minihell->\1\x1b[0m\2"
 
 /*builtin*/
 # define BUILT_IN_LIST {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL}
