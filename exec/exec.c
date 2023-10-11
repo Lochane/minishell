@@ -41,6 +41,8 @@ int	check_path(char *cmd)
 	i = 0;
 	if (!cmd)
 		return (0);
+	if (cmd[0] == '.')
+		return (0);
 	while (cmd[i])
 	{
 		if (cmd[i] == '/')

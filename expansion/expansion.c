@@ -6,13 +6,11 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:13 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/10 18:03:19 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:18:43 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/expansion.h"
-
-//set param erreur de malloc
 
 void	expand_arg(char **args, t_data *data)
 {
@@ -32,7 +30,6 @@ void	expand_arg(char **args, t_data *data)
 		i++;
 	}
 }
-//set pram erreur de malloc
 
 void	expand_redir(t_dir *redir, t_data *data)
 {
@@ -48,7 +45,6 @@ void	expand_redir(t_dir *redir, t_data *data)
 		redir = redir->next;
 	}
 }
-//set dans data un paramettre pour l'erreur de malloc  verifier dans le main
 
 void	expansion(t_data *data)
 {
