@@ -320,7 +320,6 @@ void	exec(t_cmd *cmd_lst, t_data *data)
 	}
 	close_pipe_child(data->cmd);
 	execve(fork.pathed, fork.cmd, fork.env);
-	free(fork.env);
 	free_child(fork, data);
 	failure_critic(0);
 }
