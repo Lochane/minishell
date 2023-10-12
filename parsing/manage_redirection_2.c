@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 18:44:11 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:08:50 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ char	*manage_space_back(int index, char *tab, int space_count, int j_index)
 	if (space_count > 1)
 	{
 		ft_memmove(tmp + (index + 1), tmp + j_index, ft_strlen(tmp));
+		free(tab);
 		tab = ft_strdup(tmp);
 		if (!tab)
-			return (fail_malloc(), NULL);
+			return (free(tmp), fail_malloc(), NULL);
 	}
 	return (tmp);
 }
@@ -82,7 +83,6 @@ char	*manage_space_front(int index, char *tab, int space_count)
 	char	*tmp2;
 
 	tmp = tab;
-	printf("index = %d\n", index);
 	if (space_count == 0)
 	{
 		tmp2 = ft_str_insert_front(tmp, " ", index);

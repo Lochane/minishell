@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/10 16:38:44 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:44:53 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	do_cd(t_cmd *cmd, t_fd *fd, t_data *data)
 		{
 			if (oldpwd)
 			{
-				oldpwdpath = ft_join("OLDPWD=", pwd->data, 0);
+				oldpwdpath = ft_join("OLDPWD=", pwdpath, 0);
 				if (!oldpwdpath)
-					return (free(pwdpath), fail_malloc(), errno);//free pwdpath
+					return (free(pwdpath), fail_malloc(), errno);
 				free(oldpwd->data);
 			}
 			free(pwd->data);

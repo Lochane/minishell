@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/10 16:34:22 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:01:07 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	set_cmd(t_data *data)
 		if (!lst_tmp)
 			return (fail_malloc(), 0);
 		if (!tri_cmd(tmp[i], lst_tmp))
-			return (0);
+			return (ft_free_tab(tmp, tab_size(tmp)), 0);
 		if (i == 0)
 			data->cmd = lst_tmp;
 		else

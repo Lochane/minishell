@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:29 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/09 20:42:22 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:28:35 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_char(char c)
 {
 	unsigned int	i;
-	const char		*protected = "$:=\"'` ?";
+	const char		*protected = "$:\"'` ?";
 
 	if (c == 0)
 		return (0);
@@ -72,9 +72,9 @@ void	stack_itoa(char n[11], unsigned int nb)
 		size++;
 		nbr /= 10;
 	}
-	n[size] = 0;
 	if (nb == 0)
 		n[0] = '0';
+	n[size] = 0;
 	while (nb > 0)
 	{
 		n[--size] = (nb % 10) + 48;
@@ -82,43 +82,46 @@ void	stack_itoa(char n[11], unsigned int nb)
 	}
 }
 
-char	*get_var_content(int *tmp, int *index, char *str, t_data data)
+int	get_var_content(t_expand *expand, int *tmp, char *str, t_data data)
 {
-	char	nb[11];
-	char	*content;
 	t_lst	*lst;
 
-	if (*tmp == 0 && str[*index + 1] == '?')
+	if (*tmp == 0 && str[1] == '?')
 	{
-		stack_itoa(nb, data.return_value);
-		content = nb;
-		(*index) += 2;
+		stack_itoa(expand->nb, data.return_value);
+		expand->content = expand->nb;
+		return (2);
 	}
 	else
 	{
-		content = ft_get_env(&str[*index + 1], *tmp, data.env, &lst);
-		(*index) += *tmp + 1;
+		expand->content = ft_get_env(&str[1], *tmp, data.env, &lst);
+		return (*tmp + 1);
 	}
-	return (content);
+	return (0);
 }
 
 void	cpy_var(char *str, int *index, t_buf *buffer, t_data data)
 {
-	int		tmp;
-	char	*content;
+	int			tmp;
+	int			len;
+	t_expand	expand;
 
 	tmp = 0;
-	while (str[*index + 1 + tmp] && check_char(str[*index + 1 + tmp]))
+	expand.content = NULL;
+	while (str[*index + 1 + tmp] && check_char(str[*index + 1 + tmp]) && str[*index + 1 + tmp] != '=')
 		tmp++;
-	content = get_var_content(&tmp, index, str, data);
-	if (content)
+	*index += get_var_content(&expand, &tmp, str + *index, data);
+	if (expand.content)
 	{
-		if (buffer->index + ft_strlen(content) >= buffer->size)
-			get_buf(buffer, ft_strlen(content));//proteger le null
-		while (*content)
+		len = ft_strlen(expand.content);
+		if (buffer->index + len >= buffer->size)
+			get_buf(buffer, len);
+		if (!buffer->buf)
+			return ;
+		while (*expand.content)
 		{
-			(buffer->buf)[buffer->index++] = *content;
-			content++;
+			(buffer->buf)[buffer->index++] = *expand.content;
+			expand.content++;
 		}
 	}
 	else if ((tmp == 0 && ((str[*index] != '\'') || str[*index] != '"')))

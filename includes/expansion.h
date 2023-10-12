@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:44:43 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/10 18:02:56 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:16:55 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_buf
 int		check_char(char c);
 void	get_buf(t_buf *buffer, unsigned long size);
 void	stack_itoa(char n[11], unsigned int nb);
-char	*get_var_content(int *tmp, int *index, char *str, t_data data);
+int		get_var_content(t_expand *expand, int *tmp, char *str, t_data data);
 void	cpy_var(char *str, int *index, t_buf *buffer, t_data data);
 char	*do_expand(char **str, t_data data);
 void	expand_arg(char **args, t_data *data);

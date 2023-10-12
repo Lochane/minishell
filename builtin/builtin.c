@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/10 17:24:21 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:42:10 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_var_cmp(char *s1, int size, char *s2)
 		return (-1);
 	while ((s1[i] && s1[i] != '=') && s1[i] == s2[i] && i < size)
 		i++;
-	if ((!s1[i] || !check_char(s1[i])) && s2[i] == '=')
+	if ((!s1[i] || s1[i] == '=') && s2[i] == '=')
 		return (0);
 	else
 		return (1);
