@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minihell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/11 15:21:49 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:22:33 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	manage_data(t_data *data, int allow)
 {
 	t_cmd	*tmp;
 	t_dir	*tmp_dir;
-	
+
 	if (allow == 0)
 	{
 		data->args = NULL;
@@ -49,47 +49,9 @@ void	manage_data(t_data *data, int allow)
 	}
 }
 
-void	sig_handler(int signum)
-{
-	if (signum == SIGINT)
-	{
-		close(0);
-		g_g = CTRL_C;
-	}
-	else
-		return ;
-}
 
-void	sig_handler_exec_loop(int signum)
-{
-	(void) signum;
-}
 
-void	restore_sig(void)
-{
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGTSTP, SIG_IGN);
-}
 
-void	intercept_sig(void)
-{
-	struct sigaction	ca;
-
-	ca.sa_handler = sig_handler;
-	ca.sa_flags = 0;
-	sigemptyset(&ca.sa_mask);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	sigaction(SIGINT, &ca, NULL);
-}
-
-void	ignore_sig(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-}
 
 int	history(char *str)
 {
@@ -108,21 +70,12 @@ int	history(char *str)
 	return (1);
 }
 
-void	handle_sig(t_data *data)
-{
-	dup2(data->fd, 0);
-	data->return_value = g_g;
-	g_g = 0;
-	manage_data(data, 1);
-	if (!data->new_line++)
-		write(1, "\n", 1);
-}
 
 char	*get_line(t_data data)
 {
 	char	*line;
 	int		len;
-	
+
 	if (data.tty == 0)
 	{
 		line = get_next_line(0);
@@ -140,7 +93,7 @@ char	*get_line(t_data data)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
-	
+
 	(void) argv;
 	if (argc != 1)
 	{

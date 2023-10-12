@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/11 14:28:52 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:24:44 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ extern unsigned char	g_g;
 # define RESET "\x1b[0m\2"
 # define HEADER "\033[38;5;223;1m"
 
-# define PROMPT "\1🌈\033[38;5;223;1m\2Minihell->\1\x1b[0m\2"
+# define PROMPT "\1\033[38;5;223;1m\2Minihell->\1\x1b[0m\2"
 
 /*builtin*/
 # define BUILT_IN_LIST {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL}
@@ -80,7 +80,6 @@ int		check_pipe(char *args, int i);
 int		count_chevron(char *args, int i);
 char	**split_and_check(t_data *data);
 
-
 /* Utils */
 int		fill_arg(t_cmd *cmd, char **tab);
 char	**ft_split_shell(char const *s, char c);
@@ -92,16 +91,17 @@ t_dir	*init_dir(char *file);
 void	ft_syntax_error(char *message);
 void	manage_data(t_data *data, int allow);
 int		remove_lst(t_lst **lst, char *name);
-void    ft_clear_lst(t_lst **lst);
+void	ft_clear_lst(t_lst **lst);
 
-/*signaux*/
+/* Signaux */
 void	restore_sig(void);
 void	ignore_sig(void);
+void	sig_handler(int signum);
+void	handle_sig(t_data *data);
 void	intercept_sig(void);
 
 /* Poubelle */
-
 void	print_tab(char **tab);
-void    print_cmds(t_cmd *cmd);
+void	print_cmds(t_cmd *cmd);
 
 #endif
