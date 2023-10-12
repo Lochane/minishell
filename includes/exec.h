@@ -15,6 +15,7 @@ char	**lst_to_tab(t_lst *lst);
 t_lst	*tab_to_list(char **tab);
 t_lst	*ft_new_lst(char *data);
 void	ft_add_back(t_lst **lst, t_lst *new);
+void	close_pipe_child(t_cmd *cmd);
 
 /* Utils exec */
 
