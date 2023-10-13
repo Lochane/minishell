@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/12 17:53:19 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/13 20:06:10 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ int	get_arg(char **tab, t_cmd *cmd)
 int	tri_cmd(char *tab, t_cmd *cmd)
 {
 	char	**tmp;
+	char	*tmp_tab;
 
+	tmp_tab = tab;
 	tab = check_space_front(tab);
 	if (!tab)
 		return (0);
@@ -103,6 +105,8 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 			return (0);
 	}
 	ft_free_tab(tmp, tab_size(tmp));
+	if (tmp_tab != tab)
+		free(tab);
 	return (1);
 }
 

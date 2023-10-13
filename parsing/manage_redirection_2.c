@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/11 20:08:50 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:59:45 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	*manage_space_back(int index, char *tab, int space_count, int j_index)
 		if (!tmp2)
 			return (NULL);
 		tmp = ft_strdup(tmp2);
+		free(tab);
 		if (!tmp)
 			return (free(tmp2), fail_malloc(), NULL);
 		free(tmp2);
@@ -69,10 +70,6 @@ char	*manage_space_back(int index, char *tab, int space_count, int j_index)
 	if (space_count > 1)
 	{
 		ft_memmove(tmp + (index + 1), tmp + j_index, ft_strlen(tmp));
-		free(tab);
-		tab = ft_strdup(tmp);
-		if (!tab)
-			return (free(tmp), fail_malloc(), NULL);
 	}
 	return (tmp);
 }
@@ -89,15 +86,11 @@ char	*manage_space_front(int index, char *tab, int space_count)
 		if (!tmp2)
 			return (NULL);
 		tmp = ft_strdup(tmp2);
+		free(tmp2);
 		if (!tmp)
 			return (fail_malloc(), NULL);
 	}
 	if (space_count > 1)
-	{
-		ft_memmove(tmp + found_space(tmp, 0), tmp + index, ft_strlen(tmp));
-		tab = ft_strdup(tmp);
-		if (!tab)
-			return (fail_malloc(), NULL);
-	}
+		ft_memmove(tmp + found_space(tmp, 0), tmp + index, ft_strlen(tmp + index));
 	return (tmp);
 }
