@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:44:43 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/11 17:16:55 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:27:29 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,32 @@
 # include "here_doc.h"
 # include "exec.h"
 
-typedef struct s_buf
+typedef struct s_buffer
 {
 	char			*buf;
 	unsigned long	size;
 	unsigned long	index;
 
-}					t_buf;
+}					t_buffer;
+
+typedef struct s_expand
+{
+	char		nb[11];
+	char		*content;
+	t_buffer	buffer;
+	int			index;
+	int			quote[2];
+}				t_expand;
 
 int		check_char(char c);
-void	get_buf(t_buf *buffer, unsigned long size);
+void	get_buf(t_buffer *buffer, unsigned long size);
 void	stack_itoa(char n[11], unsigned int nb);
-int		get_var_content(t_expand *expand, int *tmp, char *str, t_data data);
-void	cpy_var(char *str, int *index, t_buf *buffer, t_data data);
-char	*do_expand(char **str, t_data data);
+void	get_var_content(t_expand *expand, int *tmp, char *str, t_data *data);
+void	cpy_var(char *str, t_expand *expand, t_data *data);
+char	*do_expand(char **str, t_data *data);
 void	expand_arg(char **args, t_data *data);
 void	expand_redir(t_dir *redir, t_data *data);
 void	expansion(t_data *data);
-int		check_quote(char *str, int quote[2], int *index);
+void		check_quote(char *str, int quote[2], int *index);
 
 #endif

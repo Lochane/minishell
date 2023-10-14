@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:29 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/11 18:28:35 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:20:10 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,31 @@
 int	check_char(char c)
 {
 	unsigned int	i;
-	const char		*protected = "$:\"'` ?";
 
 	if (c == 0)
 		return (0);
 	i = 0;
+	if (ft_isalnum(c))
+		return (1);
+	return (0);
+}
+
+int	allowed_char(char c)
+{
+	const char	*protected = "_?";
+	int			i;
+	
+	i = 0;
 	while (protected[i])
 	{
-		if (c == protected[i])
+		if (protected[i] == c)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-void	get_buf(t_buf *buffer, unsigned long size)
+void	get_buf(t_buffer *buffer, unsigned long size)
 {
 	char			*tmp;
 	unsigned long	index;
@@ -82,49 +92,52 @@ void	stack_itoa(char n[11], unsigned int nb)
 	}
 }
 
-int	get_var_content(t_expand *expand, int *tmp, char *str, t_data data)
+void	get_var_content(t_expand *expand, int *tmp, char *str, t_data *data)
 {
 	t_lst	*lst;
 
 	if (*tmp == 0 && str[1] == '?')
 	{
-		stack_itoa(expand->nb, data.return_value);
+		stack_itoa(expand->nb, data->return_value);
 		expand->content = expand->nb;
-		return (2);
+		expand->index += 2;
 	}
 	else
 	{
-		expand->content = ft_get_env(&str[1], *tmp, data.env, &lst);
-		return (*tmp + 1);
+		expand->content = ft_get_env(&str[1], *tmp, data->env, &lst);
+		expand->index += *tmp + 1;
 	}
-	return (0);
 }
 
-void	cpy_var(char *str, int *index, t_buf *buffer, t_data data)
+void	cpy_var(char *str, t_expand *expand, t_data *data)
 {
 	int			tmp;
 	int			len;
-	t_expand	expand;
 
 	tmp = 0;
-	expand.content = NULL;
-	while (str[*index + 1 + tmp] && check_char(str[*index + 1 + tmp]) && str[*index + 1 + tmp] != '=')
-		tmp++;
-	*index += get_var_content(&expand, &tmp, str + *index, data);
-	if (expand.content)
+	if (!(ft_isdigit(str[expand->index + 1]) && \
+	ft_isalpha(str[expand->index + 1])) || allowed_char(str[expand->index + 1]))
 	{
-		len = ft_strlen(expand.content);
-		if (buffer->index + len >= buffer->size)
-			get_buf(buffer, len);
-		if (!buffer->buf)
-			return ;
-		while (*expand.content)
+		tmp++;
+		while (check_char(str[expand->index + tmp]))
+			tmp++;
+		get_var_content(expand, &tmp, str + expand->index, data);
+		if (expand->content)
 		{
-			(buffer->buf)[buffer->index++] = *expand.content;
-			expand.content++;
+			len = ft_strlen(expand->content);
+			if (expand->buffer.index + len >= expand->buffer.size)
+				get_buf(&expand->buffer, len);
+			if (!expand->buffer.buf)
+				return ;
+			while (*expand->content)
+			{
+				(expand->buffer.buf)[expand->buffer.index++] = *expand->content;
+				expand->content++;
+			}
 		}
 	}
-	else if ((tmp == 0 && ((str[*index] != '\'') || str[*index] != '"')))
-		(buffer->buf)[(buffer->index)++] = '$';
-	(buffer->buf)[buffer->index] = 0;
+	if (tmp == 0 || (expand->quote[0] && !expand->content))
+		(expand->buffer.buf)[(expand->buffer.index)++] = '$';
+	(expand->buffer.buf)[expand->buffer.index] = 0;
+	expand->content = NULL;
 }

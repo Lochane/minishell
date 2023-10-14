@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:51:16 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/11 17:07:33 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:24:34 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ typedef enum s_tokens
 	LESS_LESS,
 	DOUBLE,
 }	t_tokens;
-
-typedef struct s_expand
-{
-	char	nb[11];
-	char	*content;
-}			t_expand;
 
 typedef struct s_fork
 {

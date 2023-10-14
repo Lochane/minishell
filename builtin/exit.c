@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/12 18:30:19 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/13 20:09:09 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 		{
 			if (tty)
 				printf(RED"exit\n"RESET);
-			write(2, "bash: exit: too many arguments\n", 32);//join fct error
+			write(2, "minishell: exit: too many arguments\n", 32);//join fct error
 			return (1);
 		}
 		rl_clear_history();
@@ -54,8 +54,7 @@ int	do_exit(t_cmd *cmd, t_fd *fd, t_data *data)
 		if (!check)
 		{
 			if (tty)
-				printf(RED"exit\n"RESET);
-			
+				printf(RED"exit\n"RESET);	
 			manage_data(data, 1);
 			exit(nb % 256);
 		}

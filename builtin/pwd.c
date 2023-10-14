@@ -6,37 +6,68 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/10 17:25:05 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/13 20:27:49 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+int	get_env_size(t_lst *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		i += ft_strlen(lst->data);
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+
+char	*get_ptr_env(t_lst *lst, int size)
+{
+	char	*line;
+	int		i;
+	int		j;
+
+	line = malloc(size + 1);
+	if (!line)
+		return (fail_malloc(), NULL);
+	j = 0;
+	while (lst)
+	{
+		i = 0;
+		while (lst->data[i])
+			line[j++] = lst->data[i++];
+		line[j++] = '\n';
+		lst = lst->next;
+	}
+	line[j] = 0;
+	return (line);
+}
+
 int	print_env(t_cmd *cmd, t_fd *fd, t_data *data)
 {
 	int	final_fd;
 	char	*str;
-	t_lst	*tmp;
 
 	final_fd = 1;
 	if (fd->out > 0)
 		final_fd = fd->out;
 	(void) cmd;
 	(void) data;
-	tmp = data->env;
-	while (tmp)
-	{
-		str = ft_join(tmp->data, NULL, '\n');
-		//proteger echec allocation
-		if (write(final_fd, str, ft_strlen(str)) == -1)
+	str = get_ptr_env(data->env, get_env_size(data->env));
+	if (!str)
+		return (errno);
+	if (write(final_fd, str, ft_strlen(str)) == -1)
 		{
 			ft_error(cmd->cmd, "write error: ", 1);
 			free(str);
 			return (125);
-		}
-		free(str);
-		tmp = tmp->next;
-	}
+		} 
+	free(str);
 	return (0);
 }
 

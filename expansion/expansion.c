@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:13 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/11 19:25:23 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:12:39 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	expand_arg(char **args, t_data *data)
 {
 	int		i;
+	int		j;
+	int		tmp;
 	char	*str;
 
 	i = 0;
@@ -22,11 +24,14 @@ void	expand_arg(char **args, t_data *data)
 		return ;
 	while (args[i])
 	{
-		str = do_expand(&args[i], *data);
-		if (!str && args[i + 1])
+		str = do_expand(&args[i], data);
+		if (!str)
 		{
-			str = malloc(1);
-			str[0] = 0;
+			j = i + 1;
+			tmp = i;
+			while (args[j])
+				args[tmp++] = args[j++];
+			args[tmp] = NULL;			
 		}
 		free(args[i]);
 		args[i] = str;
@@ -40,7 +45,9 @@ void	expand_redir(t_dir *redir, t_data *data)
 
 	while (redir)
 	{
-		str = do_expand(&redir->file, *data);
+		if (data->return_value == 12)
+			return ;
+		str = do_expand(&redir->file, data);
 		free(redir->file);
 		redir->file = str;
 		redir = redir->next;
@@ -55,7 +62,9 @@ void	expansion(t_data *data)
 	tmp_cmd = data->cmd;
 	while (tmp_cmd)
 	{
-		str = do_expand(&tmp_cmd->cmd, *data);
+		if (data->return_value == 12)
+			return ;
+		str = do_expand(&tmp_cmd->cmd, data);
 		free(tmp_cmd->cmd);
 		tmp_cmd->cmd = str;
 		expand_arg(tmp_cmd->arg, data);//check le paamettre erruer de malloc
