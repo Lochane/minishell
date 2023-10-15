@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:29 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/14 19:20:10 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/15 21:53:06 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	get_var_content(t_expand *expand, int *tmp, char *str, t_data *data)
 {
 	t_lst	*lst;
 
-	if (*tmp == 0 && str[1] == '?')
+	if (str[1] == '?')
 	{
 		stack_itoa(expand->nb, data->return_value);
 		expand->content = expand->nb;
@@ -104,19 +104,18 @@ void	get_var_content(t_expand *expand, int *tmp, char *str, t_data *data)
 	}
 	else
 	{
-		expand->content = ft_get_env(&str[1], *tmp, data->env, &lst);
-		expand->index += *tmp + 1;
+		expand->content = ft_get_env(&str[1], *tmp - 1, data->env, &lst);
+		expand->index += *tmp;
 	}
 }
 
 void	cpy_var(char *str, t_expand *expand, t_data *data)
 {
-	int			tmp;
-	int			len;
+	int	tmp;
+	int	len;
 
 	tmp = 0;
-	if (!(ft_isdigit(str[expand->index + 1]) && \
-	ft_isalpha(str[expand->index + 1])) || allowed_char(str[expand->index + 1]))
+	if (ft_isalpha(str[expand->index + 1]) || !allowed_char(str[expand->index + 1]))
 	{
 		tmp++;
 		while (check_char(str[expand->index + tmp]))
@@ -136,7 +135,14 @@ void	cpy_var(char *str, t_expand *expand, t_data *data)
 			}
 		}
 	}
-	if (tmp == 0 || (expand->quote[0] && !expand->content))
+	else
+	{
+		expand->index += 1;
+		if (str[expand->index] != '\'' && str[expand->index] != '"')
+			expand->index++;
+		return ;
+	}
+	if ((tmp == 0 || !expand->content) && str[expand->index] == ':')
 		(expand->buffer.buf)[(expand->buffer.index)++] = '$';
 	(expand->buffer.buf)[expand->buffer.index] = 0;
 	expand->content = NULL;

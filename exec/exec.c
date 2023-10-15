@@ -70,6 +70,8 @@ char	*check_access(char *cmd, char **path)
 	i = 0;
 	if (!cmd)
 		return (NULL);//free_and_exit();
+	if (!cmd[0])
+		return (ft_error("''", "command not found", 0), NULL);
 	if (!path || !check_path(cmd))
 	{
 		if (!access(cmd, F_OK | X_OK))

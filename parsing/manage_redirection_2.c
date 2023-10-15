@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/13 18:59:45 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:17:31 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char	*manage_space_back(int index, char *tab, int space_count, int j_index)
 		if (!tmp2)
 			return (NULL);
 		tmp = ft_strdup(tmp2);
-		free(tab);
 		if (!tmp)
 			return (free(tmp2), fail_malloc(), NULL);
 		free(tmp2);

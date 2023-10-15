@@ -6,13 +6,13 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:39:32 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/14 19:31:55 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/15 21:55:32 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/expansion.h"
 
-void	check_quote(char *str, int quote[2], int *index)
+void	check_quote(char *str, int quote[2], int *index, int *quoted)
 {
 	if ((str[*index] == '"' && !quote[1]) || (str[*index] == '\'' && !quote[0]))
 	{
@@ -21,10 +21,11 @@ void	check_quote(char *str, int quote[2], int *index)
 		else if (str[*index] == '\'')
 			quote[1] = (quote[1] != 1);
 		(*index)++;
+		(*quoted)++;
 	}
 }
 
-void	fill_buf(char *str, t_data *data,t_expand *expand)
+void	fill_buf(char *str, t_data *data, t_expand *expand)
 {
 	if (!str)
 		return ;
@@ -34,9 +35,12 @@ void	fill_buf(char *str, t_data *data,t_expand *expand)
 			get_buf(&expand->buffer, 10);
 		if (!expand->buffer.buf)
 			return ;
-		check_quote(str, expand->quote, &expand->index);
+		check_quote(str, expand->quote, &expand->index, &expand->quoted);
+		if (str[expand->index])
 		{
-			if (str[expand->index] != '$' || expand->quote[1])
+			if ((expand->quote[0] && str[expand->index] == '"') || (expand->quote[1] && str[expand->index] == '\''))
+				expand->index++;			
+			else if (str[expand->index] != '$' || expand->quote[1])
 				expand->buffer.buf[expand->buffer.index++] = str[expand->index++];
 			else
 				cpy_var(str, expand, data);
@@ -54,6 +58,7 @@ void	init_expand(t_expand *expand)
 	expand->index = 0;
 	expand->quote[0] = 0;
 	expand->quote[1] = 0;
+	expand->quoted = 0;
 }
 
 char	*do_expand(char **str, t_data *data)
@@ -72,13 +77,11 @@ char	*do_expand(char **str, t_data *data)
 	}
 	fill_buf(*str, data, &expand);
 	expand.buffer.buf[expand.buffer.index] = 0;
-	if (!expand.buffer.index)
+	if (!expand.buffer.index && !expand.quoted)
 	{
 		free(expand.buffer.buf);
 		free(*str);
 		expand.buffer.buf = NULL;
-		*str = expand.buffer.buf;
-		return (NULL);
 	}
 	return (expand.buffer.buf);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minihell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/12 19:22:33 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/15 22:12:26 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,24 @@
 
 unsigned char	g_g;
 
+void	free_redirection(t_dir *redir)
+{
+	t_dir	*tmp_dir;
+	
+	while (redir)
+	{
+		free(redir->file);
+		tmp_dir = redir->next;
+		if (redir->fd != -1)
+			close(redir->fd);
+		free(redir);
+		redir = tmp_dir;
+	}
+}
+
 void	manage_data(t_data *data, int allow)
 {
 	t_cmd	*tmp;
-	t_dir	*tmp_dir;
 
 	if (allow == 0)
 	{
@@ -28,15 +42,7 @@ void	manage_data(t_data *data, int allow)
 	{
 		while (data->cmd)
 		{
-			while (data->cmd->redirection)
-			{
-				free(data->cmd->redirection->file);
-				tmp_dir = data->cmd->redirection->next;
-				if (data->cmd->redirection->fd != -1)
-					close(data->cmd->redirection->fd);
-				free(data->cmd->redirection);
-				data->cmd->redirection = tmp_dir;
-			}
+			free_redirection(data->cmd->redirection);
 			ft_free_tab(data->cmd->arg, tab_size(data->cmd->arg));
 			free(data->cmd->cmd);
 			tmp = data->cmd->next;
