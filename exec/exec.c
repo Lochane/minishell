@@ -185,7 +185,6 @@ int	open_redir(t_dir *redir, t_fd *fd)
 		}
 		if (tmp->token == LESS || tmp->token == LESS_LESS)
 		{
-		
 			if (fd->in > 0)
 				close(fd->in);
 			if (tmp->token == LESS)
@@ -253,6 +252,23 @@ void	close_pipe_child(t_cmd *cmd)
 	}
 }
 
+void	close_redir(t_cmd *cmd)
+{
+	t_dir *tmp;
+
+	while (cmd)
+	{
+		tmp = cmd->redirection;
+		while (tmp)
+		{
+			if (tmp->fd != -1)
+				close(tmp->fd);
+			tmp = tmp->next;
+		}
+		cmd = cmd->next;
+	}
+}
+
 void	exec(t_cmd *cmd_lst, t_data *data)
 {
 	t_fork fork;
@@ -270,20 +286,23 @@ void	exec(t_cmd *cmd_lst, t_data *data)
 	}
 	if (open_redir(cmd_lst->redirection, &fork.fd) == 1)
 	{
+		close_pipe_child(data->cmd);
+		close_redir(data->cmd);
 		if (fork.fd.in > 0)
 			close(fork.fd.in);
 		if (fork.fd.out > 0)
 			close(fork.fd.out);
 		free_child(fork, data);
-		close_pipe_child(data->cmd);
 		failure_critic(1);
 	}
 	if (dup_redir(fork.fd) == 1)
 	{
 		free_child(fork, data);
+		close_redir(data->cmd);
 		close_pipe_child(data->cmd);
 		failure_critic(1);
 	}
+	close_redir(data->cmd);
 	if (fork.fd.in > 0)
 		close(fork.fd.in);
 	if (fork.fd.out > 0)
@@ -307,7 +326,6 @@ void	exec(t_cmd *cmd_lst, t_data *data)
 	fork.cmd = join_cmd(cmd_lst->cmd, cmd_lst->arg);
 	if (!fork.cmd)
 	{
-		close_pipe_child(data->cmd);
 		free_child(fork, data);
 		write(2, strerror(errno), ft_strlen(strerror(errno)));
 		exit(errno);
