@@ -64,7 +64,7 @@ valgrind: all
     	./minishell
 
 valgrind2: all
-		valgrind -q --suppressions=ignore_readline2 --trace-children=yes \
+		valgrind -q --suppressions=$(PWD)/ignore_readline2 --trace-children=yes \
 		--leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes    \
     	./minishell
 

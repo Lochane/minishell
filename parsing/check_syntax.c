@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/10 16:26:21 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/19 20:00:35 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,37 @@ int	check_double_quotes(char *args, int i)
 	return (0);
 }
 
+int	get_next_quote(char c, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i + 1);
+		i++;
+	}
+	return (i + 1);
+}
+
 int	check_quotes(char *args, int i)
 {
-	static int	check;
-
-	if (args[i] == '\'' && check == 0)
+	int	check;
+	
+	check = 0;
+	while (args[i])
 	{
-		i++;
-		while (args[i])
+		if (args[i] == '\'' || args[i] == '"')
 		{
-			if (args[i] == '\'')
-				check = 1;
-			i++;
+			i += get_next_quote(args[i], args + i + 1);
+			check = (args[i] == 0);
 		}
-		if (check == 0)
-			return (ft_syntax_error("syntax error\n"), 1);
+		else
+			i++;
 	}
+	if (check == 1)
+		return (ft_syntax_error("syntax error\n"), 1);
 	return (0);
 }
 

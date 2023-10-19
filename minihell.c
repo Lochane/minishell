@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/17 00:12:59 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:49:31 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,10 @@ int	main(int argc, char **argv, char **envp)
 				do_exit(data.cmd, NULL, &data);
 				break ;
 			}
-			expansion(&data);
 			if (data.cmd)
-					data.return_value = handle_cmds(data.cmd, &data);
+				expansion(&data);
+			if (data.cmd && data.return_value != 12)
+				data.return_value = handle_cmds(data.cmd, &data);
 			manage_data(&data, 1);
 		}
 	}
