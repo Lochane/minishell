@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/13 19:59:27 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:25:34 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ char	*check_space_front(char *tab)
 	int		i;
 	int		j;
 	int		space_count;
+	char	*tmp;
+	char	*tab_cpy;
 
 	i = ft_strlen(tab);
+	tab_cpy = tab;
+	tmp = NULL;
 	while (i > 0 && tab[--i])
 	{
 		space_count = 0;
@@ -30,8 +34,12 @@ char	*check_space_front(char *tab)
 			j = i;
 			while (j > 0 && tab[j--] == ' ')
 				space_count++;
+			if (tab != tab_cpy)
+				tmp = tab;
 			if (i > 0)
 				tab = manage_space_front(i, tab, space_count);
+			if (tmp && tab != tmp)
+				free(tmp);
 		}
 	}
 	return (tab);
@@ -42,7 +50,11 @@ char	*check_space_back(char *tab)
 	int		i;
 	int		j;
 	int		space_count;
+	char	*tmp;
+	char	*tab_cpy;
 
+	tab_cpy = tab;
+	tmp = NULL;
 	i = -1;
 	while (tab[++i])
 	{
@@ -55,7 +67,11 @@ char	*check_space_back(char *tab)
 			j = i - 1;
 			while (tab[++j] == ' ')
 				space_count++;
+			if (tab != tab_cpy)
+				tmp = tab;
 			tab = manage_space_back(i, tab, space_count, j);
+			if (tmp && tab != tmp)
+				free(tmp);
 		}
 	}
 	return (tab);

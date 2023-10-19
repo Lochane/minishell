@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/13 20:06:10 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:28:14 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,18 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 {
 	char	**tmp;
 	char	*tmp_tab;
+	char	*tmp_tab2;
 
 	tmp_tab = tab;
 	tab = check_space_front(tab);
 	if (!tab)
 		return (0);
+	tmp_tab2 = tab;
 	tab = check_space_back(tab);
 	if (!tab)
 		return (0);
+	if (tab != tmp_tab2)
+		free(tmp_tab2);
 	tmp = ft_split_shell(tab, ' ');
 	if (!tmp)
 		return (fail_malloc(), 0);
