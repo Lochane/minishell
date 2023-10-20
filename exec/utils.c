@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:55:03 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/20 21:22:04 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,38 +88,30 @@ void	fail_malloc()
 
 void	ft_error(char *message, char *message2, int info)
 {
-	char	*tab[9];
-	char	*str;
+	char	*tab[11];
 	int		i;
 
-	i = 0;
+	i = 1;
 	tab[i++] = RED;
 	tab[i++] = "minishell: ";
 	tab[i++] = message;
+	tab[i++] = " ";
 	if (!message2 && !info)
-	{
-		tab[i++] = " ";
 		tab[i++] = strerror(errno);
-		tab[i++] = " ";
-	}
 	else if (message && info)
 	{
 		tab[i++] = message2;
-		tab[i++] = " ";
 		tab[i++] = strerror(errno);
 		tab[i++] = " ";
 	}
 	else if (message)
-	{
-		tab[i++] = " ";
 		tab[i++] = message2;
-		tab[i++] = " ";
-	}
+	tab[i++] = " ";
 	tab[i++] = RESET;
 	tab[i] = NULL;
-	str = ft_strjoin_pool(tab_size(tab) ,tab, "", 0);
-	if (!str)
+	tab[0] = ft_strjoin_pool(tab_size(tab + 1) ,tab + 1, "", 0);
+	if (!tab[0])
 		return (fail_malloc());
-	write(2, str, ft_strlen(str));
-	free(str);
+	write(2, tab[0], ft_strlen(tab[0]));
+	free(tab[0]);
 }

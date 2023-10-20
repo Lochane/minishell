@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:39:32 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/15 21:55:32 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/20 21:09:38 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void	fill_buf(char *str, t_data *data, t_expand *expand)
 		check_quote(str, expand->quote, &expand->index, &expand->quoted);
 		if (str[expand->index])
 		{
-			if ((expand->quote[0] && str[expand->index] == '"') || (expand->quote[1] && str[expand->index] == '\''))
-				expand->index++;			
-			else if (str[expand->index] != '$' || expand->quote[1])
+			if (str[expand->index] != '$' || expand->quote[1])
 				expand->buffer.buf[expand->buffer.index++] = str[expand->index++];
 			else
 				cpy_var(str, expand, data);
@@ -77,7 +75,7 @@ char	*do_expand(char **str, t_data *data)
 	}
 	fill_buf(*str, data, &expand);
 	expand.buffer.buf[expand.buffer.index] = 0;
-	if (!expand.buffer.index && !expand.quoted)
+	if (!*expand.buffer.buf && !expand.quoted)
 	{
 		free(expand.buffer.buf);
 		free(*str);

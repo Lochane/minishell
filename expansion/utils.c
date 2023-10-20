@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:29 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/15 21:53:06 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/20 21:06:50 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,15 +135,8 @@ void	cpy_var(char *str, t_expand *expand, t_data *data)
 			}
 		}
 	}
-	else
-	{
-		expand->index += 1;
-		if (str[expand->index] != '\'' && str[expand->index] != '"')
-			expand->index++;
-		return ;
-	}
-	if ((tmp == 0 || !expand->content) && str[expand->index] == ':')
-		(expand->buffer.buf)[(expand->buffer.index)++] = '$';
+	if ((tmp == 0 && !expand->content) && !ft_isalnum(str[expand->index]))
+		(expand->buffer.buf)[(expand->buffer.index)++] = str[expand->index++];
 	(expand->buffer.buf)[expand->buffer.index] = 0;
 	expand->content = NULL;
 }

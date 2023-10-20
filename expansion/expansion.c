@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:13 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/14 19:12:39 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/20 21:08:53 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ void	expand_arg(char **args, t_data *data)
 				args[tmp++] = args[j++];
 			args[tmp] = NULL;			
 		}
-		free(args[i]);
-		args[i] = str;
-		i++;
+		else
+		{
+			free(args[i]);
+			args[i] = str;
+			i++;
+		}
 	}
 }
 
@@ -62,7 +65,7 @@ void	expansion(t_data *data)
 	tmp_cmd = data->cmd;
 	while (tmp_cmd)
 	{
-		if (data->return_value == 12)
+		if (data->return_value == 12)//a mettre a jour partout
 			return ;
 		str = do_expand(&tmp_cmd->cmd, data);
 		free(tmp_cmd->cmd);

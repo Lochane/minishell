@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/19 20:00:35 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/20 19:43:01 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,20 @@ int	get_next_quote(char c, char *str)
 int	check_quotes(char *args, int i)
 {
 	int	check;
+	int	c;
 	
+	(void) i;
 	check = 0;
-	while (args[i])
+	c = 0;
+	while (args[c])
 	{
-		if (args[i] == '\'' || args[i] == '"')
+		if (args[c] == '\'' || args[c] == '"')
 		{
-			i += get_next_quote(args[i], args + i + 1);
-			check = (args[i] == 0);
+			c += get_next_quote(args[c], args + c + 1);
+			check = (args[c] == 0);
 		}
-		else
-			i++;
+		if (args[c])
+			c++;
 	}
 	if (check == 1)
 		return (ft_syntax_error("syntax error\n"), 1);
@@ -88,10 +91,15 @@ int	check_syntax(char *args, t_data *data)
 	int	i;
 
 	i = 0;
+	if (check_quotes(args, i) != 0)
+	{
+		data->return_value = 2;
+		return (2);
+	}
 	while (args[i])
 	{
 		if (check_chevron(args, i) != 0 || check_pipe(args, i) != 0 \
-			|| check_ampersand(args, i) != 0 || check_quotes(args, i) != 0 \
+			|| check_ampersand(args, i) != 0\
 			|| check_double_quotes(args, i) != 0)
 		{
 			data->return_value = 2;
