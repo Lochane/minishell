@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:29 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/20 21:06:50 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/23 23:50:27 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,26 @@ void	get_var_content(t_expand *expand, int *tmp, char *str, t_data *data)
 	}
 }
 
+int	is_quote(char c, int quote[2])
+{
+	if (c == '\'' || c == '"')
+	{
+		if (!quote[0] && !quote[1])
+			return (1);
+		if (c == '\'')
+		{
+			if (quote[1])
+				return (1);
+		}
+		if (c == '"')
+		{
+			if (quote[0])
+				return (1);
+		}
+	}
+	return (0);
+}
+
 void	cpy_var(char *str, t_expand *expand, t_data *data)
 {
 	int	tmp;
@@ -135,7 +155,9 @@ void	cpy_var(char *str, t_expand *expand, t_data *data)
 			}
 		}
 	}
-	if ((tmp == 0 && !expand->content) && !ft_isalnum(str[expand->index]))
+	if (is_quote(str[expand->index + 1], expand->quote))
+		expand->index++;
+	else if ((tmp == 0 && !expand->content) && !ft_isalnum(str[expand->index + 1]))
 		(expand->buffer.buf)[(expand->buffer.index)++] = str[expand->index++];
 	(expand->buffer.buf)[expand->buffer.index] = 0;
 	expand->content = NULL;

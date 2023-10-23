@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:39:32 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/20 21:09:38 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/23 23:46:57 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	check_quote(char *str, int quote[2], int *index, int *quoted)
 			quote[1] = (quote[1] != 1);
 		(*index)++;
 		(*quoted)++;
+		if (str[*index] == str[*index - 1])
+		{
+			quote[0] = 0;
+			quote[1] = 0;
+			(*index)++;
+		}
 	}
 }
 
@@ -71,6 +77,7 @@ char	*do_expand(char **str, t_data *data)
 	{
 		free(*str);
 		*str = expand.buffer.buf;
+		*str = NULL;
 		return (NULL);
 	}
 	fill_buf(*str, data, &expand);
@@ -79,6 +86,7 @@ char	*do_expand(char **str, t_data *data)
 	{
 		free(expand.buffer.buf);
 		free(*str);
+		*str = NULL;
 		expand.buffer.buf = NULL;
 	}
 	return (expand.buffer.buf);

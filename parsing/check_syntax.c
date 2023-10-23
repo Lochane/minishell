@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/20 19:43:01 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/24 00:09:04 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,7 @@ int	check_syntax(char *args, t_data *data)
 	while (args[i])
 	{
 		if (check_chevron(args, i) != 0 || check_pipe(args, i) != 0 \
-			|| check_ampersand(args, i) != 0\
-			|| check_double_quotes(args, i) != 0)
+			|| check_ampersand(args, i) != 0 /*|| check_double_quotes(args, i) != 0*/)
 		{
 			data->return_value = 2;
 			return (2);
