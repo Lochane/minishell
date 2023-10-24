@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirection_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/15 22:17:31 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:42:55 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	*trim_space(char *tab, char *save_tab)
+{
+	char	*tmp_tab2;
+
+	tab = check_space_front(tab);
+	if (!tab)
+		return (0);
+	tmp_tab2 = tab;
+	tab = check_space_back(tab);
+	if (!tab)
+		return (0);
+	if (tab != tmp_tab2 && tmp_tab2 != save_tab)
+		free(tmp_tab2);
+	return (tab);
+}
 
 char	*ft_str_insert_front(char *str, char *insert, int index)
 {
@@ -68,7 +84,7 @@ char	*manage_space_back(int index, char *tab, int space_count, int j_index)
 	}
 	if (space_count > 1)
 	{
-		ft_memmove(tmp + (index + 1), tmp + j_index, ft_strlen(tmp));
+		ft_memmove(tmp + (index + 1), tmp + j_index, ft_strlen(tmp + j_index));
 	}
 	return (tmp);
 }
@@ -90,6 +106,11 @@ char	*manage_space_front(int index, char *tab, int space_count)
 			return (fail_malloc(), NULL);
 	}
 	if (space_count > 1)
-		ft_memmove(tmp + found_space(tmp, 0), tmp + index, ft_strlen(tmp + index));
+	{
+		ft_memmove(tmp + found_space(tmp, 0), tmp + index, \
+		ft_strlen(tmp + index));
+		tmp[ft_strlen(tmp) - index + 3] = '\0';
+	}
+	printf("%s\n", tmp);
 	return (tmp);
 }

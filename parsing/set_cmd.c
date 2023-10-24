@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/19 19:38:44 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:42:28 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,10 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 	char	**tmp;
 	char	*save_tab;
 	char	*tmp_tab;
-	char	*tmp_tab2;
 
 	tmp_tab = tab;
 	save_tab = tab;
-	tab = check_space_front(tab);
-	if (!tab)
-		return (0);
-	tmp_tab2 = tab;
-	tab = check_space_back(tab);
-	if (!tab)
-		return (0);
-	if (tab != tmp_tab2 && tmp_tab2 != save_tab)
-		free(tmp_tab2);
+	tab = trim_space(tab, save_tab);
 	tmp = ft_split_shell(tab, ' ');
 	if (!tmp)
 		return (fail_malloc(), 0);

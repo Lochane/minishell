@@ -3,46 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   manage_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/19 19:25:34 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:09:20 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+void	init_check_space_front(int i[2], char *tab, char **tab_cpy, char **tmp)
+{
+	i[0] = ft_strlen(tab);
+	*tab_cpy = tab;
+	*tmp = NULL;
+}
+
 char	*check_space_front(char *tab)
 {
-	int		i;
-	int		j;
+	int		i[2];
 	int		space_count;
 	char	*tmp;
 	char	*tab_cpy;
 
-	i = ft_strlen(tab);
-	tab_cpy = tab;
-	tmp = NULL;
-	while (i > 0 && tab[--i])
+	init_check_space_front(i, tab, &tab_cpy, &tmp);
+	while (i[0] > 0 && tab[--(i[0])])
 	{
 		space_count = 0;
-		if ((tab[i] == '>' || tab[i] == '<') && i > 0)
+		if ((tab[i[0]] == '>' || tab[i[0]] == '<') && i[0] > 0 && (i[0])--)
 		{
-			i--;
-			if (tab[i] == '>' || tab[i] == '<')
-				i--;
-			j = i;
-			while (j > 0 && tab[j--] == ' ')
+			if (tab[i[0]] == '>' || tab[i[0]] == '<')
+				(i[0])--;
+			i[1] = i[0];
+			while (i[1] > 0 && tab[(i[1])--] == ' ')
 				space_count++;
 			if (tab != tab_cpy)
 				tmp = tab;
-			if (i > 0)
-				tab = manage_space_front(i, tab, space_count);
+			if (i[0] > 0)
+				tab = manage_space_front(i[0], tab, space_count);
 			if (tmp && tab != tmp)
 				free(tmp);
 		}
 	}
 	return (tab);
+}
+
+void	init_check_space_back(char **tab_cpy, char **tmp, char *tab, int *i)
+{
+	*tab_cpy = tab;
+	*tmp = NULL;
+	*i = -1;
 }
 
 char	*check_space_back(char *tab)
@@ -53,15 +63,12 @@ char	*check_space_back(char *tab)
 	char	*tmp;
 	char	*tab_cpy;
 
-	tab_cpy = tab;
-	tmp = NULL;
-	i = -1;
+	init_check_space_back(&tab_cpy, &tmp, tab, &i);
 	while (tab[++i])
 	{
 		space_count = 0;
-		if (tab[i] == '>' || tab[i] == '<')
+		if ((tab[i] == '>' || tab[i] == '<') && i++)
 		{
-			i++;
 			if (tab[i] == '>' || tab[i] == '<')
 				i++;
 			j = i - 1;
