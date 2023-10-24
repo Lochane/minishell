@@ -83,10 +83,12 @@ int	get_arg(char **tab, t_cmd *cmd)
 int	tri_cmd(char *tab, t_cmd *cmd)
 {
 	char	**tmp;
+	char	*save_tab;
 	char	*tmp_tab;
 	char	*tmp_tab2;
 
 	tmp_tab = tab;
+	save_tab = tab;
 	tab = check_space_front(tab);
 	if (!tab)
 		return (0);
@@ -94,7 +96,7 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 	tab = check_space_back(tab);
 	if (!tab)
 		return (0);
-	if (tab != tmp_tab2)
+	if (tab != tmp_tab2 && tmp_tab2 != save_tab)
 		free(tmp_tab2);
 	tmp = ft_split_shell(tab, ' ');
 	if (!tmp)
@@ -109,7 +111,7 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 			return (0);
 	}
 	ft_free_tab(tmp, tab_size(tmp));
-	if (tmp_tab != tab)
+	if (tmp_tab != tab && tmp_tab != save_tab)
 		free(tab);
 	return (1);
 }

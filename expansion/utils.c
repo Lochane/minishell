@@ -14,11 +14,8 @@
 
 int	check_char(char c)
 {
-	unsigned int	i;
-
 	if (c == 0)
 		return (0);
-	i = 0;
 	if (ft_isalnum(c))
 		return (1);
 	return (0);

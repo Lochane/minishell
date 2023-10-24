@@ -164,10 +164,8 @@ int	dup_redir(t_fd fd)
 int	open_redir(t_dir *redir, t_fd *fd)
 {
 	t_dir	*tmp;
-	int		i;
 
 	tmp = redir;
-	i = 0;
 	fd->in = -2;
 	fd->out = -2;
 	while (tmp)
@@ -411,13 +409,10 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 	int pip[2];
 	t_cmd *tmp;
 	int		i;
-	int		prev_pipe;
 	int		nb_cmd;
 
 	tmp = cmd;
 	i = 0;
-
-	prev_pipe = -1;
 	pip[0] = -1;
 	pip[1] = -1;
 	nb_cmd = cmd_size(cmd);

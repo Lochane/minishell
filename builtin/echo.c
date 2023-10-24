@@ -43,13 +43,11 @@ int	do_echo(t_cmd *cmd, t_fd *fd, t_data *data)
 	(void)data;
 	int		i;
 	int		ret;
-	int		n;
 	int		final_fd;
 	char	*stash;
 
 	i = 0;
 	ret = 0;
-	n = 0;
 	final_fd = 1;
 	if (fd->out > 0)
 		final_fd = fd->out;
