@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/13 18:35:07 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:25:49 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*ft_str_insert_back(char *str, char *insert, int index);
 char	*ft_str_insert_front(char *str, char *insert, int index);
 char	*manage_space_front(int index, char *tab, int space_count);
 char	*manage_space_back(int index, char *tab, int space_count, int j_index);
+char	*trim_space(char *tab, char *save_tab);
 
 /* Set Cmd Utils */
 t_cmd	*init_cmd(void);

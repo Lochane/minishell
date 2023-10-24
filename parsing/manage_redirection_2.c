@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/24 16:42:55 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:36:14 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,16 @@
 char	*trim_space(char *tab, char *save_tab)
 {
 	char	*tmp_tab2;
+	int		i;
 
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i] == '\t' || tab[i] == '\n' || tab[i] == '\n' || \
+				tab[i] == '\v' || tab[i] == '\f' || tab[i] == '\r')
+			tab[i] = ' ';
+		i++;
+	}
 	tab = check_space_front(tab);
 	if (!tab)
 		return (0);
@@ -108,8 +117,8 @@ char	*manage_space_front(int index, char *tab, int space_count)
 	if (space_count > 1)
 	{
 		ft_memmove(tmp + found_space(tmp, 0), tmp + index, \
-		ft_strlen(tmp + index));
-		tmp[ft_strlen(tmp) - index + 3] = '\0';
+		ft_strlen(tmp) + index);
+		// tmp[ft_strlen(tmp) - index + 1] = '\0';
 	}
 	printf("%s\n", tmp);
 	return (tmp);
