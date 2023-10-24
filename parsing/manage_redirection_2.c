@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/24 17:36:14 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:44:56 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ char	*manage_space_back(int index, char *tab, int space_count, int j_index)
 	}
 	if (space_count > 1)
 	{
-		ft_memmove(tmp + (index + 1), tmp + j_index, ft_strlen(tmp + j_index));
+		ft_memmove(tmp + (index + 1), tmp + j_index, \
+			ft_strlen(tmp + j_index - 1));
 	}
 	return (tmp);
 }
@@ -117,9 +118,8 @@ char	*manage_space_front(int index, char *tab, int space_count)
 	if (space_count > 1)
 	{
 		ft_memmove(tmp + found_space(tmp, 0), tmp + index, \
-		ft_strlen(tmp) + index);
-		// tmp[ft_strlen(tmp) - index + 1] = '\0';
+			ft_strlen(tmp + index));
+		tmp[ft_strlen(tmp) - index + 3] = '\0';
 	}
-	printf("%s\n", tmp);
 	return (tmp);
 }
