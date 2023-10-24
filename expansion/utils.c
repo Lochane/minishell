@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:29 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/24 00:20:50 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:56:10 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	is_quote(char c, int quote[2])
 	if (c == '\'' || c == '"')
 	{
 		if (!quote[0] && !quote[1])
-			return (1);
+			return (0);
 		if (c == '\'')
 		{
 			if (quote[1])
@@ -126,38 +126,38 @@ int	is_quote(char c, int quote[2])
 	return (0);
 }
 
-void	cpy_var(char *str, t_expand *expand, t_data *data)
+void	cpy_var(char *str, t_expand *exp, t_data *data)
 {
 	int	tmp;
 	int	len;
 
 	tmp = 0;
-	if (ft_isalpha(str[expand->index + 1]) || !allowed_char(str[expand->index + 1]))
+	if (ft_isalpha(str[exp->index + 1]) || !allowed_char(str[exp->index + 1]))
 	{
 		tmp++;
-		while (check_char(str[expand->index + tmp]))
+		while (check_char(str[exp->index + tmp]))
 			tmp++;
-		get_var_content(expand, &tmp, str + expand->index, data);
-		if (expand->content)
+		get_var_content(exp, &tmp, str + exp->index, data);
+		if (exp->content)
 		{
-			len = ft_strlen(expand->content);
-			if (expand->buffer.index + len >= expand->buffer.size)
-				get_buf(&expand->buffer, len);
-			if (!expand->buffer.buf)
+			len = ft_strlen(exp->content);
+			if (exp->buffer.index + len >= exp->buffer.size)
+				get_buf(&exp->buffer, len);
+			if (!exp->buffer.buf)
 				return ;
-			while (*expand->content)
+			while (*exp->content)
 			{
-				(expand->buffer.buf)[expand->buffer.index++] = *expand->content;
-				expand->content++;
+				(exp->buffer.buf)[exp->buffer.index++] = *exp->content;
+				exp->content++;
 			}
 		}
 	}
-	if ((!expand->content && is_quote(str[expand->index + 1], expand->quote)))
-		expand->index++;
-	else if (ft_isalnum(str[expand->index + 1]))
-		expand->index+=2;
-	else if ((tmp == 0 && !expand->content) && !ft_isalnum(str[expand->index + 1]))
-		(expand->buffer.buf)[(expand->buffer.index)++] = str[expand->index++];
-	(expand->buffer.buf)[expand->buffer.index] = 0;
-	expand->content = NULL;
+	if ((!exp->content && is_quote(str[exp->index + 1], exp->quote)))
+		exp->index++;
+	else if (!tmp && ft_isdigit(str[exp->index + 1]))
+		exp->index+=2;
+	else if ((tmp == 0 && !exp->content) && !ft_isalnum(str[exp->index + 1]))
+		(exp->buffer.buf)[(exp->buffer.index)++] = str[exp->index++];
+	(exp->buffer.buf)[exp->buffer.index] = 0;
+	exp->content = NULL;
 }
