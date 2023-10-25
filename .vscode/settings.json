@@ -6,6 +6,7 @@
 		"struct.h": "c",
 		"sigset_t.h": "c",
 		"features.h": "c",
-		"__sigset_t.h": "c"
+		"__sigset_t.h": "c",
+		"builtin.h": "c"
 	}
 }

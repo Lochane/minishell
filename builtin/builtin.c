@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/20 20:26:09 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:39:16 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_var_cmp(char *s1, int size, char *s2)
 		return (-1);
 	while ((s1[i] && s1[i] != '=') && s1[i] == s2[i] && i < size)
 		i++;
-	if ((!s1[i] || !ft_isalnum(s1[i])) && s2[i] == '=')
+	if ((!s1[i] || !ft_isalnum(s1[i])) && (!s2[i] || s2[i] == '='))
 		return (0);
 	else
 		return (1);
@@ -38,7 +38,7 @@ char	*ft_get_env(char *var, int size, t_lst *env, t_lst **lst)
 		{
 			if (lst)
 				*lst = tmp;
-			return (&tmp->data[tmp->size + 1]);
+			return (&tmp->data[tmp->size + (tmp->is_env)]);
 		}
 		tmp = tmp->next;
 	}
@@ -54,7 +54,6 @@ int	do_built_in(t_cmd *cmd, t_data *data, int check)
 	int		i;
 	t_fd	fd;
 	int		ret;
-	//faire un tableau de fct built in dans le meme ordre afin de donner la cmd a la fct de i
 
 	fd.in = 0;
 	fd.out = 0;
@@ -96,4 +95,63 @@ int	is_built_in(char *s)
 		i++;
 	}
 	return (0);
+}
+
+int	find_char(char c, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int	check_options(char **args, char *options, char *found, char *invalid)
+{
+	int	i;
+	int	l;
+	int	check;
+
+	l = 0;
+	while (args[l])
+	{
+		if (args[l][0] != '-')
+			break ;
+		i = 1;
+		while (args[l][i])
+		{
+			check = find_char(args[l][i], options);
+			if (check == -1)
+			{
+				if (invalid)
+					*invalid = args[l][i];
+				return (l);
+			}
+			found[check] = 1;
+			i++;
+		}
+		l++;
+	}
+	return (l);
+}
+
+void	error_option(char *cmd, char invalid)
+{
+	int		index;
+	char	buffer[100];
+	
+	ft_strlcpy(buffer, "minishell: ", 11);
+	ft_strlcpy(buffer + 11, cmd, ft_strlen(buffer));
+	index = ft_strlen(buffer);
+	buffer[index++] = ':';
+	buffer[index++] = ' ';
+	buffer[index++] = invalid;
+	buffer[index] = 0;
+	ft_strlcpy(buffer + index, ": invalid option\n", 18);
+	write(2, buffer, ft_strlen(buffer));
 }

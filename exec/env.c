@@ -14,6 +14,7 @@ t_lst  *ft_new_lst(char *data)
     new->next = NULL;
     new->data = data; 
     new->size = i;
+    new->is_env = 1;
     return (new);
 }
 
@@ -51,8 +52,6 @@ char **lst_to_tab(t_lst *lst)
 
     i = 0;
     size = lst_size(lst);
-    if (size == 0)
-        return (NULL);
     tab = malloc(sizeof(char *) * (size + 1));
     if (!tab)
         return (NULL);

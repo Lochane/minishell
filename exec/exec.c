@@ -424,7 +424,7 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 	{
 		if (tmp->next)
 			if (pipe(pip) == -1)
-				return (1); // erreur creation pipe message fd insuffiant? erno?
+				return (ft_error("pipe error:", NULL, 0), errno);
 		if (tmp->next)
 			tmp->pipe = pip[1];	
 		if (tmp->next)
@@ -434,27 +434,11 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 		{
 			write(2, "error to create process\n", 24);
 			perror("fork : ");
-			failure_critic(127);
-			return (0);
+			return (127);
 		}
 		else if (tmp->pid == 0)
 			exec(tmp , data);
 		i++;
-		// if (prev_pipe != -1)
-		// {
-		// 	close(prev_pipe);
-		// 	prev_pipe = -1;
-		// }
-		// if (pip[1] != -1)
-		// {
-		// 	close(pip[1]);
-		// 	pip[1] = -1;
-		// }
-		// if (pip[0] != -1)
-		// {
-		// 	prev_pipe = pip[0];
-		// 	pip[0] = -1;
-		// }
 		if (tmp->pipe != -1)
 			close(tmp->pipe);
 		if (tmp->prev_pipe != -1)

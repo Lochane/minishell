@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:51:16 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/14 17:24:34 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:31:57 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_lst
 	char			*data;
 	struct s_lst	*next;
 	int				size;
+	int				is_env;
 }					t_lst;
 
 typedef enum s_tokens

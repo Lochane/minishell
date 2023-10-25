@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/13 20:27:49 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/25 20:08:48 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ char	*get_ptr_env(t_lst *lst, int size)
 	while (lst)
 	{
 		i = 0;
-		while (lst->data[i])
-			line[j++] = lst->data[i++];
-		line[j++] = '\n';
+		if (lst->is_env)
+		{
+			while (lst->data[i])
+				line[j++] = lst->data[i++];
+			line[j++] = '\n';
+		}
 		lst = lst->next;
 	}
 	line[j] = 0;
@@ -76,8 +79,21 @@ int	do_pwd(t_cmd *cmd, t_fd *fd, t_data *data)
 	char	*var;
 	int		final_fd;
 	char	*str;
+	char	invalid;
+	int		check;
+	char	option[0];
 
 	final_fd = 1;
+	invalid = 0;
+	if (cmd->arg)
+	{
+		check = check_options(cmd->arg ,PWD_OPTION, option, &invalid);
+		if (invalid != 0)
+		{
+			error_option(cmd->cmd, invalid);
+			return (2);
+		}
+	}
 	var = ft_get_env("PWD", 3, data->env, NULL);
 	if (fd->out > 0)
 		final_fd = fd->out;
