@@ -1,0 +1,4 @@
+minishell: warning: here-document at at line 0 delimited by end-of-file (wanted `$HOME')
+[91;1mminishell: prout : command not found [0m
+[91;1mminishell: /mnt/nfs/homes/lsouquie : Is a directory [0m
+[91;1mminishell: /mnt/nfs/homes/lsouquie : Is a directory [0m

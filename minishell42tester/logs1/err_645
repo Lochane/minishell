@@ -1,0 +1,7 @@
+minishell: warning: here-document at at line 0 delimited by end-of-file (wanted `hola')
+[91;1mminishell: chola : command not found [0m
+[91;1mminishell: holache : command not found [0m
+[91;1mminishell: hola : command not found [0m
+[91;1mminishell: hola : command not found [0m
+[91;1mminishell: hola : command not found [0m
+[91;1mminishell: hola : command not found [0m

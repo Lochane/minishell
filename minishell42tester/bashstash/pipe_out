@@ -1,0 +1,56 @@
+<‚>‚>>‚bashstash‚bo1.txt‚bonjou‚bonjour‚bonjour\‚cat‚echo‚examples‚gen2‚hello‚hola‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚minishell‚minitester.sh‚pwd‚README.md‚result1‚stash‚testfile‚testfile1‚
+
+
+<‚>‚>>‚bashstash‚bo1.txt‚bonjou‚bonjour‚bonjour\‚cat‚echo‚examples‚gen2‚hello‚hola‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚minishell‚minitester.sh‚pwd‚README.md‚result1‚stash‚testfile‚testfile1‚
+hola$‚
+
+‚
+que tal‚
+hola‚
+hola‚
+oui$‚
+
+
+hola‚
+hola$$$‚
+hola‚
+hola‚
+/mnt/nfs/homes/lsouquie/dev/42Cursus/minishell/minishell42tester‚
+docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500‚        ether 02:42:33:cb:cd:26  txqueuelen 0  (Ethernet)‚enp0s31f6: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500‚        inet6 fe80::2be:43ff:fe9b:d6e7  prefixlen 64  scopeid 0x20<link>‚        ether 00:be:43:9b:d6:e7  txqueuelen 1000  (Ethernet)‚lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536‚        inet6 ::1  prefixlen 128  scopeid 0x10<host>‚virbr0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500‚        ether 52:54:00:d6:f2:d3  txqueuelen 1000  (Ethernet)‚
+
+lsouquie‚
+lsouquie‚
+lsouquie$$‚
+ls: /usr/bin/ls /usr/share/man/man1/ls.1.gz /usr/share/man/man1/ls.1posix.gz$$‚
+
+
+
+<‚>‚>>‚bashstash‚bo1.txt‚bonjou‚bonjour‚bonjour\‚cat‚echo‚examples‚gen2‚hello‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚stash‚testfile‚testfile1‚
+
+aloh‚
+total 380‚drwxr-xr-x 11 lsouquie 2022_paris   4096 Oct 25 16:32 .‚drwxr-xr-x 14 lsouquie 2022_paris   4096 Oct 25 16:27 ..‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 <‚-rw-r--r--  1 lsouquie 2022_paris     13 Oct 25 16:32 >‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 >>‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 bashstash‚-rw-r--r--  1 lsouquie 2022_paris  39108 Oct 25 16:32 bo1.txt‚-rw-r--r--  1 lsouquie 2022_paris      1 Oct 25 16:27 bonjou‚-rw-r--r--  1 lsouquie 2022_paris      5 Oct 25 16:32 bonjour‚-rw-r--r--  1 lsouquie 2022_paris      7 Oct 25 16:27 bonjour\‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 cat‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 echo‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:24 examples‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 gen2‚drwxr-xr-x  8 lsouquie 2022_paris   4096 Oct 25 16:24 .git‚-rw-r--r--  1 lsouquie 2022_paris      4 Oct 25 16:32 hello‚-rw-r--r--  1 lsouquie 2022_paris      8 Oct 25 16:32 hola1‚-rw-r--r--  1 lsouquie 2022_paris      2 Oct 25 16:32 hola2‚-rw-r--r--  1 lsouquie 2022_paris    127 Oct 25 16:24 ignore_rl_leaks.supp‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:24 img‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 logs‚drwxr-xr-x  2 lsouquie 2022_paris  36864 Oct 25  2023 logs1‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 ls‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 ls1‚-rwxr-xr-x  1 lsouquie 2022_paris 110200 Oct 25 16:32 minishell‚-rwxr-xr-x  1 lsouquie 2022_paris  33999 Oct 25 16:24 minitester.sh‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:24 .pack‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 pwd‚-rw-r--r--  1 lsouquie 2022_paris  10360 Oct 25 16:24 README.md‚-rw-r--r--  1 lsouquie 2022_paris  62411 Oct 25 16:32 result1‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:25 stash‚-rw-r--r--  1 lsouquie 2022_paris     57 Oct 25 16:27 testfile‚-rw-r--r--  1 lsouquie 2022_paris     31 Oct 25 16:32 testfile1‚
+
+test.c$$$$$$$$$$$‚
+<‚>‚>>‚bashstash‚bo1.txt‚bonjou‚bonjour‚bonjour\‚cat‚echo‚examples‚gen2‚hello‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚stash‚testfile‚testfile1‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+
+
+
+
+
+
+
+
+
+hola‚
+hola‚
+
+
+
+
+

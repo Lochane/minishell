@@ -1,0 +1,625 @@
+syntax
+4: Expected [0] status but found [127]
+4: Expected no error output but found [[91;1mminishell: : : command not found [0m]
+5: Expected [1] status but found [127]
+5: Expected no error output but found [[91;1mminishell: ! : command not found [0m]
+6: Expected [syntax error near unexpected token `newline'] error output but found [[91;1mminishell: syntax error
+[0m]
+7: Expected [syntax error near unexpected token `newline'] error output but found [[91;1mminishell: syntax error
+[0m]
+8: Expected [syntax error near unexpected token `newline'] error output but found [[91;1mminishell: syntax error
+[0m]
+9: Expected [syntax error near unexpected token `newline'] error output but found [[91;1mminishell: syntax error
+[0m]
+10: Expected [syntax error near unexpected token `newline'] error output but found [[91;1mminishell: syntax error
+[0m]
+11: Expected [syntax error near unexpected token `>>'] error output but found [[91;1mminishell: syntax error
+[0m]
+12: Expected [syntax error near unexpected token `>>'] error output but found [[91;1mminishell: syntax error
+[0m]
+13: Expected [syntax error near unexpected token `<<'] error output but found [[91;1mminishell: syntax error
+[0m]
+14: Expected [syntax error near unexpected token `<<'] error output but found [[91;1mminishell: syntax error
+[0m]
+15: Expected [syntax error near unexpected token `>'] error output but found [[91;1mminishell: syntax error
+[0m]
+16: Expected [syntax error near unexpected token `>>'] error output but found [[91;1mminishell: syntax error
+[0m]
+17: Expected [syntax error near unexpected token `>>'] error output but found [[91;1mminishell: syntax error
+[0m]
+18: Expected [126] status but found [127]
+18: Expected [/: Is a directory] error output but found [[91;1mminishell: / : Is a directory [0m]
+19: Expected [126] status but found [127]
+19: Expected [//: Is a directory] error output but found [[91;1mminishell: // : Is a directory [0m]
+20: Expected [126] status but found [127]
+20: Expected [/.: Is a directory] error output but found [[91;1mminishell: /. : Is a directory [0m]
+21: Expected [126] status but found [127]
+21: Expected [/./../../../../..: Is a directory] error output but found [[91;1mminishell: /./../../../../.. : Is a directory [0m]
+22: Expected [126] status but found [127]
+22: Expected [///////: Is a directory] error output but found [[91;1mminishell: /////// : Is a directory [0m]
+23: Expected [\: command not found] error output but found [[91;1mminishell: \\ : command not found [0m]
+24: Expected [\\: command not found] error output but found [[91;1mminishell: \\\\ : command not found [0m]
+25: Expected [\\\\: command not found] error output but found [[91;1mminishell: \\\\\\\\ : command not found [0m]
+26: Expected [-: command not found] error output but found [[91;1mminishell: - : command not found [0m]
+27: Expected [syntax error near unexpected token `|'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+28: Expected [syntax error near unexpected token `|'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+29: Expected [syntax error near unexpected token `|'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+30: Expected [syntax error near unexpected token `||'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+31: Expected [syntax error near unexpected token `||'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+32: Expected [syntax error near unexpected token `||'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+33: Expected [syntax error near unexpected token `|'] error output but found [[91;1mminishell: syntax error
+[0m]
+34: Expected [syntax error near unexpected token `&&'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+35: Expected [syntax error near unexpected token `&&'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+36: Expected [syntax error near unexpected token `&&'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+37: Expected [2] status but found [127]
+37: Expected [syntax error near unexpected token `;;'] error output but found [[91;1mminishell: ;; : command not found [0m]
+38: Expected [2] status but found [127]
+38: Expected [syntax error near unexpected token `;;'] error output but found [[91;1mminishell: ;;;;; : command not found [0m]
+39: Expected [2] status but found [127]
+39: Expected [syntax error near unexpected token `;;'] error output but found [[91;1mminishell: ;;;;;;;;;;;;;;; : command not found [0m]
+40: Expected [2] status but found [127]
+40: Expected [syntax error near unexpected token `)'] error output but found [[91;1mminishell: () : command not found [0m]
+41: Expected [2] status but found [127]
+41: Expected [syntax error near unexpected token `)'] error output but found [[91;1mminishell: ( : command not found [0m]
+42: Expected [2] status but found [127]
+42: Expected [syntax error near unexpected token `)'] error output but found [[91;1mminishell: ( : command not found [0m]
+44: Expected [hola: command not found] error output but found [[91;1mminishell: hola : command not found [0m]
+45: Expected [hola: command not found] error output but found [[91;1mminishell: hola : command not found [0m]
+48: Expected [: command not found] error output but found [[91;1mminishell: */* No such file or directory [0m]
+49: Expected [*/*: No such file or directory] error output but found [[91;1mminishell: */* No such file or directory [0m]
+50: Expected [2] status but found [127]
+50: Expected [.: filename argument required] error output but found [[91;1mminishell: . : Is a directory [0m]
+51: Expected [..: command not found] error output but found [[91;1mminishell: .. : Is a directory [0m]
+52: Expected [126] status but found [127]
+52: Expected [/mnt/nfs/homes/lsouquie: Is a directory] error output but found [[91;1mminishell: ~ : command not found [0m]
+53: Expected [0] status but found [127]
+54: Expected [4ABC=hola: command not found] error output but found [[91;1mminishell: 4ABC=hola : command not found [0m]
+55: Expected [hola: command not found] error output but found [[91;1mminishell: hola : command not found [0m]
+56: Expected [hola: command not found] error output but found [[91;1mminishell: hola : command not found [0m]
+57: Expected [Makefile: command not found] error output but found [[91;1mminishell: Makefile : command not found [0m]
+echo
+61: Expected [echoHola: command not found] error output but found [[91;1mminishell: echoHola : command not found [0m]
+62: Expected [echo-nHola: command not found] error output but found [[91;1mminishell: echo-nHola : command not found [0m]
+73: Expected [0] status but found [127]
+73: Expected [hola que tal] output but found []
+73: Expected no error output but found [[91;1mminishell: 'echo : command not found [0m]
+94: Expected [$HOME] output but found [\/mnt/nfs/homes/lsouquie]
+98: Expected [1000] output but found []
+102: Expected [1000/mnt/nfs/homes/lsouquie%] output but found [/mnt/nfs/homes/lsouquie]
+104: Expected [lsouquie$USERlsouquie$USERtestlsouquie] output but found [lsouquie\lsouquielsouquie\lsouquie]
+107: Expected [syntax error near unexpected token `<'] error output but found [[91;1mminishell: syntax error
+[0m]
+108: Expected [syntax error near unexpected token `|'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+109: Expected [EechoE: command not found] error output but found [[91;1mminishell: EechoE : command not found [0m]
+110: Expected [.echo.: command not found] error output but found [[91;1mminishell: .echo. No such file or directory [0m]
+111: Expected [syntax error near unexpected token `newline'] error output but found [[91;1mminishell: syntax error
+[0m]
+112: Expected [syntax error near unexpected token `newline'] error output but found [[91;1mminishell: syntax error
+[0m]
+113: Expected [syntax error near unexpected token `newline'] error output but found [[91;1mminishell: syntax error
+[0m]
+114: Expected [syntax error near unexpected token `|'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+115: Expected [syntax error near unexpected token `|'] error output but found [[91;1mminishell: syntax error near unexpected token
+[0m]
+116: Expected [minitester.sh] output but found [*]
+118: Expected [minitester.sh] output but found [minit*]
+120: Expected [minitester.sh hola] output but found [*h hola]
+121: Expected [minitester.sh] output but found [*h]
+124: Expected [minitester.sh] output but found [*]
+128: Expected [$] output but found ["]
+145: Expected [$HOME] output but found [HOME]
+155: Expected [echo'hola': command not found] error output but found []
+156: Expected no error output but found [[91;1mminishell: echo'hola' : command not found [0m]
+159: Expected [ho"l"a] output but found ['ho''''la']
+163: Expected [echo hola: command not found] error output but found []
+164: Expected [echo hola: command not found] error output but found [[91;1mminishell: echo hola : command not found [0m]
+165: Expected no error output but found [[91;1mminishell: echo hola : command not found [0m]
+173: Expected [0] status but found [127]
+173: Expected [bonjour] output but found []
+173: Expected [e'c'ho 'b'onjo'u'r: command not found] error output but found [[91;1mminishell: e'cho : command not found [0m]
+174: Expected no error output but found [[91;1mminishell: e'c'ho 'b'onjo'u'r : command not found [0m]
+dollar
+178: Expected [0: command not found] error output but found [[91;1mminishell: 0 : command not found [0m]
+179: Expected [00: command not found] error output but found [[91;1mminishell: 00 : command not found [0m]
+180: Expected [?/mnt/nfs/homes/lsouquie: command not found] error output but found [[91;1mminishell: ?/mnt/nfs/homes/lsouquie No such file or directory [0m]
+181: Expected [$: command not found] error output but found [[91;1mminishell: $ : command not found [0m]
+182: Expected [126] status but found [127]
+182: Expected [/mnt/nfs/homes/lsouquie: Is a directory] error output but found [[91;1mminishell: /mnt/nfs/homes/lsouquie : Is a directory [0m]
+183: Expected [0] status but found [127]
+185: Expected [$HOMEdskjhfkdshfsd: command not found] error output but found [[91;1mminishell: $HOMEdskjhfkdshfsd : command not found [0m]
+186: Expected [0] status but found [127]
+187: Expected [-R: command not found] error output but found [[91;1mminishell: -R : command not found [0m]
+envvar
+189: Expected [127] status but found [0]
+189: Expected no output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+189: Expected [env: Ê»hola
+€™: No such file or directory] error output but found []
+190: Expected [127] status but found [0]
+190: Expected no output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+190: Expected [env: Ê»hola
+€™: No such file or directory] error output but found []
+193: Expected [minitester.sh] output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+194: Expected [126] status but found [0]
+194: Expected no output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+194: Expected [env: 
+€
+./Makefile
+€™: Permission denied] error output but found []
+197: Expected [export PATH="..."] output but found []
+198: Expected [export HOME="/mnt/nfs/homes/lsouquie"
+
+
+export Hola] output but found []
+199: Expected [HOME="/mnt/nfs/homes/lsouquie"
+
+
+Hola9hey] output but found []
+200: Expected [export HOME="/mnt/nfs/homes/lsouquie"
+
+
+export PATH="..."] output but found []
+201: Expected [0] status but found [1]
+201: Expected [export HOME="/mnt/nfs/homes/lsouquie"] output but found []
+202: Expected [1] status but found [0]
+202: Expected [minishell: export: `': not a valid identifier] error output but found []
+203: Expected [1] status but found [0]
+203: Expected [minishell: export: Ê»=': not a valid identifier] error output but found [[91;1mminishell: export = is not a valid identifier [0m]
+204: Expected [1] status but found [0]
+204: Expected [minishell: export: Ê»%': not a valid identifier] error output but found []
+205: Expected [1] status but found [0]
+205: Expected [minishell: export: `0': not a valid identifier] error output but found [[91;1mminishell: export 0 is not a valid identifier [0m]
+206: Expected [1] status but found [0]
+206: Expected [minishell: export: Ê»?=2': not a valid identifier] error output but found []
+207: Expected [1] status but found [0]
+207: Expected [minishell: export: Ê»9HOLA=': not a valid identifier] error output but found [[91;1mminishell: export 9HOLA= is not a valid identifier [0m]
+210: Expected [___HOLA=bonjour] output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+210: Expected no error output but found [[91;1mminishell: export ___HOLA=bonjour is not a valid identifier [0m]
+211: Expected [_HO_LA_=bonjour] output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+211: Expected no error output but found [[91;1mminishell: export _HO_LA_=bonjour is not a valid identifier [0m]
+212: Expected [1] status but found [0]
+212: Expected [minishell: export: Ê»HOL@=bonjour
+€™: not a valid identifier] error output but found [[91;1mminishell: export HOL@=bonjour is not a valid identifier [0m]
+213: Expected [1] status but found [0]
+213: Expected [minishell: export: `HOL~A=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HOL\~A=bonjour is not a valid identifier [0m]
+214: Expected [2] status but found [0]
+214: Expected [minishell: export: -H: invalid option] error output but found []
+215: Expected [2] status but found [0]
+215: Expected [minishell: export: --: invalid option] error output but found [[91;1mminishell: export --HOLA=bonjour is not a valid identifier [0m]
+216: Expected [1] status but found [0]
+216: Expected [minishell: export: `HOLA-=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HOLA-=bonjour is not a valid identifier [0m]
+217: Expected [1] status but found [0]
+217: Expected [minishell: export: `HO-LA=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HO-LA=bonjour is not a valid identifier [0m]
+218: Expected [1] status but found [0]
+218: Expected [minishell: export: `HOL.A=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HOL.A=bonjour is not a valid identifier [0m]
+219: Expected [1] status but found [0]
+219: Expected [minishell: export: `HOL\$A=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HOL\\\=bonjour is not a valid identifier [0m]
+220: Expected [1] status but found [0]
+220: Expected [minishell: export: `HO\\LA=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HO\\\\LA=bonjour is not a valid identifier [0m]
+221: Expected [1] status but found [0]
+221: Expected [minishell: export: `HOL}A=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HOL}A=bonjour is not a valid identifier [0m]
+222: Expected [1] status but found [0]
+222: Expected [minishell: export: `HOL{A=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HOL{A=bonjour is not a valid identifier [0m]
+223: Expected [1] status but found [0]
+223: Expected [minishell: export: `HO*LA=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HO*LA=bonjour is not a valid identifier [0m]
+224: Expected [1] status but found [0]
+224: Expected [minishell: export: `HO#LA=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HO#LA=bonjour is not a valid identifier [0m]
+225: Expected [1] status but found [0]
+225: Expected [minishell: export: `HO@LA=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HO@LA=bonjour is not a valid identifier [0m]
+226: Expected [minishell: !LA=bonjour: event not found] error output but found [[91;1mminishell: export HO!LA=bonjour is not a valid identifier [0m]
+228: Expected [1] status but found [0]
+228: Expected [minishell: export: `+HOLA=bonjour': not a valid identifier] error output but found []
+229: Expected [1] status but found [0]
+229: Expected [minishell: export: `HOL+A=bonjour': not a valid identifier] error output but found [[91;1mminishell: export HOL+A=bonjour is not a valid identifier [0m]
+230: Expected [HOLA=bonjour] output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+230: Expected no error output but found [[91;1mminishell: export HOLA+=bonjour is not a valid identifier [0m]
+231: Expected [HOLA=bonjourbonjour] output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+231: Expected no error output but found [[91;1mminishell: export HOLA+=bonjour is not a valid identifier [0m]
+232: Expected no error output but found [[91;1mminishell: exportHOLA=bonjour : command not found [0m]
+233: Expected [1] status but found [0]
+233: Expected [minishell: export: Ê»=bonjour
+€™: not a valid identifier] error output but found [[91;1mminishell: export =bonjour is not a valid identifier [0m]
+234: Expected [1] status but found [0]
+234: Expected [minishell: export: Ê»=': not a valid identifier] error output but found [[91;1mminishell: export = is not a valid identifier [0m]
+242: Expected [HOLA=bonjour] output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+243: Expected [HOLA=bon\jour] output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+244: Expected [2] status but found [0]
+244: Expected [minishell: syntax error near unexpected token `('] error output but found []
+245: Expected [2] status but found [0]
+245: Expected [minishell: syntax error near unexpected token `('] error output but found []
+246: Expected [127] status but found [0]
+246: Expected [jour: command not found] error output but found []
+248: Expected no output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+248: Expected [jour: command not found
+
+
+HOLA=bon] error output but found []
+249: Expected [1] status but found [0]
+249: Expected [minishell: !jour: event not found] error output but found []
+252: Expected [HOLA=bonjour=casse-toi] output but found [bonjour=casse-toi]
+253: Expected [HOLA=bonjour=casse-toi] output but found [bonjour=casse-toi]
+256: Expected no error output but found [[91;1mminishell: export =bonjour is not a valid identifier [0m]
+257: Expected [bonjour$] output but found [bonjour      $]
+258: Expected [bonjour$>] output but found [   -n bonjour   ]
+259: Expected [bonjour /] output but found [bonjour   /]
+261: Expected [0] status but found [1]
+261: Expected [[cela affiche le Makefile]] output but found []
+261: Expected no error output but found [cat: Makefile: No such file or directory]
+262: Expected [1] status but found [0]
+262: Expected [minishell: export: `': not a valid identifier] error output but found []
+265: Expected [bonjour hey$] output but found [  bonjour  hey  $]
+266: Expected [   bonjour    hey    $] output but found ["  bonjour  hey  "$]
+267: Expected [wesh   bonjour    hey    $] output but found [wesh  bonjour  hey  $]
+268: Expected [wesh bonjour hey .] output but found [wesh  bonjour  hey  .]
+269: Expected [weshHOLA.] output but found [wesh$HOLA.]
+270: Expected [weshHOLA HOLA.] output but found [wesh$HOLA HOLA.]
+274: Expected [ls -l - a] output but found [ls        -l    - a]
+275: Expected [0] status but found [127]
+275: Expected [total] output but found []
+275: Expected no error output but found [[91;1mminishell: ls -la : command not found [0m]
+276: Expected [ls -la: command not found] error output but found [[91;1mminishell: ls -la : command not found [0m]
+277: Expected [l$HOLA: command not found] error output but found [[91;1mminishell: l$HOLA : command not found [0m]
+278: Expected [0] status but found [127]
+281: Expected [$HOLAs: command not found] error output but found [[91;1mminishell: $HOLAs : command not found [0m]
+283: Expected [1] status but found [0]
+283: Expected no output but found [SHELL=/bin/zsh
+LSCOLORS=Gxfxcxdxbxegedabagacad
+SESSION_MANAGER=local/made-f0Cr6s3.clusters.42paris.fr:@/tmp/.ICE-unix/182704,unix/made-f0Cr6s3.clusters.42paris.fr:/tmp/.ICE-unix/182704
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor]
+283: Expected [minishell: export: `TE+S=T': not a valid identifier] error output but found [[91;1mminishell: export TE+S=T is not a valid identifier [0m]
+284: Expected [1] status but found [0]
+284: Expected [minishell: export: `=': not a valid identifier] error output but found [[91;1mminishell: export = is not a valid identifier [0m]
+285: Expected [1] status but found [0]
+285: Expected [minishell: export: `=': not a valid identifier] error output but found [[91;1mminishell: export = is not a valid identifier [0m]
+286: Expected [1] status but found [0]
+286: Expected [minishell: export: `===': not a valid identifier] error output but found [[91;1mminishell: export === is not a valid identifier [0m]
+287: Expected [1] status but found [0]
+287: Expected [minishell: export: `===': not a valid identifier] error output but found [[91;1mminishell: export === is not a valid identifier [0m]
+288: Expected [pBYEd: command not found] error output but found [[91;1mminishell: pBYEd : command not found [0m]
+289: Expected [p$BYEd: command not found] error output but found [[91;1mminishell: p'wd : command not found [0m]
+291: Expected [HOLABYEd: command not found] error output but found [[91;1mminishell: $HOLA$BYEd : command not found [0m]
+292: Expected [HOLABYEd: command not found] error output but found [[91;1mminishell: $HOLA$BYEd : command not found [0m]
+293: Expected [127] status but found [0]
+293: Expected no output but found [hey]
+293: Expected [echo -n: command not found] error output but found []
+294: Expected [1'2$C"$D5"$F'7'8] output but found [1'2'34'5'6"7$H"]
+298: Expected [minishell: ls: No such file or directory] error output but found [[91;1mminishell: ls Permission denied [0m]
+299: Expected [1] status but found [0]
+299: Expected [minishell: unset: `': not a valid identifier] error output but found []
+301: Expected no error output but found [[91;1mminishell: pwd PWD not set [0m]
+302: Expected no error output but found [No such file
+[91;1mminishell: pwd PWD not set [0m]
+303: Expected [0] status but found [1]
+304: Expected [1] status but found [0]
+304: Expected [minishell: unset: `9HOLA': not a valid identifier] error output but found []
+306: Expected [1] status but found [0]
+306: Expected [minishell: unset: `HOL?A': not a valid identifier] error output but found []
+307: Expected [1] status but found [0]
+307: Expected [minishell: unset: `HOL?A': not a valid identifier] error output but found []
+308: Expected [1] status but found [0]
+308: Expected [minishell: unset: `HOL?A': not a valid identifier] error output but found []
+309: Expected [1] status but found [0]
+309: Expected [minishell: unset: `HOL?A': not a valid identifier
+
+
+minishell: unset: `HOL.A': not a valid identifier] error output but found []
+310: Expected [1] status but found [0]
+310: Expected [minishell: unset: `HOLA=': not a valid identifier] error output but found []
+311: Expected [1] status but found [0]
+311: Expected [minishell: unset: `HOL\\A': not a valid identifier] error output but found []
+312: Expected [127] status but found [0]
+312: Expected [A: command not found] error output but found []
+313: Expected [1] status but found [0]
+313: Expected [minishell: unset: `HOL.A': not a valid identifier] error output but found []
+314: Expected [1] status but found [0]
+314: Expected [minishell: unset: `HOL+A': not a valid identifier] error output but found []
+315: Expected [1] status but found [0]
+315: Expected [minishell: unset: `HOL=A': not a valid identifier] error output but found []
+316: Expected [1] status but found [0]
+316: Expected [minishell: unset: `HOL{A': not a valid identifier] error output but found []
+317: Expected [1] status but found [0]
+317: Expected [minishell: unset: `HOL}A': not a valid identifier] error output but found []
+318: Expected [1] status but found [0]
+318: Expected [minishell: unset: `HOL-A': not a valid identifier] error output but found []
+319: Expected [2] status but found [0]
+319: Expected [minishell: unset: -H: invalid option] error output but found []
+323: Expected [1] status but found [0]
+323: Expected [minishell: unset: `HOL*A': not a valid identifier] error output but found []
+324: Expected [1] status but found [0]
+324: Expected [minishell: unset: `HOL#A': not a valid identifier] error output but found []
+326: Expected [1] status but found [0]
+326: Expected [minishell: unset: `/mnt/nfs/homes/lsouquie/dev/42Cursus/minishell/minishell42tester': not a valid identifier] error output but found []
+327: Expected [1] status but found [0]
+327: Expected [minishell: unset: `HOL@': not a valid identifier] error output but found []
+328: Expected [1] status but found [0]
+328: Expected [minishell: !A: event not found] error output but found []
+329: Expected [1] status but found [0]
+329: Expected [minishell: unset: `HOL^A': not a valid identifier] error output but found []
+331: Expected [1] status but found [0]
+331: Expected [minishell: unset: `HOL~': not a valid identifier] error output but found []
+332: Expected [0] status but found [1]
+332: Expected [minishell: unset: `': not a valid identifier] error output but found []
+334: Expected [1] status but found [127]
+334: Expected [minishell: cat: No such file or directory] error output but found [[91;1mminishell: cat Permission denied [0m]
+335: Expected [minishell: unset: `=': not a valid identifier] error output but found []
+336: Expected [minishell: unset: `======': not a valid identifier] error output but found []
+337: Expected [minishell: unset: `++++++': not a valid identifier] error output but found []
+cdpwd
+350: Expected [2] status but found [0]
+350: Expected no output but found [/mnt/nfs/homes/lsouquie/dev/42Cursus/minishell/minishell42tester]
+350: Expected [pwd: -p: invalid option] error output but found []
+351: Expected [2] status but found [0]
+351: Expected no output but found [/mnt/nfs/homes/lsouquie/dev/42Cursus/minishell/minishell42tester]
+351: Expected [pwd: --: invalid option] error output but found []
+352: Expected [2] status but found [0]
+352: Expected no output but found [/mnt/nfs/homes/lsouquie/dev/42Cursus/minishell/minishell42tester]
+352: Expected [pwd: --: invalid option] error output but found []
+357: Expected no output but found [No arguments]
+367: Expected no error output but found [No such file]
+368: Expected [1] status but found [0]
+368: Expected [cd: too many arguments] error output but found [too many argument]
+369: Expected no error output but found [No such file]
+370: Expected no error output but found [No such file]
+374: Expected [1] status but found [0]
+374: Expected [cd: sr: No such file or directory] error output but found [No such file]
+375: Expected [1] status but found [0]
+375: Expected [cd: Makefile: Not a directory] error output but found [No such file]
+376: Expected no error output but found [No such file]
+378: Expected [1] status but found [0]
+378: Expected [cd: .././../.././../bin/ls: No such file or directory] error output but found [No such file]
+381: Expected [//] output but found [/]
+382: Expected [//] output but found [/]
+386: Expected [1] status but found [0]
+386: Expected [cd: /minishell: No such file or directory] error output but found [No such file]
+388: Expected [1] status but found [0]
+388: Expected [cd: _: No such file or directory] error output but found [No such file]
+389: Expected [/mnt/nfs/homes/lsouquie/dev/42Cursus/minishell/minishell42tester] output but found []
+389: Expected no error output but found [No such file]
+390: Expected no error output but found [No such file]
+391: Expected [2] status but found [0]
+391: Expected [cd: --: invalid option] error output but found [No such file]
+393: Expected [1] status but found [0]
+393: Expected [cd: too many arguments] error output but found [too many argument]
+395: Expected no error output but found [No such file]
+396: Expected [1] status but found [0]
+396: Expected [cd: $PWD/srcs: No such file or directory] error output but found [No such file]
+397: Expected [1] status but found [0]
+397: Expected [cd: HOME not set] error output but found [No such file]
+398: Expected no output but found [No arguments]
+399: Expected [1] status but found [0]
+399: Expected no output but found [No arguments]
+399: Expected [cd: HOME not set] error output but found []
+400: Expected [1] status but found [0]
+400: Expected [cd: too many arguments] error output but found [too many argument]
+402: Expected no error output but found [No such file]
+403: Expected no error output but found [No such file]
+404: Expected no error output but found [No such file]
+405: Expected no error output but found [No such file]
+406: Expected [1] status but found [0]
+406: Expected [cd: minishell: No such file or directory] error output but found [No such file]
+407: Expected [1] status but found [0]
+407: Expected [cd: too many arguments] error output but found [No such file]
+408: Expected [1] status but found [0]
+408: Expected [chdir: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory] error output but found [rm: cannot remove 'a': No such file or directory
+No such file]
+409: Expected [1] status but found [0]
+409: Expected no output but found [/mnt/nfs/homes/lsouquie/dev/42Cursus/minishell/minishell42tester/a/b]
+409: Expected [pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory] error output but found []
+414: Expected [/mnt/nfs/homes/lsouquie] output but found []
+414: Expected no error output but found [No such file]
+exit
+417: Expected [exit] error output but found []
+421: Expected [exit] error output but found []
+422: Expected [exit] error output but found []
+423: Expected [exit] error output but found []
+430: Expected [exit] error output but found []
+431: Expected [exit] error output but found []
+432: Expected [exit] error output but found []
+433: Expected [exit] error output but found []
+434: Expected [exit] error output but found []
+435: Expected [exit] error output but found []
+436: Expected [exit] error output but found []
+437: Expected [exit] error output but found []
+438: Expected [exit] error output but found []
+439: Expected [exit] error output but found []
+440: Expected [exit] error output but found []
+446: Expected [exit] error output but found []
+447: Expected [exit] error output but found []
+448: Expected [exit] error output but found []
+449: Expected [exit] error output but found []
+452: Expected [exit] error output but found []
+453: Expected [exit] error output but found []
+456: Expected [170] status but found [2]
+457: Expected [170] status but found [2]
+458: Expected [86] status but found [2]
+459: Expected [exit] error output but found []
+461: Expected [exit] error output but found []
+pipe
+486: Expected [ls: /usr/bin/ls /usr/share/man/man1/ls.1posix.gz /usr/share/man/man1/ls.1.gz$$] output but found [ls: /usr/bin/ls /usr/share/man/man1/ls.1.gz /usr/share/man/man1/ls.1posix.gz$$]
+487: Expected [hola: command not found] error output but found [[91;1mminishell: hola : command not found [0m]
+489: Expected [hola: command not found] error output but found [[91;1mminishell: hola : command not found [0m]
+490: Expected [hola: command not found] error output but found [[91;1mminishell: hola : command not found [0m]
+491: Expected [hola: command not found] error output but found [[91;1mminishell: hola : command not found [0m]
+503: Expected [2] status but found [0]
+503: Expected no output but found [hola]
+503: Expected [minishell: syntax error near
+
+
+unexpected token `|'] error output but found []
+505: Expected [$$] output but found []
+505: Expected no error output but found [cat: .testignore: No such file or directory]
+506: Expected [syntax;] output but found []
+506: Expected no error output but found [cat: .testignore: No such file or directory]
+507: Expected [syntax;] output but found []
+507: Expected no error output but found [cat: .testignore: No such file or directory]
+508: Expected [1] status but found [0]
+508: Expected [minishell: cd: file_not_exist: No such file or directory] error output but found [No such file
+cat: .testignore: No such file or directory]
+509: Expected [hello: command not found] error output but found [[91;1mminishell: hello : command not found [0m
+cat: .testignore: No such file or directory]
+515: Expected [real0m3.002s
+
+
+user0m0.003s] output but found []
+515: Expected no error output but found [0.00user 0.00system 0:01.00elapsed 0%CPU (0avgtext+0avgdata 2244maxresident)k
+0inputs+0outputs (0major+89minor)pagefaults 0swaps]
+tricky
+519: Expected [minishell: ./minishell: Permission denied] error output but found [[91;1mminishell: ./minishell Permission denied [0m]
+521: Expected [126] status but found [127]
+521: Expected [minishell: ./README.md: Permission denied] error output but found [[91;1mminishell: ./README.md Permission denied [0m]
+523: Expected no output but found [SHLVL=3
+SHLVL=3]
+524: Expected [126] status but found [127]
+524: Expected [minishell: ./hola: Permission denied] error output but found [[91;1mminishell: ./hola Permission denied [0m]
+525: Expected [53] output but found [58]
+526: Expected [wc -l: command not found] error output but found [[91;1mminishell: wc -l : command not found [0m]
+528: Expected [0] status but found [1]
+redir
+543: Expected [2] status but found [0]
+543: Expected [minishell: syntax error near unexpected token `>'] error output but found []
+544: Expected [2] status but found [0]
+544: Expected no output but found [hola bonjour]
+544: Expected [minishell: syntax error near unexpected token `<'] error output but found []
+545: Expected [minishell: syntax error near unexpected token `>'] error output but found [[91;1mminishell: syntax error
+[0m]
+548: Expected [127] status but found [0]
+548: Expected [minishell: prout: command not found] error output but found [[91;1mminishell: prout : command not found [0m]
+567: Expected [bonjour hola] output but found [hola bonjour]
+572: Expected [1] status but found [127]
+572: Expected [minishell: pwd: No such file or directory] error output but found []
+573: Expected [.: not enough arguments] error output but found [[91;1mminishell: Makefile No such file or directory [0m]
+574: Expected [1] status but found [0]
+574: Expected [minishell: pwd: No such file or directory] error output but found []
+575: Expected [minishell: srcs/pwd: No such file or directory] error output but found [[91;1mminishell: srcs/pwd No such file or directory [0m]
+576: Expected [minishell: ../pwd: No such file or directory] error output but found [[91;1mminishell: ../pwd No such file or directory [0m]
+577: Expected [minishell: syntax error near unexpected token `newline'] error output but found [[91;1mminishell: syntax error
+[0m]
+578: Expected [minishell: syntax error near unexpected token `>'] error output but found [[91;1mminishell: syntax error
+[0m]
+579: Expected [minishell: syntax error near unexpected token `<<'] error output but found [[91;1mminishell: syntax error
+[0m]
+580: Expected [minishell: syntax error near unexpected token `>'] error output but found [[91;1mminishell: syntax error
+[0m]
+581: Expected [1] status but found [0]
+581: Expected [minishell: ls: No such file or directory] error output but found []
+582: Expected [1] status but found [0]
+582: Expected [minishell: ls: No such file or directory] error output but found []
+583: Expected [minishell: ls2: No such file or directory] error output but found [[91;1mminishell: ls2 No such file or directory [0m]
+584: Expected no output but found [hey hola]
+595: Expected [0] status but found [1]
+595: Expected [hola] output but found []
+595: Expected no error output but found [[91;1mminishell: ec"ho : command not found [0m
+cat: 'bo"njour': No such file or directory]
+596: Expected [0] status but found [1]
+596: Expected no error output but found [cat: 1: No such file or directory]
+597: Expected [1] status but found [0]
+598: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+599: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+600: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+601: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+602: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+603: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+604: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+605: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+606: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+607: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+608: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+609: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+610: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+611: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+612: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+614: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+615: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+616: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+617: Expected [minishell: prout: No such file or directory] error output but found [[91;1mminishell: prout No such file or directory [0m]
+620: Expected ['bonjour hello' [...]] output but found [<
+>
+>>
+$HOLA
+bashstash]
+621: Expected ['bonjour hello' [...]] output but found [<
+>
+>>
+$HOLA
+bashstash]
+622: Expected [HOLA [...]] output but found [<
+>
+>>
+$HOLA
+bashstash]
+623: Expected ['bonjour hello' hey [...]] output but found [<
+>
+>>
+$HOLA
+bashstash]
+624: Expected ['bonjour hello' hey [...]] output but found [<
+>
+>>
+$HOLA
+bashstash]
+625: Expected ['bonjour hello' hey [...]] output but found [<
+>
+>>
+$HOLA
+bashstash]
+634: Expected [Amour Tu es Horrible] output but found []
+635: Expected [
+
+
+Amour] output but found []

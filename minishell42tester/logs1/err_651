@@ -1,0 +1,2 @@
+minishell: warning: here-document at at line 0 delimited by end-of-file (wanted `$"hola"$"b"')
+[91;1mminishell: holab : command not found [0m

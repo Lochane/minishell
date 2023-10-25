@@ -1,0 +1,106 @@
+hola‚
+hola‚que tal‚
+hola‚que tal‚
+que tal‚
+hola que tal‚
+hola que tal$‚
+hey‚
+grep: /usr/bin/grep /usr/share/man/man1/grep.1.gz /usr/share/man/man1/grep.1posix.gz /usr/share/info/grep.info.gz‚
+total 356‚drwxr-xr-x 11 lsouquie 2022_paris   4096 Oct 25 16:32 .‚drwxr-xr-x 14 lsouquie 2022_paris   4096 Oct 25 16:32 ..‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 <‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 >‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 >>‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 bashstash‚-rw-r--r--  1 lsouquie 2022_paris      1 Oct 25 16:32 bonjou‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25  2023 bonjour‚-rw-r--r--  1 lsouquie 2022_paris      7 Oct 25 16:32 bonjour\‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 cat‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 echo‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:24 examples‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 gen2‚drwxr-xr-x  8 lsouquie 2022_paris   4096 Oct 25 16:24 .git‚-rw-r--r--  1 lsouquie 2022_paris      8 Oct 25 16:32 hey‚-rw-r--r--  1 lsouquie 2022_paris      8 Oct 25 16:32 hola1‚-rw-r--r--  1 lsouquie 2022_paris      2 Oct 25 16:32 hola2‚-rw-r--r--  1 lsouquie 2022_paris    127 Oct 25 16:24 ignore_rl_leaks.supp‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:24 img‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 logs‚drwxr-xr-x  2 lsouquie 2022_paris  36864 Oct 25 16:32 logs1‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 ls‚-rwxr-xr-x  1 lsouquie 2022_paris 110200 Oct 25 16:32 minishell‚-rwxr-xr-x  1 lsouquie 2022_paris  33999 Oct 25 16:24 minitester.sh‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:24 .pack‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 pwd‚-rw-r--r--  1 lsouquie 2022_paris  10360 Oct 25 16:24 README.md‚-rw-r--r--  1 lsouquie 2022_paris  90511 Oct 25 16:32 result1‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:25 stash‚-rw-r--r--  1 lsouquie 2022_paris     57 Oct 25 16:27 testfile‚
+/mnt/nfs/homes/lsouquie/dev/42Cursus/minishell/minishell42tester‚
+/mnt/nfs/homes/lsouquie/dev/42Cursus/minishell/minishell42tester‚
+
+
+
+hola‚
+hola‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour‚bonjour\‚cat‚echo‚examples‚gen2‚hey‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚minishell‚minitester.sh‚pwd‚README.md‚result1‚stash‚testfile‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour‚bonjour\‚cat‚echo‚examples‚gen2‚hello‚hey‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚minishell‚minitester.sh‚pwd‚README.md‚result1‚stash‚testfile‚hola‚
+hola‚hola‚
+hola‚
+hola‚hola‚
+hola‚
+hola‚hola‚hola‚
+‚
+‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚hola‚hey‚
+hola bonjour‚
+hey hola‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour‚bonjour\‚cat‚echo‚examples‚gen2‚hello‚hey‚hola‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚minishell‚minitester.sh‚pwd‚README.md‚result1‚stash‚testfile‚hello‚2‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour‚bonjour\‚cat‚echo‚examples‚gen2‚hello‚hey‚hola‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚minishell‚minitester.sh‚pwd‚README.md‚result1‚stash‚testfile‚bonjour‚2‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour‚bonjour\‚cat‚echo‚examples‚gen2‚hello‚hey‚hola‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚minishell‚minitester.sh‚pwd‚README.md‚result1‚stash‚testfile‚
+
+
+
+
+
+
+
+
+
+
+
+<‚>‚>>‚bashstash‚bonjou‚bonjour‚bonjour\‚cat‚echo‚examples‚gen2‚hello‚hey‚hola‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚stash‚testfile‚
+hey hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚
+hola‚que tal‚
+que tal‚
+hola‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour‚bonjour\‚bonjour 1‚cat‚echo‚examples‚gen2‚hello‚hey‚hola‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚hola‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour‚bonjour\‚bonjour 1‚cat‚echo‚examples‚gen2‚hello‚hey‚hola‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚hola hey‚bonjour‚
+
+bonjour‚hello‚
+hey‚
+bonjour‚
+
+a‚bonjour‚builtin‚dfbfdb‚exec‚expansion‚fdkb‚fdkjbnjfdnb‚file‚fileprout‚fsbjnb‚fvkmf‚hello‚heredoc‚ignore_readline‚ignore_readline2‚includes‚libft‚Makefile‚mini‚minihell.c‚minishell‚minishell42tester‚parsing‚relever_erreur.txt‚signals‚test_file‚U”Ÿ0w˘o¨y«ñS^ŒJú‘˝ô?‰ì©ñSø*G‚2Ä˙—ïCªì¿;ÖÀ‚
+hey‚
+a‚bonjour‚builtin‚dfbfdb‚exec‚expansion‚fdkb‚fdkjbnjfdnb‚file‚fileprout‚fsbjnb‚fvkmf‚heredoc‚ignore_readline‚ignore_readline2‚includes‚libft‚Makefile‚mini‚minihell.c‚minishell‚minishell42tester‚parsing‚relever_erreur.txt‚signals‚test_file‚U”Ÿ0w˘o¨y«ñS^ŒJú‘˝ô?‰ì©ñSø*G‚2Ä˙—ïCªì¿;ÖÀ‚
+hey‚
+hola‚
+hola‚hey‚
+hey‚
+hola‚hey‚
+hola‚hey‚
+hola‚hey‚
+hola‚
+
+
+hey‚
+
+      0       0       0‚
+
+<‚>‚>>‚bashstash‚bonjou‚bonjour\‚bonjour 1‚cat‚echo‚examples‚gen2‚hey‚hola‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour\‚bonjour 1‚bonjour hello‚cat‚echo‚examples‚gen2‚hey‚hola‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour\‚bonjour 1‚bonjour hello‚cat‚echo‚examples‚gen2‚hey‚hola‚HOLA‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour\‚bonjour 1‚bonjour hello‚cat‚echo‚examples‚gen2‚hey‚hola‚HOLA‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour\‚bonjour 1‚bonjour hello‚cat‚echo‚examples‚gen2‚hey‚hola‚HOLA‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚
+<‚>‚>>‚bashstash‚bonjou‚bonjour\‚bonjour 1‚bonjour hello‚cat‚echo‚examples‚gen2‚hey‚hola‚HOLA‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚
+HolaQue Tal‚
+
+Prout‚
+Prout‚Amour Tu es Horrible‚0123456789‚Prout‚
+Prout‚<‚>‚>>‚a‚b‚bashstash‚bonjou‚bonjour\‚bonjour 1‚bonjour hello‚c‚cat‚d‚echo‚examples‚gen2‚hey‚hola‚HOLA‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚
+Prout‚<‚>‚>>‚a‚b‚bashstash‚bonjou‚bonjour\‚bonjour 1‚bonjour hello‚c‚cat‚d‚echo‚examples‚gen2‚hey‚hola‚HOLA‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚
+hola‚
+total 376‚drwxr-xr-x 13 lsouquie 2022_paris   4096 Oct 25 16:32 .‚drwxr-xr-x 14 lsouquie 2022_paris   4096 Oct 25 16:32 ..‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 <‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 >‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 >>‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 a‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 b‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 bashstash‚-rw-r--r--  1 lsouquie 2022_paris      1 Oct 25 16:32 bonjou‚-rw-r--r--  1 lsouquie 2022_paris      7 Oct 25 16:32 bonjour\‚-rw-r--r--  1 lsouquie 2022_paris      5 Oct 25 16:32 bonjour 1‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 bonjour hello‚-rw-r--r--  1 lsouquie 2022_paris      5 Oct 25 16:32 c‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 cat‚-rw-r--r--  1 lsouquie 2022_paris    223 Oct 25 16:32 d‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 dir‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 echo‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:24 examples‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 gen2‚drwxr-xr-x  8 lsouquie 2022_paris   4096 Oct 25 16:24 .git‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 hey‚-rw-r--r--  1 lsouquie 2022_paris      9 Oct 25 16:32 hola‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 HOLA‚-rw-r--r--  1 lsouquie 2022_paris      8 Oct 25 16:32 hola1‚-rw-r--r--  1 lsouquie 2022_paris      2 Oct 25 16:32 hola2‚-rw-r--r--  1 lsouquie 2022_paris    127 Oct 25 16:24 ignore_rl_leaks.supp‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:24 img‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 logs‚drwxr-xr-x  2 lsouquie 2022_paris  36864 Oct 25 16:32 logs1‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:25 ls‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 ls1‚-rwxr-xr-x  1 lsouquie 2022_paris 110200 Oct 25 16:32 minishell‚-rwxr-xr-x  1 lsouquie 2022_paris  33999 Oct 25 16:24 minitester.sh‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:24 .pack‚-rw-r--r--  1 lsouquie 2022_paris      0 Oct 25 16:32 pwd‚-rw-r--r--  1 lsouquie 2022_paris  10360 Oct 25 16:24 README.md‚-rw-r--r--  1 lsouquie 2022_paris  90511 Oct 25 16:32 result1‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:32 srcs‚drwxr-xr-x  2 lsouquie 2022_paris   4096 Oct 25 16:25 stash‚-rw-r--r--  1 lsouquie 2022_paris     57 Oct 25 16:27 testfile‚
+
+
+<‚>‚>>‚a‚b‚bashstash‚bonjou‚bonjour\‚bonjour 1‚bonjour hello‚c‚cat‚d‚dir‚e‚echo‚examples‚gen2‚hey‚hola‚HOLA‚hola1‚hola2‚ignore_rl_leaks.supp‚img‚logs‚logs1‚ls‚ls1‚minishell‚minitester.sh‚pwd‚README.md‚result1‚srcs‚stash‚testfile‚
+
