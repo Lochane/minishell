@@ -71,14 +71,14 @@ char	*check_access(char *cmd, char **path)
 	if (!cmd)
 		return (NULL);//free_and_exit();
 	if (!cmd[0])
-		return (ft_error("''", "command not found", 0), NULL);
+		return (ft_error("''", ": command not found", 0), NULL);
 	if (!path || !check_path(cmd))
 	{
 		if (!access(cmd, F_OK | X_OK))
 		{
 			if (!is_dir(cmd))
 			{
-				ft_error(cmd,"Is a directory", 0);
+				ft_error(cmd,": Is a directory", 0);
 				return (NULL);
 			}
 			return (ft_strdup(cmd));
@@ -103,7 +103,7 @@ char	*check_access(char *cmd, char **path)
 		free(pathed);
 		i++;
 	}
-	ft_error(cmd, "command not found", 0);
+	ft_error(cmd, ": command not found", 0);
 	return (NULL);
 }
 
