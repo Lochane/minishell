@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/24 23:12:21 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:24:53 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,37 @@ int	do_cd(t_cmd *cmd, t_fd *fd, t_data *data)
 			return (write(2, "minishell: cd: too many argument\n", 34), 0);
 		if (chdir(cmd->arg[0]))
 			return (write(2, "No such file\n", 14), 0);
+		oldpwdpath = pwdpath;
 		pwdpath = getcwd(NULL, 0);
-		if (pwd)
-		{
-			if (oldpwd)
-			{
-				oldpwdpath = ft_join("OLDPWD=", pwdpath, 0);
-				if (!oldpwdpath)
-					return (free(pwdpath), fail_malloc(), errno);
-				free(oldpwd->data);
-			}
-			free(pwd->data);
-			pwd->data = ft_join("PWD=", pwdpath, 0);
-			if (oldpwd && oldpwdpath)
-				oldpwd->data = oldpwdpath;
-		}
 		if (!pwd)
 		{
+			remove_lst(&data->env, "OLDPWD");
 			pwd = ft_new_lst(ft_join("PWD=", pwdpath, 0));
 			if (!pwd)
 				return (free(pwdpath), fail_malloc(), errno);
 			ft_add_back(&data->env, pwd);
+		}
+		else
+		{
+			oldpwdpath = ft_join("OLDPWD=", oldpwdpath, 0);
+			if (!oldpwdpath)
+				return (free(pwdpath), fail_malloc(), errno);
+			if (oldpwd)
+			{
+				free(oldpwd->data);
+				oldpwd->data = oldpwdpath;
+			}
+			else
+			{
+				oldpwd = ft_new_lst(oldpwdpath);
+				if (!oldpwd)
+					return (free(pwdpath), free(oldpwdpath), fail_malloc(), errno);
+				ft_add_back(&data->env, oldpwd);
+			}
+			free(pwd->data);
+			pwd->data = ft_join("PWD=", pwdpath, 0);
+			if (!pwd->data)
+				return (free(pwdpath), fail_malloc(), errno);
 		}
 		free(pwdpath);
 	}

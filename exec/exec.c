@@ -79,6 +79,7 @@ char	*check_access(char *cmd, char **path)
 			if (!is_dir(cmd))
 			{
 				ft_error(cmd,": Is a directory", 0);
+				g_g = 126;
 				return (NULL);
 			}
 			return (ft_strdup(cmd));
@@ -93,11 +94,12 @@ char	*check_access(char *cmd, char **path)
 			return (NULL);
 		if (!access(pathed, F_OK | X_OK))
 		{
-			//if (!is_dir(pathed))//je ne sais pas, confirmer par un test
-			//{
-				//ft_error(cmd,"Is a directory", 0);
-			//	return (NULL);
-			//}
+			if (!is_dir(pathed))//je ne sais pas, confirmer par un test
+			{
+				ft_error(cmd,"Is a directory", 0);
+				g_g = 126;
+				return (NULL);
+			}
 			return (pathed);
 		}
 		free(pathed);
@@ -336,7 +338,7 @@ void	exec(t_cmd *cmd_lst, t_data *data)
 		manage_data(data, 1);
 		if (data->fd != -1)
 			close(data->fd);
-		exit(127);
+		exit(127 - (g_g == 126));
 	}
 	close_pipe_child(data->cmd);
 	execve(fork.pathed, fork.cmd, fork.env);

@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/24 21:11:06 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:51:30 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,20 @@
 /* Code signaux */
 # define CTRL_C 130
 # define CTRL_SLASH 131
+
 extern unsigned char	g_g;
 
+# define PATH "PATH=/usr/local/sbin:/usr/local/bin:\
+/usr/sbin:/usr/bin:/sbin:/bin"
 # define RED "\x1b[91;1m"
 # define RESET "\x1b[0m\2"
 # define HEADER "\033[38;5;223;1m"
 
-# define SMILEY "\xf0\x9f\x8c\x88"
-# define PROMPT SMILEY"\1\033[38;5;223;1m\2Minihell->\1\x1b[0m\2"
+# define SMILEY "\xf0\x9f\1\x8c\x88\2"
+# define PROMPT "\xf0\x9f\1\x8c\x88\2\1\033[38;5;223;1m\2Minihell->\1\x1b[0m\2"
 
 /*builtin*/
-# define BUILT_IN_LIST {"echo", "cd", "pwd", "export", "env","unset", "exit", NULL}
+# define BUILT_IN_LIST {"echo", "cd", "pwd", "export", "env", "unset", "exit", ((char *)(0))}
 
 /* Set Cmd */
 int		tri_cmd(char *tab, t_cmd *cmd);

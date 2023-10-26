@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:39:32 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/23 23:46:57 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:33:17 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,25 @@
 
 void	check_quote(char *str, int quote[2], int *index, int *quoted)
 {
-	if ((str[*index] == '"' && !quote[1]) || (str[*index] == '\'' && !quote[0]))
+	while (str[*index] == '\'' || str[*index] == '"')
 	{
-		if (str[*index] == '"')
-			quote[0] = (quote[0] != 1);
-		else if (str[*index] == '\'')
-			quote[1] = (quote[1] != 1);
-		(*index)++;
-		(*quoted)++;
-		if (str[*index] == str[*index - 1])
+		if ((str[*index] == '"' && !quote[1]) || (str[*index] == '\'' && !quote[0]))
 		{
-			quote[0] = 0;
-			quote[1] = 0;
+			if (str[*index] == '"')
+				quote[0] = (quote[0] != 1);
+			else if (str[*index] == '\'')
+				quote[1] = (quote[1] != 1);
 			(*index)++;
+			(*quoted)++;
+		//	if (str[*index] == str[*index - 1])
+		//	{
+		//		quote[0] = 0;
+		//		quote[1] = 0;
+		//		(*index)++;
+		//	}
 		}
+		else
+			break ;
 	}
 }
 

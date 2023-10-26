@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:29 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/24 18:58:08 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:45:21 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void	get_var_content(t_expand *expand, int *tmp, char *str, t_data *data)
 	{
 		expand->content = ft_get_env(&str[1], *tmp - 1, data->env, &lst);
 		expand->index += *tmp;
-		if (lst)
-			expand->quoted++;
 	}
 }
 
@@ -150,7 +148,6 @@ void	cpy_var(char *str, t_expand *exp, t_data *data)
 			while (*exp->content)
 			{
 				(exp->buffer.buf)[exp->buffer.index] = *exp->content;
-				printf("buffer == %lu\n", exp->buffer.index);
 				exp->content++;
 				exp->buffer.index++;
 			}

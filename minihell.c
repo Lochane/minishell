@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/19 19:49:31 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:52:33 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,111 @@ char	*get_line(t_data data)
 		return (readline(PROMPT));
 }
 
+void	update_shlvl(t_lst **env)
+{
+	t_lst	*lst;
+	char	*content;
+	int		value;
+	char	shlvl[12];
+	
+	content = ft_get_env("SHLVL", 5, *env, &lst);
+	if (lst)
+	{
+		value = ft_atoi(content);
+		if (value < 0)
+			value = 0;
+		else
+			value +=1;
+		if (value >= 1000)
+		{
+			stack_itoa(shlvl, (unsigned int) value);
+			write(1, "minishell: warning: shell level ", 33);
+			write(1, shlvl, ft_strlen(shlvl));
+			write(1, " too high, resetting to 1\n", 26);//joinpool?
+			value = 1;
+		}
+		stack_itoa(shlvl, value);
+		content = ft_join("SHLVL=", shlvl, 0);
+		if (!content)
+			return (ft_clear_lst(env), fail_malloc());
+		free(lst->data);
+		lst->data = content;
+	}
+	else
+	{
+		content = ft_strdup("SHLVL=1");
+		if (!content)
+			return (ft_clear_lst(env), fail_malloc());
+		lst = ft_new_lst(content);
+		if (!lst)
+			return (free(content), ft_clear_lst(env), fail_malloc());
+		ft_add_back(env, lst);	
+	}
+}
+
+void	update_path(t_lst **env)
+{
+	t_lst	*lst;
+	char	*content;
+
+	ft_get_env("PATH", 4, *env, &lst);
+	content = ft_get_env("PWD", 3, *env, NULL);
+	if (!lst)
+	{
+		content = ft_join(PATH, content, ':');
+		lst = ft_new_lst(content);
+		if (!lst)
+			return (free(content), ft_clear_lst(env));
+		ft_add_back(env, lst);
+	}
+}
+
+void	update_pwd(t_lst **env)
+{
+	t_lst	*lst;
+	char	*content;
+	char	*var_name;
+	
+	ft_get_env("PWD", 3, *env, &lst);
+	content = getcwd(NULL, 0);
+	var_name = ft_join("PWD=", content, 0);
+	if (!var_name)
+		return (ft_clear_lst(env), fail_malloc());
+	free(content);
+	if (lst)
+	{
+		free(lst->data);
+		lst->data = var_name;
+	}
+	else
+	{
+		lst = ft_new_lst(var_name);
+		if (!lst)
+			return (free(var_name), ft_clear_lst(env));
+		ft_add_back(env, lst);	
+	}
+}
+
+void	update_env(t_lst **env)
+{
+	update_pwd(env);
+	if (!env)
+		return ;
+	update_path(env);
+	if (!env)
+		return ;
+	update_shlvl(env);
+}
+
+t_lst	*init_env(char **env)
+{
+	t_lst	*lst;
+	
+	lst = tab_to_list(env);
+	update_env(&lst);
+	return (lst);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
@@ -107,15 +212,15 @@ int	main(int argc, char **argv, char **envp)
 		exit(0);
 	}
 	data.tty = isatty(0);
-	if (data.tty)
-		printf("\033[H\033[J");
+	//if (data.tty)
+	//	printf("\033[H\033[J\n");
 	g_g = 0;
 	data.new_line = 0;
 	data.return_value = 0;
 	data.fd = dup(0);
 	if (data.fd == -1)
 		return (perror("dup"), errno);
-	data.env = tab_to_list(envp);
+	data.env = init_env(envp);
 	if (envp[0] && !data.env)
 		return (ft_putstr_fd("echec d'allocation\n", 2), errno);
 	while (1)
@@ -126,7 +231,7 @@ int	main(int argc, char **argv, char **envp)
 		if (g_g == 130)
 			handle_sig(&data);
 		else
-		{	
+		{
 			if (data.args)
 			{
 				if (history(data.args) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/25 19:52:25 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:38:35 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	get_redirection(char **tab, t_cmd *cmd)
 	{
 		if (tab[i][0] == '<' || tab[i][0] == '>')
 		{
+			if (!tab[i + 1])
+				return (0);
 			if (!manage_redirection(tab[i], tab[i + 1], cmd))
 				return (0);
 			i += 2;
@@ -93,13 +95,13 @@ int	tri_cmd(char *tab, t_cmd *cmd)
 	if (!tmp)
 		return (fail_malloc(), 0);
 	if (!get_redirection(tmp, cmd))
-		return (0);
+		return (ft_free_tab(tmp, tab_size(tmp)), 0);
 	if (!get_cmd(tmp, cmd))
-		return (0);
+		return (ft_free_tab(tmp, tab_size(tmp)), 0);
 	if (tab[1])
 	{
 		if (!get_arg(tmp, cmd))
-			return (0);
+			return (ft_free_tab(tmp, tab_size(tmp)), 0);
 	}
 	ft_free_tab(tmp, tab_size(tmp));
 	if (tmp_tab != save_tab)
@@ -124,7 +126,7 @@ int	set_cmd(t_data *data)
 		if (!lst_tmp)
 			return (fail_malloc(), 0);
 		if (!tri_cmd(tmp[i], lst_tmp))
-			return (ft_free_tab(tmp, tab_size(tmp)), 0);
+			return (ft_free_tab(tmp, tab_size(tmp)), free(lst_tmp), 0);
 		if (i == 0)
 			data->cmd = lst_tmp;
 		else

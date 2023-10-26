@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/25 17:39:16 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:37:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ char	*ft_get_env(char *var, int size, t_lst *env, t_lst **lst)
 	tmp = env;
 	while (tmp)
 	{
-		if (!ft_var_cmp(var, size, tmp->data))
+		if (!ft_var_cmp(var, size, tmp->data) && tmp->is_env)
 		{
 			if (lst)
 				*lst = tmp;
-			return (&tmp->data[tmp->size + (tmp->is_env)]);
+			return (&tmp->data[tmp->size + 1]);
 		}
 		tmp = tmp->next;
 	}
@@ -129,7 +129,12 @@ int	check_options(char **args, char *options, char *found, char *invalid)
 			if (check == -1)
 			{
 				if (invalid)
-					*invalid = args[l][i];
+				{
+					if (args[l][i])
+						*invalid = args[l][i];
+					else
+						*invalid = '-';					
+				}
 				return (l);
 			}
 			found[check] = 1;
