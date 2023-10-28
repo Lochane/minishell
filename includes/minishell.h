@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/26 20:51:30 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/28 23:16:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ extern unsigned char	g_g;
 
 # define SMILEY "\xf0\x9f\1\x8c\x88\2"
 # define PROMPT "\xf0\x9f\1\x8c\x88\2\1\033[38;5;223;1m\2Minihell->\1\x1b[0m\2"
-
-/*builtin*/
-# define BUILT_IN_LIST {"echo", "cd", "pwd", "export", "env", "unset", "exit", ((char *)(0))}
 
 /* Set Cmd */
 int		tri_cmd(char *tab, t_cmd *cmd);

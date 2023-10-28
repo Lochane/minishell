@@ -6,58 +6,21 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/28 22:09:01 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 01:05:49 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_var_cmp(char *s1, int size, char *s2)
+int	do_built_in(t_cmd *cmd, t_data *data, int check, int index)
 {
-	int	i;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (-1);
-	while ((s1[i] && s1[i] != '=') && s1[i] == s2[i] && i < size)
-		i++;
-	if ((!s1[i] || !ft_isalnum(s1[i])) && (!s2[i] || s2[i] == '='))
-		return (0);
-	else
-		return (1);
-}
-
-char	*ft_get_env(char *var, int size, t_lst *env, t_lst **lst)
-{
-	t_lst	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		if (!ft_var_cmp(var, size, tmp->data) && tmp->is_env)
-		{
-			if (lst)
-				*lst = tmp;
-			return (&tmp->data[tmp->size + 1]);
-		}
-		tmp = tmp->next;
-	}
-	if (lst)
-		*lst = NULL;
-	return (NULL);
-}
-
-int	do_built_in(t_cmd *cmd, t_data *data, int check)
-{
-	const char		*built_in_name[] = BUILT_IN_LIST;
-	const fct	built_in_fct[]  = {do_echo, do_cd, do_pwd, do_export, print_env, do_unset, do_exit};
-	int		i;
-	t_fd	fd;
-	int		ret;
+	const fct	built_in_fct[] = {do_echo, do_cd, do_pwd, do_export, \
+	print_env, do_unset, do_exit};
+	t_fd		fd;
+	int			ret;
 
 	fd.in = 0;
 	fd.out = 0;
-
 	if (check && open_redir(cmd->redirection, &fd) == 1)
 	{
 		if (fd.in > 0)
@@ -66,14 +29,7 @@ int	do_built_in(t_cmd *cmd, t_data *data, int check)
 			close(fd.out);
 		return (1);
 	}
-	i = 0;
-	while (built_in_name[i])
-	{
-		if (ft_strcmp(built_in_name[i], cmd->cmd) == 0)
-			break ;
-		i++;
-	}
-	ret = built_in_fct[i](cmd, &fd, data);
+	ret = built_in_fct[index](cmd, &fd, data);
 	if (fd.in > 0)
 		close(fd.in);
 	if (fd.out > 0)
@@ -83,18 +39,18 @@ int	do_built_in(t_cmd *cmd, t_data *data, int check)
 
 int	is_built_in(char *s)
 {
-	const char	*built_in[] = BUILT_IN_LIST;
-	int	i;
+	int			i;
+	const char	*built_in[] = {"echo", "cd", "pwd", "export", \
+	"env", "unset", "exit", ((char *)(0))};
 
 	i = 0;
 	while (built_in[i])
 	{
-
 		if (ft_strcmp(built_in[i], s) == 0)
-			return (1);
+			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 int	find_char(char c, char *str)
@@ -144,7 +100,7 @@ void	error_option(char *cmd, char invalid)
 {
 	int		index;
 	char	buffer[100];
-	
+
 	ft_strlcpy(buffer, "minishell: ", 11);
 	ft_strlcpy(buffer + 11, cmd, ft_strlen(buffer));
 	index = ft_strlen(buffer);

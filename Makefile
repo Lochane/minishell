@@ -16,8 +16,8 @@ SRCS =  $(SRCEXPAND)/expansion.c $(SRCEXPAND)/utils.c $(SRCEXPAND)/utils2.c\
 		$(SRCPARSING)/check_syntax_2.c $(SRCPARSING)/manage_redirection_2.c \
 		$(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
 		$(SRCPARSING)/poubelle_fonction.c \
-		$(SRCBUILTIN)/builtin.c $(SRCBUILTIN)/cd.c $(SRCBUILTIN)/echo.c $(SRCBUILTIN)/exit.c \
-		$(SRCBUILTIN)/export.c $(SRCBUILTIN)/pwd.c $(SRCBUILTIN)/unset.c $(SRCBUILTIN)/ft_strjoin_pool.c\
+		$(SRCBUILTIN)/builtin.c $(SRCBUILTIN)/env.c $(SRCBUILTIN)/builtin_util.c $(SRCBUILTIN)/cd.c $(SRCBUILTIN)/echo.c $(SRCBUILTIN)/exit.c \
+		$(SRCBUILTIN)/export.c $(SRCBUILTIN)/export_utils.c $(SRCBUILTIN)/pwd.c $(SRCBUILTIN)/unset.c $(SRCBUILTIN)/ft_strjoin_pool.c\
 		$(SRCHEREDOC)/heredoc.c \
 		$(SRCSIGNALS)/signals.c \
 		minihell.c \

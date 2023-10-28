@@ -308,9 +308,9 @@ void	exec(t_cmd *cmd_lst, t_data *data)
 	if (fork.fd.out > 0)
 		close(fork.fd.out);
 	built_in = is_built_in(cmd_lst->cmd);
-	if (built_in)
+	if (built_in != -1)
 	{
-		do_built_in(cmd_lst, data, 0);
+		do_built_in(cmd_lst, data, 0, built_in);
 		close_pipe_child(data->cmd);
 		free_child(fork, data);
 		exit (data->return_value);
@@ -412,6 +412,7 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 	t_cmd *tmp;
 	int		i;
 	int		nb_cmd;
+	int		is_builtin;
 
 	tmp = cmd;
 	i = 0;
@@ -419,8 +420,9 @@ int handle_cmds(t_cmd *cmd, t_data *data)
 	pip[1] = -1;
 	nb_cmd = cmd_size(cmd);
 	modif_cmd(tmp);
-	if (nb_cmd == 1 && is_built_in(cmd->cmd))
-		return (do_built_in(cmd, data, 1));
+	is_builtin = is_built_in(cmd->cmd);
+	if (nb_cmd == 1 && is_builtin != -1)
+		return (do_built_in(cmd, data, 1, is_builtin));
 	ignore_sig();
 	while (tmp)
 	{

@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/28 21:39:58 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/28 23:39:52 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,37 +37,47 @@
 // 	return(i);
 // }
 
-int	do_echo(t_cmd *cmd, t_fd *fd, t_data *data)
+typedef struct s_echo
 {
 	int		i;
 	int		ret;
 	int		final_fd;
 	char	*stash;
-	char	option[1];
+	char	opt[1];
+}			t_echo;
+
+void	init_echo(t_echo *echo)
+{
+	echo->i = 0;
+	echo->ret = 0;
+	echo->opt[0] = 0;
+	echo->final_fd = 1;
+}
+
+int	do_echo(t_cmd *cmd, t_fd *fd, t_data *data)
+{
+	t_echo	echo;
 
 	(void) fd;
 	(void)data;
-	i = 0;
-	ret = 0;
-	option[0] = 0;
-	final_fd = 1;
+	init_echo(&echo);
 	if (fd->out > 0)
-		final_fd = fd->out;
+		echo.final_fd = fd->out;
 	if (!cmd->arg)
 	{
-		if (write(final_fd, "\n", 1) == -1)
+		if (write(echo.final_fd, "\n", 1) == -1)
 		{
-			ret = 1;
+			echo.ret = 1;
 			ft_error(cmd->cmd, "write error: ", 1);
 		}
-		return (ret);
+		return (echo.ret);
 	}
-	i = check_options(cmd->arg , ECHO_OPTIONS, option, NULL);
-	printf("i == %d\n", i);
-	stash = ft_strjoin_pool(tab_size(&cmd->arg[i]), &cmd->arg[i], " ", option[0]);
-	if (!stash)
+	echo.i = check_options(cmd->arg, ECHO_OPTIONS, echo.opt, NULL);
+	echo.stash = ft_strjoin_pool(tab_size(&cmd->arg[echo.i]), \
+	&cmd->arg[echo.i], " ", echo.opt[0]);
+	if (!echo.stash)
 		return (fail_malloc(), 0);
-	write(final_fd, stash, ft_strlen(stash));
-	free(stash);
+	write(echo.final_fd, echo.stash, ft_strlen(echo.stash));
+	free(echo.stash);
 	return (0);
 }
