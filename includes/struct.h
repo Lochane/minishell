@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:51:16 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/24 18:31:57 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 01:56:45 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 typedef struct s_fd
 {
-    int in;
-    int out;
-}       t_fd;
+	int	in;
+	int	out;
+}		t_fd;
 
 typedef struct s_lst
 {

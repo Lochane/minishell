@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/29 01:05:49 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 01:52:04 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	do_built_in(t_cmd *cmd, t_data *data, int check, int index)
 {
-	const fct	built_in_fct[] = {do_echo, do_cd, do_pwd, do_export, \
+	const t_fct	built_in_fct[] = {do_echo, do_cd, do_pwd, do_export, \
 	print_env, do_unset, do_exit};
 	t_fd		fd;
 	int			ret;
