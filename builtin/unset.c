@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/09 14:30:07 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:32:26 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,27 @@ int remove_lst(t_lst **lst, char *name)
 	while (prev && prev->next != tmp)
 		prev = prev->next;
 	prev->next = tmp->next;
-	free(tmp->data);
-	free(tmp);
-	return (1);
+	return (free(tmp->data), free(tmp), 1);
 }
 
 int	do_unset(t_cmd *cmd, t_fd *fd, t_data *data)
 {
 	int	i;
+	int	check;
+	char	option[0];
+	char	invalid;
 	
-	(void) cmd;
 	(void) fd;
-	(void) data;
+	invalid = 0;
 	if (cmd->arg)
 	{
+		check = check_options(cmd->arg ,EXPORT_OPTION, option, &invalid);
+		if (invalid != 0)
+		{
+			error_option(cmd->cmd, invalid);
+			return (2);
+		}
+		i = 0;
 		i = 0;
 		while (cmd->arg[i])
 		{

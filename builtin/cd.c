@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/26 18:24:53 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/28 22:37:18 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,28 @@ int	do_cd(t_cmd *cmd, t_fd *fd, t_data *data)
 	char	*pwdpath;
 	char	option[0];
 	int		check;
-	char	buffer[36];
 	char	invalid;
+	char	*arg;
 	
 	(void) fd;
 	(void)cmd;
 	invalid = 0;
 	pwdpath = ft_get_env("PWD", 3, data->env, &pwd);
-	ft_get_env("OLDPWD", 6, data->env, &oldpwd);
+	arg = ft_get_env("OLDPWD", 6, data->env, &oldpwd);
 	if (cmd->arg)
 	{
 		check = check_options(cmd->arg ,CD_OPTION, option, &invalid);
-		if (check != 0 || cmd->arg[0][0] == '-')
+		if (invalid)
 		{
-			ft_strlcpy(buffer, "minishell: cd: -o: invalid option\n", 35);
-			buffer[16] = cmd->arg[0][1];	
-			write(2, buffer, 35);
+			error_option(cmd->cmd, invalid);
+			write(2, CD_USAGE, ft_strlen(CD_USAGE));
 			return (2);
 		}
 		if (cmd->arg[1])
 			return (write(2, "minishell: cd: too many argument\n", 34), 0);
-		if (chdir(cmd->arg[0]))
+		if ((!(cmd->arg[0][0] == '-' && cmd->arg[0][1] == 0)) || !arg || !*arg)
+			arg = cmd->arg[0];
+		if (chdir(arg))
 			return (write(2, "No such file\n", 14), 0);
 		oldpwdpath = pwdpath;
 		pwdpath = getcwd(NULL, 0);

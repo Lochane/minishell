@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/26 18:37:23 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/28 22:09:01 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	check_options(char **args, char *options, char *found, char *invalid)
 	l = 0;
 	while (args[l])
 	{
-		if (args[l][0] != '-')
+		if (args[l][0] == 0 || args[l][0] != '-' || args[l][1] == 0)
 			break ;
 		i = 1;
 		while (args[l][i])
@@ -129,12 +129,7 @@ int	check_options(char **args, char *options, char *found, char *invalid)
 			if (check == -1)
 			{
 				if (invalid)
-				{
-					if (args[l][i])
-						*invalid = args[l][i];
-					else
-						*invalid = '-';					
-				}
+					*invalid = args[l][i];
 				return (l);
 			}
 			found[check] = 1;

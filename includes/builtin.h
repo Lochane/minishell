@@ -7,6 +7,11 @@
 # define CD_OPTION ""
 # define PWD_OPTION ""
 # define ENV_OPTION ""
+# define EXPORT_USAGE "export: usage: export [no option] [name[=value] ...]\n"
+# define UNSET_USAGE "unset: usage: unset [no option] [name ...]\n"
+# define CD_USAGE "cd: usage: cd [-n] [dir]\n"
+# define PWD_USAGE "pwd: usage: pwd [no option]\n"
+# define ENV_USAGE "env: usage: env [no option]\n"
 
 typedef int (*fct)(t_cmd *, t_fd *, t_data *);
 

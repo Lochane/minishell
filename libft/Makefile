@@ -27,7 +27,7 @@ OBJ = $(addsuffix .o, $(SRCFILES))
 OBJ := $(addprefix obj/, $(OBJ))
 HEADER = .
 CC = cc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 	
 all: $(NAME)
 

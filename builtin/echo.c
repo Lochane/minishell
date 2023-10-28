@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/24 23:13:09 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:39:58 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	do_echo(t_cmd *cmd, t_fd *fd, t_data *data)
 		return (ret);
 	}
 	i = check_options(cmd->arg , ECHO_OPTIONS, option, NULL);
+	printf("i == %d\n", i);
 	stash = ft_strjoin_pool(tab_size(&cmd->arg[i]), &cmd->arg[i], " ", option[0]);
 	if (!stash)
 		return (fail_malloc(), 0);

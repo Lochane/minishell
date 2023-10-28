@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:46:02 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/25 20:08:48 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:31:01 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,23 @@ int	print_env(t_cmd *cmd, t_fd *fd, t_data *data)
 {
 	int	final_fd;
 	char	*str;
+	int		check;
+	char	option[0];
+	char	invalid;
 
 	final_fd = 1;
+	invalid = 0;
+	if (cmd->arg)
+	{
+		check = check_options(cmd->arg ,EXPORT_OPTION, option, &invalid);
+		if (invalid != 0)
+		{
+			error_option(cmd->cmd, invalid);
+			return (2);
+		}
+	}
 	if (fd->out > 0)
 		final_fd = fd->out;
-	(void) cmd;
-	(void) data;
 	str = get_ptr_env(data->env, get_env_size(data->env));
 	if (!str)
 		return (errno);
