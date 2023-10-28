@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/28 22:37:18 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/28 22:48:48 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	do_cd(t_cmd *cmd, t_fd *fd, t_data *data)
 		}
 		if (cmd->arg[1])
 			return (write(2, "minishell: cd: too many argument\n", 34), 0);
-		if ((!(cmd->arg[0][0] == '-' && cmd->arg[0][1] == 0)) || !arg || !*arg)
+		if ((!(cmd->arg[0][0] == '-' && cmd->arg[0][1] == 0)) || !arg)
 			arg = cmd->arg[0];
 		if (chdir(arg))
 			return (write(2, "No such file\n", 14), 0);
