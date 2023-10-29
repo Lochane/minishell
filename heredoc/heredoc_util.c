@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:58:46 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/29 02:08:20 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:09:58 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	ft_strcpy(char *s1, char *s2)
 
 char	*get_file_name(void)
 {
-	int				i;
-	int				fd;
+	int		i;
+	int		fd;
 	char	*file_name;
 
 	i = 5;
