@@ -6,75 +6,11 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:43:46 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/11 15:20:23 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:02:58 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	verif_heredoc(char *s1, const char *s2, int n)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s1[i] == s2[i] && i < n)
-		i++;
-	if (!s1[i] && !s2[i])
-		return (0);
-	return (1);
-}
-
-void	ft_strcpy(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s2[i])
-	{
-		s1[i] = s2[i];
-		i++;
-	}
-	s1[i] = 0;
-}
-
-static unsigned char	*get_file_name(void)
-{
-	int				i;
-	int				fd;
-	unsigned char	*file_name;
-
-	i = 5;
-	file_name = malloc(sizeof(char) * 16);
-	if (!file_name)
-		return (NULL);
-	ft_strcpy((char *)file_name, "/tmp/");
-	fd = open("/dev/random", O_RDONLY);
-	if (fd == -1)
-		return (free(file_name), NULL);
-	if (read(fd, file_name + 5, 10) == -1)
-		return (free(file_name), close(fd), NULL);
-	close(fd);
-	while (i < 16)
-	{
-		file_name[i] = file_name[i] % 26 + 'A';
-		i++;
-	}
-	file_name[15] = 0;
-	file_name[5] = '.';
-	return (file_name);
-}
-
-int	get_fd(unsigned char *file_name, int type)
-{
-	int	fd;
-
-	if (!type)
-		fd = open((const char *)file_name, O_WRONLY | O_CREAT, \
-			S_IRUSR | S_IWUSR | S_IRGRP);
-	else
-		fd = open((const char *)file_name, O_RDONLY);
-	return (fd);
-}
 
 void	error(char *str)
 {
@@ -103,8 +39,7 @@ void	fill_here_doc(const char *limiter, int tmp_fd)
 		{
 			if (g_g != 130)
 			{
- 				error("minishell: warning: here-document at at line 0\
- delimited by ");
+				write(2, HERE_DOC_ERROR, ft_strlen(HERE_DOC_ERROR));
 				bash_error("end-of-file (wanted `", (char *)limiter, "')\n");
 			}
 			free(line);
@@ -138,7 +73,7 @@ int	get_infile_heredoc(char *limiter)
 	if (g_g == 130)
 	{
 		close(fd);
-		fd = -1;	
+		fd = -1;
 	}
 	return (fd);
 }

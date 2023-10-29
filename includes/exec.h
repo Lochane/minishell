@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:54:54 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/29 01:55:56 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:00:51 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void	ft_error(char *message, char *message2, int info);
 void	fail_malloc(void);
 
 /* Heredoc */
+
+# define HERE_DOC_ERROR "minishell: warning: here-document at at line \
+0 delimited by "
 
 int		get_infile_heredoc(char *limiter);
 
