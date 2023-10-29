@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:43:46 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/29 02:02:58 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:07:51 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	fill_here_doc(const char *limiter, int tmp_fd)
 int	get_infile_heredoc(char *limiter)
 {
 	int				tmp_fd;
-	unsigned char	*file_name;
+	char	*file_name;
 	int				fd;
 
 	file_name = get_file_name();

@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:58:46 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/29 02:04:23 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:08:20 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	ft_strcpy(char *s1, char *s2)
 	s1[i] = 0;
 }
 
-unsigned char	*get_file_name(void)
+char	*get_file_name(void)
 {
 	int				i;
 	int				fd;
-	unsigned char	*file_name;
+	char	*file_name;
 
 	i = 5;
 	file_name = malloc(sizeof(char) * 16);
@@ -64,7 +64,7 @@ unsigned char	*get_file_name(void)
 	return (file_name);
 }
 
-int	get_fd(unsigned char *file_name, int type)
+int	get_fd(char *file_name, int type)
 {
 	int	fd;
 
