@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:54:54 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/29 02:00:51 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:05:50 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void	fail_malloc(void);
 # define HERE_DOC_ERROR "minishell: warning: here-document at at line \
 0 delimited by "
 
-int		get_infile_heredoc(char *limiter);
+int				get_infile_heredoc(char *limiter);
+int				get_fd(unsigned char *file_name, int type);
+unsigned char	*get_file_name(void);
+void			ft_strcpy(char *s1, char *s2);
+int				verif_heredoc(char *s1, const char *s2, int n);
 
 #endif

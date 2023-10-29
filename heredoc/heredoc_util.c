@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:58:46 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/29 01:58:49 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 02:04:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_strcpy(char *s1, char *s2)
 	s1[i] = 0;
 }
 
-static unsigned char	*get_file_name(void)
+unsigned char	*get_file_name(void)
 {
 	int				i;
 	int				fd;
