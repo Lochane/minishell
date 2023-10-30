@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:13 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/20 21:08:53 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 01:20:00 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ void	expand_arg(char **args, t_data *data)
 			tmp = i;
 			while (args[j])
 				args[tmp++] = args[j++];
-			args[tmp] = NULL;			
+			args[tmp] = NULL;
 		}
 		else
 		{
 			free(args[i]);
-			args[i] = str;
-			i++;
+			args[i++] = str;
 		}
 	}
 }
@@ -65,13 +64,13 @@ void	expansion(t_data *data)
 	tmp_cmd = data->cmd;
 	while (tmp_cmd)
 	{
-		if (data->return_value == 12)//a mettre a jour partout
+		if (data->return_value == 12)
 			return ;
 		str = do_expand(&tmp_cmd->cmd, data);
 		free(tmp_cmd->cmd);
 		tmp_cmd->cmd = str;
-		expand_arg(tmp_cmd->arg, data);//check le paamettre erruer de malloc
-		expand_redir(tmp_cmd->redirection, data);//check le parametre erreur de malloc
+		expand_arg(tmp_cmd->arg, data);
+		expand_redir(tmp_cmd->redirection, data);
 		tmp_cmd = tmp_cmd->next;
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:55:03 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/20 21:22:04 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:20:15 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-long ft_atol(char *nbr, int *check)
+long	ft_atol(char *nbr, int *check)
 {
 	int				sign;
 	unsigned long	nb;
@@ -31,9 +31,10 @@ long ft_atol(char *nbr, int *check)
 	}
 	while (*nbr && *nbr <= '9' && *nbr >= '0' && nb < max)
 		nb = nb * 10 + *nbr++ - '0';
-	if ((nb > max - 3 && !sign) || (nb > max - 2 && sign) || (*nbr >= '0' && *nbr <= '9'))
+	if ((nb > max - 2 && sign) || (*nbr >= '0' && *nbr <= '9') || \
+	(nb >= max - 2 && sign) || nb > max - 3)
 		*check = 1;
-	else if (*nbr != 0)
+	if (*nbr != 0)
 		*check = 2;
 	if (sign)
 		nb *= -1;
@@ -43,7 +44,7 @@ long ft_atol(char *nbr, int *check)
 int	ft_strcmp(const char *s, const char *s1)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!s || !s1)
 		return (s - s1);
@@ -80,9 +81,10 @@ char	*ft_join(char *s1, char *s2, char c)
 	return (s3);
 }
 
-void	fail_malloc()
+void	fail_malloc(void)
 {
-	const char *str = "\x1b[91;1mechec malloc\n\x1b[0m\2";
+	const char	*str = "\x1b[91;1mechec malloc\n\x1b[0m\2";
+
 	write(2, str, ft_strlen(str));
 }
 
@@ -109,9 +111,8 @@ void	ft_error(char *message, char *message2, int info)
 	tab[i++] = " ";
 	tab[i++] = RESET;
 	tab[i] = NULL;
-	tab[0] = ft_strjoin_pool(tab_size(tab + 1) ,tab + 1, "", 0);
+	tab[0] = ft_strjoin_pool(tab_size(tab + 1), tab + 1, "", 0);
 	if (!tab[0])
 		return (fail_malloc());
-	write(2, tab[0], ft_strlen(tab[0]));
-	free(tab[0]);
+	return (write(2, tab[0], ft_strlen(tab[0])), free(tab[0]));
 }

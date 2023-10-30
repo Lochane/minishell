@@ -9,13 +9,12 @@ SRCEXPAND = expansion
 SRCEXEC = exec
 OBJDIR  = obj
 
-SRCS =  $(SRCEXPAND)/expansion.c $(SRCEXPAND)/utils.c $(SRCEXPAND)/utils2.c\
-		$(SRCEXEC)/exec.c $(SRCEXEC)/env.c $(SRCEXEC)/utils.c  \
+SRCS =  $(SRCEXPAND)/expansion.c $(SRCEXPAND)/utils.c $(SRCEXPAND)/utils2.c $(SRCEXPAND)/utils3.c\
+		$(SRCEXEC)/init_env.c $(SRCEXEC)/init_env_util.c $(SRCEXEC)/quit.c $(SRCEXEC)/init_exec.c $(SRCEXEC)/redir.c $(SRCEXEC)/redir_utils.c $(SRCEXEC)/access.c $(SRCEXEC)/access_utils.c $(SRCEXEC)/exec.c $(SRCEXEC)/wait.c $(SRCEXEC)/env.c $(SRCEXEC)/env_utils.c $(SRCEXEC)/utils.c  \
 		$(SRCPARSING)/set_cmd_utils.c $(SRCPARSING)/manage_redirection.c \
 		$(SRCPARSING)/check_syntax.c $(SRCPARSING)/ft_split_shell.c \
 		$(SRCPARSING)/check_syntax_2.c $(SRCPARSING)/manage_redirection_2.c \
-		$(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c \
-		$(SRCPARSING)/poubelle_fonction.c \
+		$(SRCPARSING)/utils.c $(SRCPARSING)/set_cmd.c  $(SRCPARSING)/utils2.c\
 		$(SRCBUILTIN)/builtin.c $(SRCBUILTIN)/env.c $(SRCBUILTIN)/builtin_util.c $(SRCBUILTIN)/cd.c $(SRCBUILTIN)/echo.c $(SRCBUILTIN)/exit.c \
 		$(SRCBUILTIN)/export.c $(SRCBUILTIN)/export_utils.c $(SRCBUILTIN)/pwd.c $(SRCBUILTIN)/unset.c $(SRCBUILTIN)/ft_strjoin_pool.c\
 		$(SRCHEREDOC)/heredoc.c $(SRCHEREDOC)/heredoc_util.c \
@@ -26,12 +25,10 @@ OBJS = $(patsubst $(SRCHEREDOC)/%.c $(SRCEXPAND)%.c $(SRCBUILTIN)/%.c $(SRCEXEC)
 		$(SRCEXEC)/utils.c $(SRCSIGNALS)/%.c $(SRCDIR)/%.c,\
 		$(OBJDIR)/%.o,$(SRCS))
  
-
 NAME = minishell
 LIBPATH = ./libft/libft.a
 
 all: $(NAME)
-
 
 $(NAME): $(OBJS) | lib
 		@echo "			-> Compiling $(NAME)..."

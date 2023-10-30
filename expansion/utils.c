@@ -6,35 +6,11 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:16:29 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/26 15:45:21 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 01:18:59 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/expansion.h"
-
-int	check_char(char c)
-{
-	if (c == 0)
-		return (0);
-	if (ft_isalnum(c))
-		return (1);
-	return (0);
-}
-
-int	allowed_char(char c)
-{
-	const char	*protected = "_?";
-	int			i;
-	
-	i = 0;
-	while (protected[i])
-	{
-		if (protected[i] == c)
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 void	get_buf(t_buffer *buffer, unsigned long size)
 {
@@ -44,20 +20,16 @@ void	get_buf(t_buffer *buffer, unsigned long size)
 	if (!buffer->buf)
 	{
 		buffer->buf = malloc(sizeof(char) * 31);
-		if (!buffer->buf)
-			return ;
-		ft_memset((buffer->buf), '\0', 31);
-		buffer->size = 30;
+		if (buffer->buf)
+		{
+			ft_memset((buffer->buf), '\0', 31);
+			buffer->size = 30;
+		}
 		return ;
 	}
 	tmp = malloc((buffer->size + size) + 1);
 	if (!tmp)
-	{
-		free (buffer->buf);
-		buffer->buf = NULL;
-		buffer->size = 0;
-		return ;
-	}
+		return (fail_malloc_expand(buffer));
 	index = -1;
 	while (++index < buffer->index)
 		tmp[index] = buffer->buf[index];
@@ -65,28 +37,6 @@ void	get_buf(t_buffer *buffer, unsigned long size)
 	free(buffer->buf);
 	buffer->buf = tmp;
 	buffer->size += size;
-}
-
-void	stack_itoa(char n[11], unsigned int nb)
-{
-	unsigned int	size;
-	unsigned int	nbr;
-
-	nbr = nb;
-	size = 1;
-	while (nbr >= 10)
-	{
-		size++;
-		nbr /= 10;
-	}
-	if (nb == 0)
-		n[0] = '0';
-	n[size] = 0;
-	while (nb > 0)
-	{
-		n[--size] = (nb % 10) + 48;
-		nb /= 10;
-	}
 }
 
 void	get_var_content(t_expand *expand, int *tmp, char *str, t_data *data)
@@ -106,24 +56,26 @@ void	get_var_content(t_expand *expand, int *tmp, char *str, t_data *data)
 	}
 }
 
-int	is_quote(char c, int quote[2])
+void	fill_var(int *len, t_expand *exp, t_data *data)
 {
-	if (c == '\'' || c == '"')
+	*len = ft_strlen(exp->content);
+	if (exp->buffer.index + *len >= exp->buffer.size)
 	{
-		if (!quote[0] && !quote[1])
-			return (0);
-		if (c == '\'')
+		get_buf(&exp->buffer, *len);
+		if (!exp->buffer.buf)
 		{
-			if (quote[1])
-				return (1);
-		}
-		if (c == '"')
-		{
-			if (quote[0])
-				return (1);
+			data->return_value = 12;
+			return ;
 		}
 	}
-	return (0);
+	if (!exp->buffer.buf)
+		return ;
+	while (*exp->content)
+	{
+		(exp->buffer.buf)[exp->buffer.index] = *exp->content;
+		exp->content++;
+		exp->buffer.index++;
+	}
 }
 
 void	cpy_var(char *str, t_expand *exp, t_data *data)
@@ -139,24 +91,12 @@ void	cpy_var(char *str, t_expand *exp, t_data *data)
 			tmp++;
 		get_var_content(exp, &tmp, str + exp->index, data);
 		if (exp->content)
-		{
-			len = ft_strlen(exp->content);
-			if (exp->buffer.index + len >= exp->buffer.size)
-				get_buf(&exp->buffer, len);
-			if (!exp->buffer.buf)
-				return ;
-			while (*exp->content)
-			{
-				(exp->buffer.buf)[exp->buffer.index] = *exp->content;
-				exp->content++;
-				exp->buffer.index++;
-			}
-		}
+			fill_var(&len, exp, data);
 	}
 	if ((!exp->content && is_quote(str[exp->index + 1], exp->quote)))
 		exp->index++;
 	else if (!tmp && ft_isdigit(str[exp->index + 1]))
-		exp->index+=2;
+		exp->index += 2;
 	else if ((tmp == 0 && !exp->content) && !ft_isalnum(str[exp->index + 1]))
 		(exp->buffer.buf)[(exp->buffer.index)++] = str[exp->index++];
 	(exp->buffer.buf)[exp->buffer.index] = 0;

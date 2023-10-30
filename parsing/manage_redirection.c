@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/28 20:53:17 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:52:45 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,8 @@ char	*check_space_back(char *tab)
 			if (tab != tab_cpy)
 				tmp = tab;
 			tab = manage_space_back(i, tab, space_count, j);
-			if (tmp && tab != tmp)
-				free(tmp);
-			tmp = NULL;
+			if (tmp && tab != tmp && (free(tmp), 1))
+				tmp = NULL;
 		}
 	}
 	return (tab);

@@ -6,13 +6,13 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/24 00:09:04 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:55:16 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_double_quotes(char *args, int i)
+/*int	check_double_quotes(char *args, int i)
 {
 	static int	check;
 
@@ -29,7 +29,7 @@ int	check_double_quotes(char *args, int i)
 			return (ft_syntax_error("syntax error\n"), 1);
 	}
 	return (0);
-}
+}*/
 
 int	get_next_quote(char c, char *str)
 {
@@ -45,12 +45,11 @@ int	get_next_quote(char c, char *str)
 	return (i + 1);
 }
 
-int	check_quotes(char *args, int i)
+int	check_quotes(char *args)
 {
 	int	check;
 	int	c;
-	
-	(void) i;
+
 	check = 0;
 	c = 0;
 	while (args[c])
@@ -91,7 +90,7 @@ int	check_syntax(char *args, t_data *data)
 	int	i;
 
 	i = 0;
-	if (check_quotes(args, i) != 0)
+	if (check_quotes(args) != 0)
 	{
 		data->return_value = 2;
 		return (2);
@@ -99,7 +98,7 @@ int	check_syntax(char *args, t_data *data)
 	while (args[i])
 	{
 		if (check_chevron(args, i) != 0 || check_pipe(args, i) != 0 \
-			|| check_ampersand(args, i) != 0 /*|| check_double_quotes(args, i) != 0*/)
+			|| check_ampersand(args, i) != 0)
 		{
 			data->return_value = 2;
 			return (2);

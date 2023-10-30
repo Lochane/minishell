@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:42:40 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/29 01:46:38 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 21:35:46 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ int	do_cd(t_cmd *cmd, t_fd *fd, t_data *data)
 			return (2);
 		if (cmd->arg[1])
 			return (write(2, "minishell: cd: too many argument\n", 34), 0);
-		if ((!(cmd->arg[0][0] == '-' && cmd->arg[0][1] == 0)))
+		if ((cmd->arg[0][0] == '-' && cmd->arg[0][1] == 0) && !cd.arg)
 			return (write(2, "minishell: cd: OLDPWD not set\n", 31), 1);
-		if (!cd.arg)
+		if (!(cmd->arg[0][0] == '-' && cmd->arg[0][1] == 0))
 			cd.arg = cmd->arg[0];
 		if (chdir(cd.arg))
 			return (write(2, "No such file\n", 14), 1);

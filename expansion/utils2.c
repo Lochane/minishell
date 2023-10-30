@@ -6,56 +6,53 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:39:32 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/26 15:33:17 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 01:22:39 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/expansion.h"
 
-void	check_quote(char *str, int quote[2], int *index, int *quoted)
+void	check_quote(char *str, int q[2], int *index, int *quoted)
 {
 	while (str[*index] == '\'' || str[*index] == '"')
 	{
-		if ((str[*index] == '"' && !quote[1]) || (str[*index] == '\'' && !quote[0]))
+		if ((str[*index] == '"' && !q[1]) || (str[*index] == '\'' && !q[0]))
 		{
 			if (str[*index] == '"')
-				quote[0] = (quote[0] != 1);
+				q[0] = (q[0] != 1);
 			else if (str[*index] == '\'')
-				quote[1] = (quote[1] != 1);
+				q[1] = (q[1] != 1);
 			(*index)++;
 			(*quoted)++;
-		//	if (str[*index] == str[*index - 1])
-		//	{
-		//		quote[0] = 0;
-		//		quote[1] = 0;
-		//		(*index)++;
-		//	}
 		}
 		else
 			break ;
 	}
 }
 
-void	fill_buf(char *str, t_data *data, t_expand *expand)
+void	fill_buf(char *str, t_data *data, t_expand *exp)
 {
 	if (!str)
 		return ;
-	while (str[expand->index])
+	while (str[exp->index])
 	{
-		if (expand->buffer.index >= expand->buffer.size - 1)
-			get_buf(&expand->buffer, 10);
-		if (!expand->buffer.buf)
-			return ;
-		check_quote(str, expand->quote, &expand->index, &expand->quoted);
-		if (str[expand->index])
+		if (exp->buffer.index >= exp->buffer.size - 1)
+			get_buf(&exp->buffer, 10);
+		if (!exp->buffer.buf)
 		{
-			if (str[expand->index] != '$' || expand->quote[1])
-				expand->buffer.buf[expand->buffer.index++] = str[expand->index++];
+			data->return_value = 12;
+			return ;
+		}
+		check_quote(str, exp->quote, &exp->index, &exp->quoted);
+		if (str[exp->index])
+		{
+			if (str[exp->index] != '$' || exp->quote[1])
+				exp->buffer.buf[exp->buffer.index++] = str[exp->index++];
 			else
-				cpy_var(str, expand, data);
+				cpy_var(str, exp, data);
 		}
 	}
-	expand->buffer.buf[expand->buffer.index++] = 0;
+	exp->buffer.buf[exp->buffer.index++] = 0;
 }
 
 void	init_expand(t_expand *expand)

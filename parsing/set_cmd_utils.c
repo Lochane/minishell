@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:40:19 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/28 20:51:47 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:47:11 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,8 @@ t_cmd	*init_cmd(void)
 	new->cmd = NULL;
 	new->arg = NULL;
 	new->next = NULL;
+	new->pipe = -1;
+	new->prev_pipe = -1;
+	new->pid = -1;
 	return (new);
 }

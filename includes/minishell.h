@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/28 23:16:23 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:50:28 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	ft_syntax_error(char *message);
 void	manage_data(t_data *data, int allow);
 int		remove_lst(t_lst **lst, char *name);
 void	ft_clear_lst(t_lst **lst);
+void	remove_space(char *tab);
 
 /* Signaux */
 void	restore_sig(void);

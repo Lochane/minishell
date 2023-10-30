@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/28 20:55:34 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 00:53:26 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,28 +99,6 @@ char	*manage_space_back(int index, char *tab, int space_count, int j_index)
 	return (tmp);
 }
 
-void	remove_space(char *tab)
-{
-	int	i;
-	int	j;
-	int	len;
-
-	i = 0;
-	len = ft_strlen(tab);
-	while (tab[i])
-	{
-		if (tab[i] == ' ' && tab[i + 1] == ' ')
-		{
-			ft_memmove(&tab[i], &tab[i + 1], len - i);
-			j = ft_strlen(tab);
-			while (--len > j)
-				tab[len] = 0;
-		}
-		else
-			i++;	
-	}
-}
-
 char	*manage_space_front(int index, char *tab, int space_count)
 {
 	char	*tmp;
@@ -140,7 +118,7 @@ char	*manage_space_front(int index, char *tab, int space_count)
 	if (space_count > 1)
 	{
 		remove_space(tmp);
-		//ft_memmove(tmp + found_space(tmp, 0), tmp + index, \
+		//ft_memmove(tmp + found_space(tmp, 0), tmp + index,
 		//	ft_strlen(tmp + index));
 		//tmp[len - index + 3] = '\0';
 	}
