@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 20:30:28 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/29 20:37:06 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:32:20 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,6 @@ int	lst_size(t_lst *lst)
 		i++;
 	}
 	return (i);
-}
-
-void	print_list(t_lst *lst)
-{
-	while (lst)
-	{
-		printf("%s\n", lst->data);
-		lst = lst->next;
-	}
 }
 
 void	ft_add_back(t_lst **lst, t_lst *new)

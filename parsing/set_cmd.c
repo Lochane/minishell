@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 13:48:42 by lochane           #+#    #+#             */
-/*   Updated: 2023/10/28 20:52:28 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:52:48 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ int	get_cmd(char **tab, t_cmd *cmd)
 			cmd->cmd = ft_strdup(tab[i]);
 			if (!cmd->cmd)
 				return (fail_malloc(), 0);
+			while (tab[i + 1])
+			{
+				tab[i] = tab[i + 1];
+				i++;
+			}
+			tab[i] = NULL;
 			break ;
 		}
 	}

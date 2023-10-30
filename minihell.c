@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:42:59 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/30 15:00:17 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:29:56 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static void	init(t_data *data, char **envp, int argc, char **argv)
 		exit(0);
 	}
 	data->tty = isatty(0);
-	//if (data.tty)
-	//	printf("\033[H\033[J\n");
+	if (data->tty)
+		printf("\033[H\033[J\n");
 	g_g = 0;
 	data->new_line = 0;
 	data->return_value = 0;

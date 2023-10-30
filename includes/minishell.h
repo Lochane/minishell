@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:43:14 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/30 00:50:28 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:28:59 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	manage_data(t_data *data, int allow);
 int		remove_lst(t_lst **lst, char *name);
 void	ft_clear_lst(t_lst **lst);
 void	remove_space(char *tab);
+char	*do_space_front(int *i, char *tab, int space_count);
 
 /* Signaux */
 void	restore_sig(void);

@@ -1,5 +1,0 @@
-minishell: warning: here-document at at line 0 delimited by end-of-file (wanted `hola')
-[91;1mminishell: prout : command not found [0m
-[91;1mminishell: bruh : command not found [0m
-[91;1mminishell: mini : command not found [0m
-[91;1mminishell: hola : command not found [0m

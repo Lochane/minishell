@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:43:46 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/30 18:43:42 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:58:26 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	fill_here_doc(const char *limiter, int tmp_fd)
 		if (!verif_heredoc(line, (char *)limiter, ft_strlen(limiter)))
 			break ;
 		ft_putstr_fd(line, tmp_fd);
+		ft_putstr_fd("\n", tmp_fd);
 		free(line);
 	}
-	ft_putstr_fd("\n", tmp_fd);
 	free(line);
 }
 

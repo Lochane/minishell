@@ -1,7 +1,0 @@
-minishell: warning: here-document at at line 0 delimited by end-of-file (wanted `lol')
-minishell: warning: here-document at at line 0 delimited by end-of-file (wanted `cat')
-minishell: warning: here-document at at line 0 delimited by end-of-file (wanted `koala')
-[91;1mminishell: prout : command not found [0m
-[91;1mminishell: prout : command not found [0m
-[91;1mminishell: lol : command not found [0m
-[91;1mminishell: koala : command not found [0m

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 11:49:44 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/30 00:55:16 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:27:15 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	check_chevron(char *args, int i)
 	{
 		if (count_chevron(args, i) != 0)
 			return (1);
-		if (!args[i + 1])
+		if (!args[i + 1] || (args[i + 2] == '<' || args[i + 2] == '>' \
+		|| args[i + 2] == '|'))
 			return (ft_syntax_error("syntax error\n"), 1);
 		else
 		{
@@ -97,8 +98,7 @@ int	check_syntax(char *args, t_data *data)
 	}
 	while (args[i])
 	{
-		if (check_chevron(args, i) != 0 || check_pipe(args, i) != 0 \
-			|| check_ampersand(args, i) != 0)
+		if (check_chevron(args, i) != 0 || check_pipe(args, i) != 0)
 		{
 			data->return_value = 2;
 			return (2);

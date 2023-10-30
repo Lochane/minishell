@@ -1,2 +1,0 @@
-mkdir: cannot create directory ‘a’: File exists
-rm: cannot remove '../a': No such file or directory

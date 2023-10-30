@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:45:53 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/30 18:03:24 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:28:13 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@ void	init_check_space_front(int i[2], char *tab, char **tab_cpy, char **tmp)
 	i[0] = ft_strlen(tab);
 	*tab_cpy = tab;
 	*tmp = NULL;
-}
-
-char	*do_space_front(int *i, char *tab, int space_count)
-{
-	tab = manage_space_front(i[0], tab, space_count);
-	if (i[0] > (int)ft_strlen(tab))
-		i[0] = ft_strlen(tab);
-	return (tab);
 }
 
 char	*check_space_front(char *tab)

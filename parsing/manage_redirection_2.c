@@ -6,7 +6,7 @@
 /*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:20:26 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/30 17:48:42 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:27:47 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,6 @@ char	*manage_space_front(int index, char *tab, int space_count)
 			return (fail_malloc(), NULL);
 	}
 	if (space_count > 1)
-	{
 		remove_space(tmp);
-		// ft_memmove(tmp + found_space(tmp, 0), tmp + index,
-		// 	ft_strlen(tmp + index));
-		// tmp[ft_strlen(tmp) - index + 3] = '\0';
-	}
 	return (tmp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:58:46 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/30 18:37:19 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:29:21 by lsouquie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*get_file_name(void)
 int	get_fd(char *file_name, int type)
 {
 	int				fd;
-	unsigned char *file;
+	unsigned char	*file;
 
 	file = (unsigned char *)file_name;
 	if (!type)
