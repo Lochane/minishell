@@ -8,6 +8,7 @@ SRCHEREDOC = heredoc
 SRCEXPAND = expansion
 SRCEXEC = exec
 OBJDIR  = obj
+MAKEFLAGS += --no-print-directory
 
 SRCS =  $(SRCEXPAND)/expansion.c $(SRCEXPAND)/utils.c $(SRCEXPAND)/utils2.c $(SRCEXPAND)/utils3.c\
 		$(SRCEXEC)/init_env.c $(SRCEXEC)/init_env_util.c $(SRCEXEC)/quit.c $(SRCEXEC)/init_exec.c $(SRCEXEC)/redir.c $(SRCEXEC)/redir_utils.c $(SRCEXEC)/access.c $(SRCEXEC)/access_utils.c $(SRCEXEC)/exec.c $(SRCEXEC)/wait.c $(SRCEXEC)/env.c $(SRCEXEC)/env_utils.c $(SRCEXEC)/utils.c  \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouquie <lsouquie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:58:46 by madaguen          #+#    #+#             */
-/*   Updated: 2023/10/30 16:52:53 by lsouquie         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:37:19 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	ft_strcpy(char *s1, char *s2)
 
 char	*get_file_name(void)
 {
-	int		i;
-	int		fd;
-	char	*file_name;
+	int				i;
+	int				fd;
+	unsigned char	*file_name;
 
 	i = 5;
 	file_name = malloc(sizeof(char) * 16);
@@ -61,15 +61,17 @@ char	*get_file_name(void)
 	}
 	file_name[15] = 0;
 	file_name[5] = '.';
-	return (file_name);
+	return ((char *)file_name);
 }
 
 int	get_fd(char *file_name, int type)
 {
-	int	fd;
+	int				fd;
+	unsigned char *file;
 
+	file = (unsigned char *)file_name;
 	if (!type)
-		fd = open((const char *)file_name, O_WRONLY | O_CREAT, \
+		fd = open((const char *)file, O_WRONLY | O_CREAT, \
 			S_IRUSR | S_IWUSR | S_IRGRP);
 	else
 		fd = open((const char *)file_name, O_RDONLY);

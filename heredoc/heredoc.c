@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:43:46 by lsouquie          #+#    #+#             */
-/*   Updated: 2023/10/29 02:10:12 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:43:42 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	fill_here_doc(const char *limiter, int tmp_fd)
 		ft_putstr_fd(line, tmp_fd);
 		free(line);
 	}
+	ft_putstr_fd("\n", tmp_fd);
 	free(line);
 }
 
